@@ -5,12 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
-
+import Popup from '@utils/popup'
 const Nav = () => {
 
     const {data: session} = useSession()
     const [navbar, setNavbar] = useState(false);
-
+    const [showModal, setShowModal] = useState(false);
 
   return (
     <nav>
@@ -18,11 +18,11 @@ const Nav = () => {
         {session?.user ? (
                 
                 <div>
-                <nav className="w-full">
+                <nav className="w-full border-b-2 border-white-900">
                   <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div>
                       <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                          <h2 className="text-2xl text-white font-bold">BEM VINDO, {session?.user.first_name}</h2>
+                          <a href='/account' className="text-2xl  font-bold">BEM VINDO, {session?.user.first_name}</a>
                         
                         <div className="md:hidden">
                           <button
@@ -32,7 +32,7 @@ const Nav = () => {
                             {navbar ? (
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-6 text-white"
+                                className="w-6 h-6 "
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                               >
@@ -45,7 +45,7 @@ const Nav = () => {
                             ) : (
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-6 text-white"
+                                className="w-6 h-6 "
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -69,23 +69,23 @@ const Nav = () => {
                         }`}
                       >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                          <li className="text-white">
-                            <Link href="/">
+                          <li className="">
+                            <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
                               Início
                             </Link>
                           </li>
-                          <li className="text-white">
-                            <Link href="/about">
+                          <li className="">
+                            <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
                               Sobre
                             </Link>
                           </li>
-                          <li className="text-white">
-                            <Link href="/account">
+                          <li className="">
+                            <Link  className='hover:border-b-2 hover:border-white-900 ' href="/account">
                               Conta
                             </Link>
                           </li>
-                          <li className="text-white">
-                            <button  onClick={signOut}>
+                          <li className="">
+                            <button className='hover:border-b-2 hover:border-white-900 '  onClick={signOut}>
                                 Sair
                             </button>
                           </li>
@@ -99,11 +99,11 @@ const Nav = () => {
         ):(
         <>
         <div>
-        <nav className="w-full">
+        <nav className="w-full border-b-2 border-white-900">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
             <div>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <h2 className="text-2xl text-white font-bold">Lab-Book</h2>
+                    <a href='/' className="text-2xl  font-bold">Lab-Book</a>
                 
                 <div className="md:hidden">
                     <button
@@ -113,7 +113,7 @@ const Nav = () => {
                     {navbar ? (
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 text-white"
+                        className="w-6 h-6 "
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         >
@@ -126,7 +126,7 @@ const Nav = () => {
                     ) : (
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 text-white"
+                        className="w-6 h-6 "
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -150,25 +150,26 @@ const Nav = () => {
                 }`}
                 >
                 <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                    <li className="text-white">
-                    <Link href="/">
+                    <li className="">
+                    <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
                         Início
                     </Link>
                     </li>
-                    <li className="text-white">
-                    <Link href="/about">
+                    <li className="">
+                    <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
                         Sobre
                     </Link>
                     </li>
-                    <li className="text-white">
-                    <button  onClick={signIn}>
+                    <li className="">
+                    <button className='hover:border-b-2 hover:border-white-900'  onClick={signIn}>
                         Entrar
                     </button>
                     </li>
-                    <li className="text-white">
-                    <Link href="/register">
+                    <li className="">
+                    <button className='hover:border-b-2 hover:border-white-900 'onClick={()=>setShowModal(true)}>
                         Criar conta
-                    </Link>
+                    </button>
+                    
                     </li>
                 </ul>
                 </div>
@@ -176,7 +177,7 @@ const Nav = () => {
             </div>
         </nav>
         </div>
-
+        <Popup onClose={()=> setShowModal(false)} isVisible={showModal} />
         </>
         )}
     </nav>

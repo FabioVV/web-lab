@@ -24,7 +24,7 @@ export default NextAuth({
         async authorize(credentials, req) {
           // Add logic here to look up the user from the credentials supplied
     
-            const res = await fetch("http://127.0.0.1:8000/api/v3/login/", {
+            const res = await fetch("http://127.0.0.1:8000/api/token/", {
               method:"POST",
               headers: {
                   "Content-Type":"application/json",
@@ -37,14 +37,28 @@ export default NextAuth({
               
             });
 
-           const user = await res.json()
-           if(res.status == 400 || res.status == 401){
+           const user_token = await res.json()
+           if(res.status != 200){
 
               return null
 
            } else {
+
+            const user_get = await fetch("http://127.0.0.1:8000/api/v3/usuarios/", {
+
+              method:"GET",
+              headers: {
+                "Content-Type":"application/json",
+                  Authorization:`Bearer ${user_token['accessToken']}`,
+              }
+              
+            });
+
+
+            const user = await user_get.json()
+            
             if (user) {
-              return user
+              return user['results'][0]
             } else {
               return null
             }
@@ -53,10 +67,8 @@ export default NextAuth({
           
         }
     }),
-    
-
-
   ],
+
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
@@ -64,6 +76,7 @@ export default NextAuth({
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
+
   callbacks:{
     async jwt({session, token, user}){
       return {...token, ...user}
@@ -72,6 +85,5 @@ export default NextAuth({
       session.user = token
       return session
     },
-    
   }
 })

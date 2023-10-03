@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 
-const Register = () => {
+const RegisterUser = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -249,4 +249,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default RegisterUser

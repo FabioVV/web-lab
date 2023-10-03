@@ -4,33 +4,43 @@
 
 
 
-.alert {
-    color: white;
+ .alert {
     border-radius: 10px;
     position: absolute;
     top: 50px;
     right: 25px;
-    padding: 20px;
     display: flex;
     align-items: center;
     z-index: 1111;
     width: 350px;
     height: 120px;
+
     }
 
-    .alert p {
+    /*.alert p {
     margin: 0;
+    font: bold;
     }
 
     .alert-error {
     background: lightcoral;
+    border-radius: 0.25rem; 
+    border-width: 1px; 
+    border-color: #F87171; 
+    background-color: #FEE2E2; 
+    font: bold;
+
     }
+
     .alert-success {
     background: #51a315;
     }
 
     .close {
-    color: white;
-    cursor: pointer;
-    margin-right: 10px;
-    }
+        cursor: pointer;
+        margin-right: 10px;
+        width: 1.5rem; 
+        height: 1.5rem; 
+        color: #EF4444; 
+        fill: currentColor; 
+    } */

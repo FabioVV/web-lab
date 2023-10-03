@@ -6,11 +6,13 @@ import { useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import Image from 'next/image';
-
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 const Register = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
 
 
@@ -27,14 +29,14 @@ const Register = () => {
   //   }
   //   object[key].push(value);
   // });
-  // var json = JSON.stringify(object);
-
+  // var json = JSON.stringify(object);}
 
 
   async function onSubmit(event){
       event.preventDefault()
       setIsLoading(true)
       setError(null)
+
 
 
       const formData = new FormData(event.currentTarget)
@@ -57,42 +59,20 @@ const Register = () => {
 
       } else {
         
-        for (let [key, value] of Object.entries(user_created)) {
-
-          if(document.getElementById(`${key}`).value == ""){
-            document.getElementById(`${key}`).style.borderColor = 'lightcoral'
-          } 
-
-
-          if(key == 'password'){
-            document.getElementById(`password_errors`).innerText = 'Sua senha necessita letras e números. No minímo 6 caracteres, uma letra minúscula, um número, um símbolo.';
-          }
-          
-        }
-        
-        window.flash(`Por favor, preencha os campos necessários.`, 'error')
-        //console.log(user_created)
+        window.flash(`Erro. Favor, tentar novamente.`, 'error')
         setIsLoading(false)
 
       }
-  
-
-
-    
-      // setError(error.message)
-      // window.flash(`Erro ao criar a conta.`, 'error')
-      // setIsLoading(false)
-
 
   }
 
-   
-    // "user_type": null,
-    // "birth_date": "2023-10-01",
-    // "is_active": true     
+     
     
     //PASSAR UM ARRAY COM OS CAMPOS DO FORMULARIO E A URL DE ONDE FAZER O POST
     
+
+
+
     // BOTÃO ESTILOS
   {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
   <button type="button" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Alternative</button>
@@ -102,24 +82,36 @@ const Register = () => {
   <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
   <button type="button" className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Yellow</button>
   <button type="button" className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Purple</button> */}
-
+  
+  
+  // OLD ERROR bg-red-100 border border-red-400 text-red-700 px-2 py-1 rounded relative mt-2
 
 
   return (
-
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 rounded-md shadow-md lg:max-w-xl">
             <div className=''>
               <h1 className='text-3xl font-bold text-center ' >Estamos quase lá! Preencha seus dados.</h1>
               
-              <form method='post' onSubmit={onSubmit} id='form' className="w-full p-6">
-                
+              <form method='post' onSubmit={handleSubmit(onSubmit)} id='form' className="w-full p-6">
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
                       Primeiro nome
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Jane" name='first_name' id='first_name'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Jane" name='first_name' id='first_name'
+                      {...register("first_name", { required: "Campo obrigatório." })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="first_name"
+                      render={({ message }) => 
+                      <div class="text-red-300 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                      
+                    />
+                  
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
@@ -134,7 +126,11 @@ const Register = () => {
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="username">
                       Nome de usuário
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="username" type="text" placeholder="Jane123" name='username'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" 
+                    id="username" type="text" placeholder="Jane123" name='username' 
+
+                    />
+                  
                   </div>
                 </div>
                 
@@ -160,7 +156,17 @@ const Register = () => {
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
                       Email
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="email" type="email" placeholder="jane@email.com" name='email'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="email" type="email" placeholder="jane@email.com" name='email'
+                     {...register("email", { required: "Campo obrigatório." , pattern: { value: /.+@.+/, message: 'Email inválido' },})}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="email"
+                      render={({ message }) => 
+                      <div class="bg-red-100 border border-red-400 text-red-700 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">{message}</strong>
+                      </div>}
+                    />
                   </div>
                 </div>
 

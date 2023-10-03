@@ -21,7 +21,7 @@ function RootLayout({children}) {
 
 
   return (
-    <html lang='en' data-theme="black">
+    <html lang='en' data-theme="luxury">
         <body>
             <Provider>
                 <div className='main'>

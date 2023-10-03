@@ -5,21 +5,17 @@ import { useRef } from "react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from 'next/image'
-import { redirect } from "next/navigation"
-import Popup from '@utils/popup'
-
 
 
 export default function LoginPage() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [showModal, setShowModal] = useState(false);
 
   const email = useRef('')
   const password = useRef('')
 
-  const submit = async()=>{
+  const submit = async() => {
 
     setIsLoading(true)
     setError(null)
@@ -59,10 +55,7 @@ export default function LoginPage() {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 rounded-md shadow-md lg:max-w-xl">
-        <h1 className="text-3xl font-bold text-center "> - Digite suas credenciais -</h1>
-
-
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        <h1 className="text-3xl font-bold text-center ">  Digite suas credenciais </h1>
 
         <form method="POST" className="mt-6">
           <div className="mb-4">
@@ -73,18 +66,18 @@ export default function LoginPage() {
               Email
             </label>
             <input
-               name="email" type="email" onChange={(e)=>{email.current = e.target.value}}
+               name="email" type="email" onChange={(e)=>{email.current = e.target.value}} placeholder="john@email.com"
               className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mb-2">
             <label
-              htmlFor="password"
+              htmlFor="password" 
               className="block text-sm font-semibold "
             >
               Senha
             </label>
-            <input
+            <input placeholder="******"
               name="password" type="password" onChange={(e)=>{password.current = e.target.value}}
               className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
@@ -104,14 +97,12 @@ export default function LoginPage() {
 
         <p className="mt-4 text-sm text-center">
           Ainda sem conta?{" "}
-          <button
-            className="font-medium hover:underline"
-            onClick={()=>setShowModal(true)}
+          <Link
+            className="font-medium hover:underline" href="/users/register"
           >
             Registre-se aqui
-          </button>
+          </Link>
         </p>
-        <Popup onClose={()=> setShowModal(false)} isVisible={showModal} />
 
       </div>
     </div>

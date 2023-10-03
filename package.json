@@ -19,6 +19,8 @@
     "yup": "^1.3.2"
   },
   "devDependencies": {
+    "@types/node": "20.8.2",
+    "@types/react": "18.2.24",
     "autoprefixer": "latest",
     "daisyui": "^3.8.1",
     "eslint": "latest",

@@ -2,17 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
-import Popup from '@utils/popup'
 
 
 const Nav = () => {
 
     const {data: session} = useSession()
     const [navbar, setNavbar] = useState(false);
-    const [showModal, setShowModal] = useState(false);
 
   return (
     <nav>
@@ -168,9 +165,9 @@ const Nav = () => {
                     </button>
                     </li>
                     <li className="">
-                    <button className='hover:border-b-2 hover:border-white-900' onClick={()=>setShowModal(true)}>
+                    <Link className='hover:border-b-2 hover:border-white-900' href="/users/register">
                         Criar conta
-                    </button>
+                    </Link>
                     
                     </li>
                 </ul>
@@ -179,7 +176,6 @@ const Nav = () => {
             </div>
         </nav>
         </div>
-        <Popup onClose={()=> setShowModal(false)} isVisible={showModal} />
         </>
         )}
     </nav>

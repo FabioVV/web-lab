@@ -1,19 +1,58 @@
 "use client"
-import { getCsrfToken, signIn } from "next-auth/react"
+
+import { signIn } from "next-auth/react"
 import { useRef } from "react"
 import Link from "next/link"
+import { useState } from "react"
+import Image from 'next/image'
+import { redirect } from "next/navigation"
+import Popup from '@utils/popup'
+
+
+
 export default function LoginPage() {
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [showModal, setShowModal] = useState(false);
 
   const email = useRef('')
   const password = useRef('')
 
   const submit = async()=>{
-    const result = await signIn("credentials", {
-      email:email.current,
-      password:password.current,
-      redirect:true,
-      callbackUrl:'/'
-    })
+
+    setIsLoading(true)
+    setError(null)
+
+    try{
+      const result = await signIn("credentials", {
+        email:email.current,
+        password:password.current,
+        redirect:false,
+        //callbackUrl:'/'
+      })
+
+      if (!result.ok) {
+
+        throw new Error('Email ou senha incorretos.')
+
+      } else {
+
+        window.location.replace('/')
+
+      }
+
+    } catch(error){
+
+      window.flash(error.message, 'error')
+      console.log(error)
+
+    } finally {
+
+      setIsLoading(false)
+
+    }
+
   }
 
 
@@ -21,7 +60,11 @@ export default function LoginPage() {
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 rounded-md shadow-md lg:max-w-xl">
         <h1 className="text-3xl font-bold text-center "> - Digite suas credenciais -</h1>
-        <form className="mt-6">
+
+
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+
+        <form method="POST" className="mt-6">
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -53,21 +96,23 @@ export default function LoginPage() {
             Esqueceu a senha?
           </Link>
           <div className="mt-2">
-            <button onClick={submit} className="w-full px-4 py-2 tracking-wide border-2 border-white-900 transition-colors duration-200 transform rounded-md hover:bg-white hover:text-black focus:text-black focus:outline-none focus:bg-white">
-              Entrar
+            <button disabled={isLoading} onClick={submit} className="flex justify-center w-full px-4 py-2 tracking-wide border-2 border-white-900 transition-colors duration-200 transform rounded-md hover:bg-white hover:text-black focus:text-black focus:outline-none focus:bg-white">
+              {isLoading ? <Image src="/images/loading.gif" className="" width={30} height={30} alt="loading gif"/>: 'Entrar'}{isLoading ? " Aguarde....": ''}
             </button>
           </div>
         </form>
 
         <p className="mt-4 text-sm text-center">
           Ainda sem conta?{" "}
-          <Link
-            href="/register"
+          <button
             className="font-medium hover:underline"
+            onClick={()=>setShowModal(true)}
           >
             Registre-se aqui
-          </Link>
+          </button>
         </p>
+        <Popup onClose={()=> setShowModal(false)} isVisible={showModal} />
+
       </div>
     </div>
   );

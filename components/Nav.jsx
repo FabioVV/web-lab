@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import Popup from '@utils/popup'
+
+
 const Nav = () => {
 
     const {data: session} = useSession()
@@ -166,7 +168,7 @@ const Nav = () => {
                     </button>
                     </li>
                     <li className="">
-                    <button className='hover:border-b-2 hover:border-white-900 'onClick={()=>setShowModal(true)}>
+                    <button className='hover:border-b-2 hover:border-white-900' onClick={()=>setShowModal(true)}>
                         Criar conta
                     </button>
                     

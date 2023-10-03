@@ -1,8 +1,11 @@
+"use client"
 
-import React, { Children } from 'react'
+import React, { Children, useEffect } from 'react'
 import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
+import { Flash } from '@components/Flash';
+import Bus from '@utils/Bus'
 
 
 export const metada = {
@@ -10,7 +13,13 @@ export const metada = {
     description: 'Booking an laboratory has never been easier.'
 }
 
+window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
+
 function RootLayout({children}) {
+
+    
+
+
   return (
     <html lang='en' data-theme="black">
         <body>
@@ -21,6 +30,7 @@ function RootLayout({children}) {
 
                 <main className='app'>
                     <Nav />
+                    <Flash />
                     {children}
                 </main>
             </Provider>

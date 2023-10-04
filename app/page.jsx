@@ -2,10 +2,10 @@ import React from 'react'
 import Link from "next/link"
 
 function Home() {
-  return (
+  return ( 
     <section className='text-center'>
 
-      <h1>TROCAR RESERVA DE EXLCLUIR PARA DESATIVAR COMO O RESTO</h1>
+      <h1>TROCAR RESERVA DE EXCLUIR PARA DESATIVAR COMO O RESTO</h1>
 
       <br />
       <br />

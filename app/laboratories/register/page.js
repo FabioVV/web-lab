@@ -39,11 +39,13 @@ function registerUser() {
           router.push('/')
           window.flash(`Laboratório registrado com sucesso.`, 'success')
 
+        } else {
+          window.flash(`Os campos não podem ser iguais`, 'error')
+
         }
 
       } catch(err){
 
-        window.flash(`Erro. Favor, tentar novamente.`, 'error')
         console.log(err)
 
       } finally {

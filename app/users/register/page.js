@@ -109,7 +109,6 @@ const RegisterUser = () => {
                       <div class="text-red-300 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
                         <strong class="font-bold">* {message}</strong>
                       </div>}
-                      
                     />
                   
                   </div>

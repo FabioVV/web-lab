@@ -17,12 +17,11 @@ function registerUser() {
         about: '',
     })
 
-    const createLab = async(e) => {
-      e.preventDefault()
+    const createLab = async(form, e) => {
+      e.preventDefault();
       setSubmitting(true)
 
       try{
-
         const response = await fetch('http://127.0.0.1:8000/api/v3/laboratorios/', {
           method:'POST',
 
@@ -38,11 +37,13 @@ function registerUser() {
         if(response.ok){
 
           router.push('/')
+          window.flash(`Laboratório registrado com sucesso.`, 'success')
 
         }
 
       } catch(err){
 
+        window.flash(`Erro. Favor, tentar novamente.`, 'error')
         console.log(err)
 
       } finally {
@@ -61,7 +62,7 @@ function registerUser() {
         lab={lab}
         setLab={setLab}
         submitting={submitting}
-        handleSubmit={createLab}
+        submit={createLab}
     />
   )
 

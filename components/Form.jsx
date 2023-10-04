@@ -1,13 +1,17 @@
 
 import Link from "next/link"
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
-function Form({lab, setLab, submitting, handleSubmit, type}) {
+function Form({lab, setLab, submitting, submit, type}) {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
 
   return (
     <section>
         <h1>{type} Laboratório</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(submit)}>
 
 
             <label htmlFor="">Nome do laboratório</label>

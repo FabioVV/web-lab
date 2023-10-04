@@ -54,11 +54,14 @@ export default NextAuth({
               
             });
 
+            const user_result = await user_get.json()
+            let user = user_result['results'][0]
+            Object.assign(user, {accessToken:user_token['accessToken']})
 
-            const user = await user_get.json()
-            
             if (user) {
-              return user['results'][0]
+              
+              return user
+
             } else {
               return null
             }

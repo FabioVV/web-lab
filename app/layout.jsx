@@ -13,26 +13,27 @@ export const metada = {
     description: 'Booking an laboratory has never been easier.'
 }
 
-window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
+
 
 function RootLayout({children}) {
 
+
+    useEffect(() => {
+        window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
+    })
     
 
-
   return (
-    <html lang='en' data-theme="luxury">
+    <html lang='en' data-theme="corporate">
         <body>
             <Provider>
-                <div className='main'>
 
-                </div>
-
+                <Nav />
+                <Flash />
                 <main className='app'>
-                    <Nav />
-                    <Flash />
                     {children}
                 </main>
+
             </Provider>
         </body>
     </html>

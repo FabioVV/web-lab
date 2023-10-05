@@ -1,10 +1,18 @@
+
 import React from 'react'
 import Link from "next/link"
+import LabFeed from '@components/LabFeed'
 
 function Home() {
+
   return ( 
     <section className='text-center'>
 
+      <LabFeed/> 
+      
+      
+      
+      <hr />
       <h1>TROCAR RESERVA DE EXCLUIR PARA DESATIVAR COMO O RESTO</h1>
 
       <br />
@@ -68,12 +76,12 @@ function Home() {
         Criar laboratório
       </Link>
       <br />
-      <Link  className='text-red-600 hover:border-b-2 hover:border-white-900 ' href="/laboratories/register">
+      <Link  className='text-red-600 hover:border-b-2 hover:border-white-900 ' href="/laboratories/1">
         Editar laboratório
       </Link>
       <br />
 
-      <Link  className='text-red-600 hover:border-b-2 hover:border-white-900 ' href="/laboratories/register">
+      <Link  className='text-red-600 hover:border-b-2 hover:border-white-900 ' href="/laboratories/1">
         Desativar laboratório
       </Link>
 

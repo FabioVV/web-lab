@@ -5,7 +5,7 @@ import { useRef } from "react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from 'next/image'
-
+import { getSession } from "next-auth/react"
 
 export default function LoginPage() {
 
@@ -108,4 +108,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
 

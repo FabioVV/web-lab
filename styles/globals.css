@@ -44,3 +44,8 @@
         color: #EF4444; 
         fill: currentColor; 
     } */
+
+
+.app section{
+    margin: 0 auto;
+}

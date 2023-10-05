@@ -15,6 +15,7 @@ function registerUser() {
     const [lab, setLab] = useState({
         name: '',
         about: '',
+        capacity: '',
     })
 
     const createLab = async(form, e) => {
@@ -25,12 +26,13 @@ function registerUser() {
         const response = await fetch('http://127.0.0.1:8000/api/v3/laboratorios/', {
           method:'POST',
 
-          headers:{ Authorization:`Bearer ${session?.user.accessToken}`, 'Content-Type': 'application/json'
+          headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
         },
 
           body:JSON.stringify({
             name:lab.name, 
             about:lab.about, 
+            capacity:lab.capacity,
           })
         })
 
@@ -41,7 +43,6 @@ function registerUser() {
 
         } else {
           window.flash(`Os campos não podem ser iguais`, 'error')
-
         }
 
       } catch(err){

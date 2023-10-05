@@ -32,14 +32,13 @@ const RegisterUser = () => {
   // var json = JSON.stringify(object);}
 
 
-  async function onSubmit(event){
+  async function onSubmit(form ,event){
       event.preventDefault()
       setIsLoading(true)
       setError(null)
 
 
-
-      const formData = new FormData(event.currentTarget)
+      const formData = new FormData(document.getElementById('form'))
 
       const res = await fetch("http://127.0.0.1:8000/api/v3/usuarios/", {
         method:"POST",
@@ -89,7 +88,7 @@ const RegisterUser = () => {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
-        <div className="w-full p-6 rounded-md shadow-md lg:max-w-xl">
+        <div className="w-full p-6 rounded-md shadow-lg lg:max-w-xl">
             <div className=''>
               <h1 className='text-3xl font-bold text-center ' >Estamos quase lá! Preencha seus dados.</h1>
               

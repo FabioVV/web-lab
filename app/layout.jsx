@@ -6,7 +6,7 @@ import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { Flash } from '@components/Flash';
 import Bus from '@utils/Bus'
-
+import Footer from '@components/Footer'
 
 export const metada = {
     title:'Laboratory booking app',
@@ -32,8 +32,10 @@ function RootLayout({children}) {
                 <Flash />
                 <main className='app'>
                     {children}
-                </main>
+                    <Footer />
 
+                </main>
+                
             </Provider>
         </body>
     </html>

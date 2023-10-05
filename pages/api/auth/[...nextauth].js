@@ -36,8 +36,9 @@ export default NextAuth({
               })
               
             });
-
            const user_token = await res.json()
+           console.log(user_token)
+
            if(res.status != 200){
 
               return null
@@ -49,14 +50,14 @@ export default NextAuth({
               method:"GET",
               headers: {
                 "Content-Type":"application/json",
-                  Authorization:`Bearer ${user_token['accessToken']}`,
+                  Authorization:`Bearer ${user_token['access']}`,
               }
               
             });
 
             const user_result = await user_get.json()
             let user = user_result['results'][0]
-            Object.assign(user, {accessToken:user_token['accessToken']})
+            Object.assign(user, {access:user_token['access']})
 
             if (user) {
               

@@ -16,7 +16,7 @@ const Nav = () => {
         {console.log(session)}
         {session?.user ? (
                 
-                <div>
+                <div className=''>
                 <nav className="w-full border-b-2 border-white-900">
                   <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div>
@@ -97,7 +97,7 @@ const Nav = () => {
           
         ):(
         <>
-        <div>
+        <div className=''>
         <nav className="w-full border-b-2 border-white-900">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
             <div>

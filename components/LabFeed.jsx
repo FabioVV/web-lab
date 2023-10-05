@@ -4,9 +4,21 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Laboratory from './Lab'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
-function LabsList({data, handleClick}){
-
+function LabsList({data, handleClick}){ 
+    return (
+        <tbody>
+            {data.results?.map((laboratory) => (
+                <Laboratory 
+                    key={laboratory.id}
+                    lab={laboratory}
+                    handleClick={handleClick}
+                />
+            ))}
+        </tbody>
+    )
+    
     
 }
 
@@ -23,35 +35,66 @@ function LabFeed() {
         const fetchLabs = async () => {
             const response = await fetch('http://127.0.0.1:8000/api/v3/laboratorios/', {
             method:'GET',
-            headers:{ Authorization:`Bearer ${session?.user.accessToken}`, 'Content-Type': 'application/json'
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
                 },
             })
 
             if(response.ok){
-                
                 const data = await response.json()
                 setLabs(data)
-
-                window.flash(`Laboratório carregados.`, 'success')
-            } else {
-                window.flash(`Erro ao carregar Laboratórios`, 'error')
-            }
+            } 
         }
         fetchLabs()
-    }, [])
+    }, [session?.user.access])
 
     if(session?.user){
         return (
-            <LabsList
-                data = {labs}
-                handleClick = {()=>{}}
-            />
+            <div className="overflow-x-auto">
+                <table className="table">
+
+                    {/* head */}
+                    <thead>
+                    <tr>
+                        <th>
+                            <label>
+                                Disponivel ?
+                            </label>
+                        </th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        {/* <th>?</th> */}
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                        <LabsList
+                            data = {labs}
+                            handleClick = {()=>{}}
+                        />
+
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        {/* <th>?</th> */}
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
         )
     } else {
         return (
-            <section>
-                <h1>Bem vindo!</h1>
-            </section>
+            <div className="hero max-h-screen">
+                <div className="hero-content text-center">
+                    <div className="max-w-md">
+                        <h1 className="text-5xl font-bold">Olá!</h1>
+                        <p className="py-6">Crie, edite e gerencie seus laboratórios.</p>
+                        <Link href="users/register" className="btn btn-primary">Comece agora</Link>
+                    </div>
+                </div>
+            </div>
         )
     }
 

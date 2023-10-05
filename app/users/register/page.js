@@ -8,12 +8,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useRouter } from 'next/navigation';
 
 const RegisterUser = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+  const router = useRouter()
 
 
   //CASO EU PRECISE DE SELECT MULTIPLE E CHECKBOXES
@@ -53,7 +54,8 @@ const RegisterUser = () => {
       const user_created = await res.json()
       if(res.status == 201){
 
-        window.location.replace('/auth/signin')
+        //window.location.replace('/auth/signin')
+        router.push('auth/signin')
         window.flash(`Conta criada! Você já pode fazer login.`, 'success')
 
       } else {

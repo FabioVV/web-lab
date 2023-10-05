@@ -23,12 +23,11 @@ function LabsList({data, handleClick}){
 }
 
 
-
-
 function LabFeed() {
 
     const [labs, setLabs] = useState([])
     const {data:session} = useSession()
+    const [activeTab, setActiveTab] = useState("tab1");
 
     useEffect(() =>{
 
@@ -47,41 +46,141 @@ function LabFeed() {
         fetchLabs()
     }, [session?.user.access])
 
+    
     if(session?.user){
         return (
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div>
 
-                    {/* head */}
-                    <thead>
-                    <tr>
-                        <th>
-                            <label>
-                                Disponivel ?
-                            </label>
-                        </th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        {/* <th>?</th> */}
-                        <th></th>
-                    </tr>
-                    </thead>
+                <div id='tab_container' className="tabs">
+                    <Link onClick={() => {setActiveTab('tab1')}}  href="#tab-1" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
+                    <Link onClick={() => {setActiveTab('tab2')}}  href="#tab-2" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
+                    <Link onClick={() => {setActiveTab('tab3')}}  href="#tab-3" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
+                </div>
 
-                        <LabsList
-                            data = {labs}
-                            handleClick = {()=>{}}
-                        />
+                <div id='tab-content'>
+                    {activeTab === "tab1" ?
+                    <section>
+                        <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        {/* <th>?</th> */}
-                        <th></th>
-                    </tr>
-                    </tfoot>
-                </table>
+                        <div className="overflow-x-auto pb-10">
+                            <table className="table">
+        
+                                {/* head */}
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label>
+                                            Disponivel ?
+                                        </label>
+                                    </th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </thead>
+        
+                                    <LabsList
+                                        data = {labs}
+                                        handleClick = {()=>{}}
+                                    />
+        
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+                    :
+                    ""
+                    }
+                    {activeTab === "tab2" ?
+                    <section>
+                        <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas</h1>
+
+                        <div className="overflow-x-auto pb-10">
+                            <table className="table">
+        
+                                {/* head */}
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label>
+                                            Disponivel ?
+                                        </label>
+                                    </th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </thead>
+        
+                                    reservas aqui
+        
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+                    :
+                    ""
+                    }
+
+                    {activeTab === "tab3" ?
+                    <section>
+                        <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
+
+                        <div className="overflow-x-auto pb-10">
+                            <table className="table">
+        
+                                {/* head */}
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label>
+                                            Disponivel ?
+                                        </label>
+                                    </th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </thead>
+        
+                                    suas reservas aqui
+        
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    {/* <th>?</th> */}
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+                    :
+                    ""
+                    }
+                </div>
+
             </div>
         )
     } else {

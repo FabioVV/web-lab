@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import Form from '@components/Form'
 
 
-function registerUser() {
+function RegisterUser() {
     const router = useRouter()
     const { data:session } = useSession()
     const [submitting, setSubmitting] = useState(false)
@@ -71,4 +71,4 @@ function registerUser() {
 
 }
 
-export default registerUser
+export default RegisterUser

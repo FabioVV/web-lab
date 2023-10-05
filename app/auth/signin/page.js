@@ -5,12 +5,13 @@ import { useRef } from "react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from 'next/image'
-import { getSession } from "next-auth/react"
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const router = useRouter()
 
   const email = useRef('')
   const password = useRef('')
@@ -34,7 +35,9 @@ export default function LoginPage() {
 
       } else {
 
-        window.location.replace('/')
+        //window.location.replace('/')
+        router.push('/')
+        window.flash(`Seja bem vindo(a)!`, 'success')
 
       }
 

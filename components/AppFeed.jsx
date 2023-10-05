@@ -3,8 +3,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Laboratory from './Lab'
+import Booking from './Reser'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+
 
 function LabsList({data, handleClick}){ 
     return (
@@ -17,15 +19,30 @@ function LabsList({data, handleClick}){
                 />
             ))}
         </tbody>
-    )
-    
-    
+    ) 
+}
+
+
+function BookingList({data, handleClick}){ 
+    return (
+        <tbody>
+            {data.results?.map((booking) => (
+                <Booking 
+                    key={booking.id}
+                    book={booking}
+                    handleClick={handleClick}
+                />
+            ))}
+        </tbody>
+    ) 
 }
 
 
 function LabFeed() {
 
     const [labs, setLabs] = useState([])
+    const [bookings, setbookings] = useState([])
+
     const {data:session} = useSession()
     const [activeTab, setActiveTab] = useState("tab1");
 
@@ -45,6 +62,25 @@ function LabFeed() {
         }
         fetchLabs()
     }, [session?.user.access])
+
+
+    useEffect(() =>{
+
+        const fetchBookings = async () => {
+            const response = await fetch('http://127.0.0.1:8000/api/v3/reservas/', {
+            method:'GET',
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+                },
+            })
+
+            if(response.ok){
+                const data = await response.json()
+                setbookings(data)
+            } 
+        }
+        fetchBookings()
+    }, [session?.user.access])
+
 
     
     if(session?.user){
@@ -110,26 +146,29 @@ function LabFeed() {
                                 {/* head */}
                                 <thead>
                                 <tr>
-                                    <th>
-                                        <label>
-                                            Disponivel ?
+                                    <th title='Número da reserva'>
+                                        <label title='Número da reserva'>
+                                            Nº
                                         </label>
                                     </th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    {/* <th>?</th> */}
+                                    <th>Laboratório</th>
+                                    <th>Data de reserva</th>
+                                    <th>Quem reservou</th>
                                     <th></th>
                                 </tr>
                                 </thead>
         
-                                    reservas aqui
+                                    <BookingList
+                                        data = {bookings}
+                                        handleClick = {()=>{}}
+                                    />
         
                                 <tfoot>
                                 <tr>
                                     <th></th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    {/* <th>?</th> */}
+                                    <th>Laboratório</th>
+                                    <th>Data de reserva</th>
+                                    <th>Quem reservou</th>
                                     <th></th>
                                 </tr>
                                 </tfoot>

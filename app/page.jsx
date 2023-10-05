@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Link from "next/link"
-import LabFeed from '@components/LabFeed'
+import AppFeed from '@components/AppFeed'
 
 function Home() {
 
@@ -11,7 +11,7 @@ function Home() {
       <br></br>
 
       <section className='max-w-4xl'>
-        <LabFeed/> 
+        <AppFeed/> 
       </section>
       
     </section>

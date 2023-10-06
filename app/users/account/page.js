@@ -66,7 +66,7 @@ const UserAccount = () => {
     
     if(session?.user.id) fetchUser()
 
-  }, [session?.user.id])
+  }, [reset, session?.user.access, session?.user.id])
 
 
   const handleDelete = async() => {
@@ -127,6 +127,7 @@ const UserAccount = () => {
       if(res.status == 200){
 
         const user = await res.json()
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         window.flash(`Dados alterados.`, 'success')
         await update({ ...user })
 

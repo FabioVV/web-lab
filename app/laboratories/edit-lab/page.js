@@ -38,7 +38,7 @@ function RegisterLab() {
       }
 
       if(LabId)getLab()
-    },[LabId])
+    },[LabId, session?.user.access])
 
 
     const EditLab = async(form, e) => {

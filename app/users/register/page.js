@@ -1,11 +1,7 @@
 "use client"
 
 import React from 'react'
-import Link from 'next/link';
-import { useRef } from 'react';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useRouter } from 'next/navigation';
@@ -98,7 +94,7 @@ const RegisterUser = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
-                      Primeiro nome
+                      Primeiro nome *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Jane" name='first_name' id='first_name'
                       {...register("first_name", { required: "Campo obrigatório." })}
@@ -107,7 +103,7 @@ const RegisterUser = () => {
                       errors={errors}
                       name="first_name"
                       render={({ message }) => 
-                      <div class="text-red-300 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
                         <strong class="font-bold">* {message}</strong>
                       </div>}
                     />
@@ -124,28 +120,56 @@ const RegisterUser = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="username">
-                      Nome de usuário
+                      Nome de usuário *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" 
                     id="username" type="text" placeholder="Jane123" name='username' 
+                      {...register("username", { required: "Campo obrigatório." })}
 
                     />
-                  
+                    <ErrorMessage
+                      errors={errors}
+                      name="username"
+                      render={({ message }) => 
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                    />
                   </div>
                 </div>
                 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password">
-                      Senha
+                      Senha *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password" type="password" placeholder="************" name='password'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password" type="password" placeholder="************" name='password'
+                      {...register("password", { required: "Campo obrigatório." })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="password"
+                      render={({ message }) => 
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                    />
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password_confirmation">
-                      Confirme sua senha
+                      Confirme sua senha *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
+                      {...register("password_confirmation", { required: "Campo obrigatório." })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="password_confirmation"
+                      render={({ message }) => 
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                    />
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
                     <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
                   </div>
@@ -154,7 +178,7 @@ const RegisterUser = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                      Email
+                      Email *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="email" type="email" placeholder="jane@email.com" name='email'
                      {...register("email", { required: "Campo obrigatório." , pattern: { value: /.+@.+/, message: 'Email inválido' },})}
@@ -163,8 +187,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="email"
                       render={({ message }) => 
-                      <div class="bg-red-100 border border-red-400 text-red-700 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">{message}</strong>
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -173,23 +197,30 @@ const RegisterUser = () => {
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cpf_cnpj">
-                      CPF/CNPJ
+                      CPF/CNPJ *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
+                      {...register("cpf_cnpj", { required: "Campo obrigatório." })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="cpf_cnpj"
+                      render={({ message }) => 
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                    />
                     <p className="text-gray-600 text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="sex">
-                      Sexo
+                      Sexo *
                     </label>
                     <div className="relative">
                       <select  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="sex" name='sex'>
                         <option value='M'>Masculino</option>
                         <option value='F'>Feminino</option>
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                      </div>
                     </div>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -204,22 +235,29 @@ const RegisterUser = () => {
                 <div style={{marginTop:30}} className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="birth_date">
-                      Data de nascimento
+                      Data de nascimento *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="birth_date" type="date"  name='birth_date'/>
+                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="birth_date" type="date"  name='birth_date'
+                      {...register("birth_date", { required: "Campo obrigatório." })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="birth_date"
+                      render={({ message }) => 
+                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong class="font-bold">* {message}</strong>
+                      </div>}
+                    />
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="user_type">
-                      Inscreva-se como
+                      Inscreva-se como *
                     </label>
                     <div className="relative">
                       <select  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="user_type" name='user_type'>
                         <option value='1'>Aluno</option>
                         <option value='2'>Professor</option>
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -231,7 +269,7 @@ const RegisterUser = () => {
 
                     <div className="w-full md:w-1/2 mt-5">
                       <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
-                        {isLoading ? <Image src="/images/loading.gif" className="" width={30} height={30} alt="loading gif"/>: 'Finalizar'}{isLoading ? " Aguarde....": ''}
+                        {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Finalizar'}
 
                       </button>
                     </div>

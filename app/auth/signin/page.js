@@ -66,7 +66,7 @@ export default function LoginPage() {
               htmlFor="email"
               className="block text-sm font-semibold "
             >
-              Email
+              Email *
             </label>
             <input
                name="email" type="email" onChange={(e)=>{email.current = e.target.value}} placeholder="john@email.com"
@@ -78,7 +78,7 @@ export default function LoginPage() {
               htmlFor="password" 
               className="block text-sm font-semibold "
             >
-              Senha
+              Senha *
             </label>
             <input placeholder="******"
               name="password" type="password" onChange={(e)=>{password.current = e.target.value}}
@@ -92,8 +92,8 @@ export default function LoginPage() {
             Esqueceu a senha?
           </Link>
           <div className="mt-2">
-            <button disabled={isLoading} onClick={submit} className="flex justify-center w-full px-4 py-2 tracking-wide border-2 border-white-900 transition-colors duration-200 transform rounded-md hover:bg-white hover:text-black focus:text-black focus:outline-none focus:bg-white">
-              {isLoading ? <Image src="/images/loading.gif" className="" width={30} height={30} alt="loading gif"/>: 'Entrar'}{isLoading ? " Aguarde....": ''}
+            <button disabled={isLoading} onClick={submit} className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+              {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Entrar'}
             </button>
           </div>
         </form>

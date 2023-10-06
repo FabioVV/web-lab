@@ -6,6 +6,7 @@ import Laboratory from './Lab'
 import Booking from './Reser'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import CreModal from './createModal'
 
 
 function LabsList({data, handleClick}){ 
@@ -95,20 +96,26 @@ function LabFeed() {
 
                 <div id='tab-content'>
                     {activeTab === "tab1" ?
-                    <section>
+                    <section className=''>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
                         {session?.user.user_type === 2 || session?.user.is_superuser? 
-                        <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            Registrar laboratório
-                        </Link>
+                        <div>
+                            {/* <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Registrar laboratório
+                            </Link> */}
+                            <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Registrar laboratório
+                            </button>
+                            <CreModal/>
+                        </div>
                         :
                         ""
                         }
 
 
                         <div className="overflow-x-auto pb-10 mt-5">
-                            <table className="table">
+                            <table className="table mb-8">
         
                                 {/* head */}
                                 <thead>

@@ -16,43 +16,11 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
     }
 
     function handleEditLab(id){
-        //router.push(`/laboratories/edit-lab?id=${id}`)
         document.getElementById('my_modal_2').showModal()
-
     }
 
     const handleDeleteLab = async (id) => {
         document.getElementById('my_modal_1').showModal()
-        
-
-        // const hasConfirmed = confirm("Você tem certeza que deseja desativar este laboratório?")
-        
-    
-        // if(hasConfirmed){
-        //     try{
-        //     const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${id}/`,{
-        //         method:"DELETE",
-    
-        //         headers: { 
-        //             "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
-        //         }
-        //     })
-    
-        //     if(response.ok){
-    
-        //         window.location.replace('/')
-        //         window.flash(`Laboratório desativado.`, 'success')
-    
-        //     } else {
-        //         window.flash(`Erro ao desativar laboratório.`, 'error')
-        //         setIsLoading(false)
-        //     }
-    
-        //     }catch(err){
-        //         console.log(err)
-        //     }
-        // }
-          
     }
 
 

@@ -7,7 +7,7 @@ import Booking from './Reser'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import CreModal from './createModal'
-
+import UserBooking from './UserReser'
 
 function LabsList({data, handleClick}){ 
     return (
@@ -38,14 +38,29 @@ function BookingList({data, handleClick}){
     ) 
 }
 
+function UserBookingList({data, handleClick}){ 
+    return (
+        <tbody>
+            {data?.map((booking) => (
+                <UserBooking 
+                    key={booking.id}
+                    book={booking}
+                    handleClick={handleClick}
+                />
+            ))}
+        </tbody>
+    ) 
+}
+
 
 function LabFeed() {
 
     const [labs, setLabs] = useState([])
     const [bookings, setbookings] = useState([])
-
+    const [userBookings, setuserBookings] = useState([])
     const {data:session} = useSession()
     const [activeTab, setActiveTab] = useState("tab1");
+
 
     useEffect(() =>{
 
@@ -80,6 +95,24 @@ function LabFeed() {
             } 
         }
         fetchBookings()
+    }, [session?.user.access])
+
+
+    useEffect(() =>{
+
+        const fetchUserBookings = async () => {
+            const response = await fetch('http://127.0.0.1:8000/api/v3/user-reservas/', {
+            method:'GET',
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+                },
+            })
+
+            if(response.ok){
+                const data = await response.json()
+                setuserBookings(data)
+            } 
+        }
+        fetchUserBookings()
     }, [session?.user.access])
 
 
@@ -132,11 +165,12 @@ function LabFeed() {
                                 </tr>
                                 </thead>
                                 
-                                    
+                                
                                     <LabsList
                                         data = {labs}
                                         handleClick = {()=>{}}
                                     />
+
         
                                 <tfoot>
                                 <tr>
@@ -163,6 +197,7 @@ function LabFeed() {
                                 {/* head */}
                                 <thead>
                                 <tr>
+
                                     <th title='Número da reserva'>
                                         <label title='Número da reserva'>
                                             Nº
@@ -208,23 +243,31 @@ function LabFeed() {
                                 <tr>
                                     <th>
                                         <label>
+                                            Nº
+                                        </label>
+                                    </th>
+                                    <th>
+                                        <label>
                                             Disponivel?
                                         </label>
                                     </th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
+                                    <th>Laboratório</th>
+                                    <th>Data da reserva</th>
                                     {/* <th>?</th> */}
                                     <th></th>
                                 </tr>
                                 </thead>
         
-                                    suas reservas aqui
+                                    <UserBookingList
+                                            data = {userBookings}
+                                            handleClick = {()=>{}}
+                                    />
         
                                 <tfoot>
                                 <tr>
                                     <th></th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
+                                    <th>Laboratório</th>
+                                    <th>Data da reserva</th>
                                     {/* <th>?</th> */}
                                     <th></th>
                                 </tr>

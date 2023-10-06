@@ -84,7 +84,7 @@ const Nav = () => {
                             </Link>
                           </li>
                           <li className="">
-                            <button className='hover:border-b-2 hover:border-white-900 '  onClick={signOut}>
+                            <button className='hover:border-b-2 hover:border-white-900 '  onClick={()=>signOut({callbackUrl: `${window.location.origin}`})}>
                                 Sair
                             </button>
                           </li>

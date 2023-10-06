@@ -1,14 +1,15 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-
+import { useState } from 'react'
 
 function DelModal({lab_id}) {
     const {data:session} = useSession()
     const router = useRouter()
+    const [submitting, setSubmitting] = useState(false)
 
     const DesativarLab = async() => {
-    
+        setSubmitting(true)
         try{
             const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${lab_id}/`,{
                 method:"DELETE",
@@ -19,7 +20,8 @@ function DelModal({lab_id}) {
             })
     
             if(response.ok){
-    
+                setSubmitting(false)
+
                 document.getElementById('close').click()
                 window.location.replace('/')
                 //window.flash(`Laboratório desativado.`, 'success')
@@ -30,6 +32,10 @@ function DelModal({lab_id}) {
     
         } catch(err) {
             console.log(err)
+
+        } finally {
+            setSubmitting(true)
+
         }
         
     } 
@@ -45,9 +51,10 @@ function DelModal({lab_id}) {
             Reativação somente mediante contato com os admnistradores.</p>
             <div className="modal-action">
 
-                <button onClick={() => DesativarLab()} type="button" className="btn text-red-600">
-                    Remover laboratório
+                <button disabled={submitting} onClick={() => DesativarLab()} type="button" className="btn text-red-600">
+                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Remover laboratório'}
                 </button>
+
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
                     <button id='close' className="btn">Fechar</button>

@@ -178,7 +178,7 @@ function EdModal({lab_id}) {
                 
             <div className="modal-action">
                 
-                <button onClick={()=>{document.getElementById('sub').click()}} type="button" className="btn text-green-600">
+                <button disabled={submitting} onClick={()=>{document.getElementById('sub').click()}} type="button" className="btn text-green-600">
                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Salvar'}
                 </button>
                 

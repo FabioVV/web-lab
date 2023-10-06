@@ -20,7 +20,6 @@ function EdModal({lab_id}) {
 
     useEffect(()=>{
         let defaultValues = {};
-
         const getLab = async () => {
           const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${lab_id}/`, {
             method:'GET',
@@ -89,9 +88,9 @@ function EdModal({lab_id}) {
 
 
   return (
-    <dialog id="my_modal_2" className="modal">
+    <dialog id={`my_modal_edit_${lab_id}`}  className="modal">
         <div className="modal-box">
-            <h3 className="font-bold text-lg">Alterar {lab?.name}</h3>
+            <h3 className="font-bold text-lg">Alterar  {lab?.name}</h3>
             
             <div className="relative flex flex-col items-center justify-center overflow-hidden">
                 <div className="w-full p-5">
@@ -160,7 +159,7 @@ function EdModal({lab_id}) {
                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 
                             <div className="w-full md:w-1/2 mt-5">
-                                <button id='sub' className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
+                                <button id={`sub_${lab_id}`} className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
                                 {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Salvar'}
 
                                 </button>
@@ -178,7 +177,7 @@ function EdModal({lab_id}) {
                 
             <div className="modal-action">
                 
-                <button disabled={submitting} onClick={()=>{document.getElementById('sub').click()}} type="button" className="btn text-green-600">
+                <button disabled={submitting} onClick={()=>{document.getElementById(`sub_${lab_id}`).click()}} type="button" className="btn text-green-600">
                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Salvar'}
                 </button>
                 

@@ -9,7 +9,6 @@ import { signIn } from 'next-auth/react';
 
 
 const RegisterUser = () => {
-  const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const router = useRouter()
@@ -255,7 +254,7 @@ const RegisterUser = () => {
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 
                     <div className="w-full md:w-1/2 mt-5">
-                      <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
+                      <button disabled={isLoading} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type='submit' >
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Finalizar'}
 
                       </button>

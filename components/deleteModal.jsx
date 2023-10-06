@@ -40,11 +40,11 @@ function DelModal({lab_id}) {
         
     } 
     
-
+    
 
 
   return (
-    <dialog id="my_modal_1" className="modal">
+    <dialog id={`my_modal_delete_${lab_id}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Você tem certeza?</h3>
             <p className="py-4">Está ação ira <span className='text-red-600'>desativar</span> o Laboratório.<br></br> 

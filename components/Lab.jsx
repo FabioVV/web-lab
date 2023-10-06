@@ -40,7 +40,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                     </div>
                 </div> */}
                 <div>
-                    <div className="font-bold">{lab.name}  ::::: id = {lab.id}</div>
+                    <div className="font-bold">{lab.name}</div>
                     <div className="text-sm opacity-50">Capacidade: {lab.capacity}</div>
                 </div>
             </div>

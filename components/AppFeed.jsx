@@ -124,7 +124,8 @@ function LabFeed() {
                                     <th></th>
                                 </tr>
                                 </thead>
-        
+                                
+                                    
                                     <LabsList
                                         data = {labs}
                                         handleClick = {()=>{}}

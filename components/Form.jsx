@@ -11,7 +11,7 @@ function Form({lab, setLab, submitting, submit, type}) {
 <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
   <div className="w-full p-6 rounded-md shadow-lg lg:max-w-xl">
       <div className=''>
-        <h1 className='text-3xl font-bold text-center ' >Atualizar laboratório.</h1>
+        <h1 className='text-3xl font-bold text-center ' >Registrar laboratório.</h1>
         
         <form method='post' onSubmit={handleSubmit(submit)} id='form' className="w-full p-6">
           <div className="flex flex-wrap -mx-3 mb-6">

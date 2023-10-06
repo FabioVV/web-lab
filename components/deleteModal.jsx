@@ -50,7 +50,7 @@ function DelModal({lab_id}) {
                 </button>
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
-                    <button id='close' className="btn">Close</button>
+                    <button id='close' className="btn">Fechar</button>
                 </form>
             </div>
         </div>

@@ -41,7 +41,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                 </div> */}
                 <div>
                     <div className="font-bold">{lab.name}</div>
-                    <div className="text-sm opacity-50">Capacidade: {lab.capacity}</div>
+                    <div className="text-sm opacity-50">--------</div>
                 </div>
             </div>
             </td>
@@ -49,7 +49,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
             <td>
                 {lab.about}
                 <br/>
-                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                <span className="badge badge-ghost badge-sm">Capacidade: {lab.capacity} lugares</span>
             </td>
 
             {/* <td>

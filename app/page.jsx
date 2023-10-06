@@ -6,7 +6,7 @@ import AppFeed from '@components/AppFeed'
 function Home() {
 
   return ( 
-    <section className='text-center'>
+    <section className=''>
 
       <br></br>
 

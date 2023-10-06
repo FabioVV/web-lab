@@ -21,7 +21,7 @@ const Nav = () => {
                   <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div>
                       <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                          <Link href='/users/account' className="text-2xl  font-bold">Olá, {session?.user.first_name}</Link>
+                          <Link href='/' className="text-2xl  font-bold">Olá, {session?.user.first_name}</Link>
                         
                         <div className="md:hidden">
                           <button

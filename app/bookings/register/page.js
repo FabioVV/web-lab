@@ -1,6 +1,8 @@
 import React from 'react'
 
 function RegisterBooking() {
+
+  
   return (
     <div>RegisterBooking</div>
   )

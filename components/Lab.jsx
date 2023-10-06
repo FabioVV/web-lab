@@ -1,7 +1,57 @@
 import React from 'react'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+
 
 function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
+
+    const {data:session} = useSession()
+    const router = useRouter()
+  
+    
+    function handleBooking(id){
+        router.push(`/bookings/register?id=${id}`)
+    }
+
+    function handleEditLab(id){
+        router.push(`/laboratories/edit-lab?id=${id}`)
+    }
+
+    const handleDeleteLab = async (id) => {
+        //router.push(`/laboratories/delete-lab?id=${id}`)
+
+        const hasConfirmed = confirm("Você tem certeza que deseja desativar este laboratório?")
+        
+    
+        if(hasConfirmed){
+            try{
+            const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${id}/`,{
+                method:"DELETE",
+    
+                headers: { 
+                    "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
+                }
+            })
+    
+            if(response.ok){
+    
+                window.location.replace('/')
+                window.flash(`Laboratório desativado.`, 'success')
+    
+            } else {
+                window.flash(`Erro ao desativar laboratório.`, 'error')
+                setIsLoading(false)
+            }
+    
+            }catch(err){
+                console.log(err)
+            }
+        }
+          
+    }
+
+
   return (
         <tr>
             <th>
@@ -18,7 +68,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                     </div>
                 </div> */}
                 <div>
-                    <div className="font-bold">{lab.name}</div>
+                    <div className="font-bold">{lab.name} </div>
                     <div className="text-sm opacity-50">Capacidade: {lab.capacity}</div>
                 </div>
             </div>
@@ -35,10 +85,18 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
             </td> */}
 
             <th>
-                <Link href="" className="btn btn-ghost btn-xs">Reservar</Link>
-                <Link href="" className="btn btn-ghost btn-xs">Editar</Link>
-                <Link href="" className="btn btn-ghost btn-xs">Remover</Link>
+                {session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff ? 
+                <div>
+                    <button onClick={() => handleBooking(lab.id)} className="btn btn-ghost btn-xs">Reservar</button>
+                    <button onClick={() => handleEditLab(lab.id)} className="btn btn-ghost btn-xs">Editar</button>
+                    <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
+                </div>
+                :
+                ""
+                }
+
             </th>
+
 
         </tr>
   )

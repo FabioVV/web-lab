@@ -5,9 +5,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+
 
 const UserAccount = () => {
-  const {data:session} = useSession()
+  const {data:session, update} = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, watch,setValue, reset, formState: { errors } } = useForm();
   const [user, setUser] = useState({
@@ -67,12 +69,35 @@ const UserAccount = () => {
   }, [session?.user.id])
 
 
-  useEffect(() => {
+  const handleDelete = async() => {
+    const hasConfirmed = confirm("Você tem certeza que deseja excluir sua conta?")
 
-  }, []);
+    if(hasConfirmed){
+      try{
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${session?.user.id}/`,{
+          method:"DELETE",
 
+          headers: { 
+              "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
+          }
+        })
 
+        if(response.ok){
 
+          signOut()
+          window.location.replace('/')
+          window.flash(`Sua conta foi excluída.`, 'success')
+
+        } else {
+          window.flash(`Erro. Favor, tentar novamente.`, 'error')
+          setIsLoading(false)
+        }
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+  } 
 
 
   async function onSubmit(form ,event){
@@ -101,9 +126,10 @@ const UserAccount = () => {
   
       if(res.status == 200){
 
-        //window.location.replace('/auth/signin')
-        //router.push('/users/account')
-        window.flash(`Dados alterados com sucesso.`, 'success')
+        const user = await res.json()
+        window.flash(`Dados alterados.`, 'success')
+        await update({ ...user })
+
         setIsLoading(false)
 
       } else {
@@ -318,9 +344,18 @@ const UserAccount = () => {
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Salvar'}
 
                       </button>
+                      
+                    </div>
+                    
+                    <div className="w-full">
+                      <button onClick={() => handleDelete()} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type='button' >
+                        {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Excluir conta'}
+                      </button>
+                      
                     </div>
 
                   </div>
+
                 </div>
 
               </form>

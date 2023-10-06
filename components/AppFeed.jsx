@@ -98,7 +98,16 @@ function LabFeed() {
                     <section>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
-                        <div className="overflow-x-auto pb-10">
+                        {session?.user.user_type === 2 ? 
+                        <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            Registrar laboratório
+                        </Link>
+                        :
+                        ""
+                        }
+
+
+                        <div className="overflow-x-auto pb-10 mt-5">
                             <table className="table">
         
                                 {/* head */}
@@ -106,7 +115,7 @@ function LabFeed() {
                                 <tr>
                                     <th>
                                         <label>
-                                            Disponivel ?
+                                            Disponivel?
                                         </label>
                                     </th>
                                     <th>Nome</th>
@@ -191,7 +200,7 @@ function LabFeed() {
                                 <tr>
                                     <th>
                                         <label>
-                                            Disponivel ?
+                                            Disponivel?
                                         </label>
                                     </th>
                                     <th>Nome</th>

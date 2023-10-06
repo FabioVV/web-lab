@@ -82,7 +82,10 @@ export default NextAuth({
   },
 
   callbacks:{
-    async jwt({session, token, user}){
+    async jwt({session, token, user, trigger}){
+      if(trigger === "update"){
+        return {...token, ...session}
+      }
       return {...token, ...user}
     },
     async session({session, token, user}){

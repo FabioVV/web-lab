@@ -11,7 +11,7 @@ function Form({lab, setLab, submitting, submit, type}) {
 <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
   <div className="w-full p-6 rounded-md shadow-lg lg:max-w-xl">
       <div className=''>
-        <h1 className='text-3xl font-bold text-center ' >Preencha os dados do laboratório.</h1>
+        <h1 className='text-3xl font-bold text-center ' >Atualizar laboratório.</h1>
         
         <form method='post' onSubmit={handleSubmit(submit)} id='form' className="w-full p-6">
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -77,7 +77,7 @@ function Form({lab, setLab, submitting, submit, type}) {
 
               <div className="w-full md:w-1/2 mt-5">
                 <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
-                  {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Finalizar'}
+                  {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Salvar'}
 
                 </button>
               </div>

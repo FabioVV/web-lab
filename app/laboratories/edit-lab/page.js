@@ -1,9 +1,9 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Form from '@components/Form'
 
 
@@ -11,6 +11,8 @@ function RegisterLab() {
     const router = useRouter()
     const { data:session } = useSession()
     const [submitting, setSubmitting] = useState(false)
+    const search = useSearchParams()
+    const LabId = search.get('id')
 
     const [lab, setLab] = useState({
         name: '',
@@ -18,13 +20,34 @@ function RegisterLab() {
         capacity: '',
     })
 
-    const createLab = async(form, e) => {
+
+    useEffect(()=>{
+      const getLab = async () => {
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${LabId}/`, {
+          method:'GET',
+
+          headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+        },
+        })
+        const data = await response.json()
+        setLab({
+          name: data.name,
+          about: data.about,
+          capacity: data.capacity,
+        })
+      }
+
+      if(LabId)getLab()
+    },[LabId])
+
+
+    const EditLab = async(form, e) => {
       e.preventDefault();
       setSubmitting(true)
 
       try{
-        const response = await fetch('http://127.0.0.1:8000/api/v3/laboratorios/', {
-          method:'POST',
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${LabId}/`, {
+          method:'PATCH',
 
           headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
         },
@@ -39,10 +62,10 @@ function RegisterLab() {
         if(response.ok){
 
           router.push('/')
-          window.flash(`Laboratório registrado.`, 'success')
+          window.flash(`Laboratório atualizado.`, 'success')
 
         } else {
-          window.flash(`Os campos não podem ser iguais`, 'error')
+          window.flash(`Erro ao atualizar laboratório`, 'error')
         }
 
       } catch(err){
@@ -65,7 +88,7 @@ function RegisterLab() {
         lab={lab}
         setLab={setLab}
         submitting={submitting}
-        submit={createLab}
+        submit={EditLab}
         // handleClick
         // handleEdit
         // andleRemove

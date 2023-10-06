@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import DelModal from './deleteModal'
 import EdModal from './editModal'
+import BookingModal from './registerBooking'
 
 function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
 
@@ -12,7 +13,8 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
   
     
     function handleBooking(id){
-        router.push(`/bookings/register?id=${id}`)
+        //router.push(`/bookings/register?id=${id}`)
+        document.getElementById(`my_modal_booking_${id}`)?.showModal()
     }
 
     function handleEditLab(id){
@@ -72,6 +74,8 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                     <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
                     <DelModal lab_id={lab.id}/>
                     <EdModal lab_id={lab.id}/>
+                    <BookingModal lab_id={lab.id}/>
+
                 </div>
                 :
                 ""

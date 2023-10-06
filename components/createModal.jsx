@@ -63,7 +63,8 @@ function CreModal({lab_id}) {
     <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Registrar laboratório</h3>
-            
+            <hr />
+
             <div className="relative flex flex-col items-center justify-center overflow-hidden">
                 <div className="w-full p-5">
                     <div className=''>

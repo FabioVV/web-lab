@@ -192,7 +192,7 @@ function LabFeed() {
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas</h1>
 
                         <div className="overflow-x-auto pb-10">
-                            <table className="table">
+                            <table className="table mb-8">
         
                                 {/* head */}
                                 <thead>
@@ -236,7 +236,7 @@ function LabFeed() {
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
 
                         <div className="overflow-x-auto pb-10">
-                            <table className="table">
+                            <table className="table mb-8">
         
                                 {/* head */}
                                 <thead>
@@ -248,7 +248,7 @@ function LabFeed() {
                                     </th>
                                     <th>
                                         <label>
-                                            Disponivel?
+                                            Ainda reservado?
                                         </label>
                                     </th>
                                     <th>Laboratório</th>

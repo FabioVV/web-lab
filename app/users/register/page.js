@@ -33,7 +33,6 @@ const RegisterUser = () => {
   async function onSubmit(form ,event){
       event.preventDefault()
       setIsLoading(true)
-      setError(null)
 
 
       const formData = new FormData(document.getElementById('form'))

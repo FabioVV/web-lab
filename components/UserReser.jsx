@@ -53,8 +53,8 @@ function UserBooking({book, handleClick, handleEdit, handleRemove}) {
             <th>
             {session?.user.id === book.user.id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
-                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Editar</button>
-                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Remover</button>
+                    {/* <button onClick={() => {}} className="btn btn-ghost btn-xs">Editar</button>
+                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Remover</button> */}
                     {/* MODALS DE CONTROLE DAS RESERVAS IRÃO AQUI */}
                 </div>
                 :

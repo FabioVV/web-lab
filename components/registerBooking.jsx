@@ -8,6 +8,18 @@ import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 
+function NumeroDoBoletoAleatorio8Digitos() {
+    const randomNumber = Math.floor(Math.random() * 100000000);
+    const randomString = randomNumber.toString();
+
+    // If the random number is less than 10000000, pad it with leading zeros
+    if (randomString.length < 8) {
+      return '0'.repeat(8 - randomString.length) + randomString;
+    }
+  
+    return randomString;
+}
+
 function BookingModal({lab_id}) {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
@@ -21,6 +33,9 @@ function BookingModal({lab_id}) {
         price:'',
     })
 
+
+    const numero_boleto = NumeroDoBoletoAleatorio8Digitos()
+
     useEffect(()=>{
         let defaultValues = {};
 
@@ -32,20 +47,21 @@ function BookingModal({lab_id}) {
           },
           })
           const data = await response.json()
+
           setLab({
             name: data.name,
             about: data.about,
             capacity: data.capacity,
-            price:'250',
-            bol_number:'123456789'
+            price:data.price,
+            bol_number: numero_boleto
           })
 
-          // FAZER O NUMERO DO BOLETO VIR DO BACKEND, PRECO TBM   data. FORMATAR CAMPOS TELEFONE, CNPJ CPF E PRECO
+          // FORMATAR CAMPOS TELEFONE, CNPJ CPF E PRECO
           defaultValues.name = data.name;
           defaultValues.about = data.about;
           defaultValues.capacity = data.capacity;
-          defaultValues.price = `23423`;
-          defaultValues.bol_number = lab.bol_number;
+          defaultValues.price = data.price;
+          defaultValues.bol_number = numero_boleto;
 
           reset({ ...defaultValues });
 
@@ -60,16 +76,15 @@ function BookingModal({lab_id}) {
         setSubmitting(true)
   
         try{
-          const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${lab_id}/`, {
-            method:'PATCH',
+          const response = await fetch(`http://127.0.0.1:8000/api/v3/reservas/`, {
+            method:'POST',
   
             headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
           },
   
             body:JSON.stringify({
-              name:lab.name, 
-              about:lab.about, 
-              capacity:lab.capacity,
+                laboratory: lab_id,
+                bol_number:lab.bol_number
             })
           })
   
@@ -77,10 +92,10 @@ function BookingModal({lab_id}) {
   
             document.getElementById('closer').click()
             window.location.reload()
-            window.flash(`Laboratório atualizado.`, 'success')
+            window.flash(`Laboratório reservado.`, 'success')
             
           } else {
-            window.flash(`Erro ao atualizar laboratório`, 'error')
+            window.flash(`Erro ao reservar laboratório`, 'error')
           }
   
         } catch(err){
@@ -228,7 +243,7 @@ function BookingModal({lab_id}) {
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 
                                     <div className="w-full md:w-1/2 mt-5">
-                                        <button id={`sub_${lab_id}`} className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
+                                        <button id={`sub_reserva_${lab_id}`} className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type='submit' >
                                         {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Salvar'}
 
                                         </button>
@@ -245,7 +260,7 @@ function BookingModal({lab_id}) {
                 
             <div className="modal-action">
                 
-                <button disabled={submitting} onClick={()=>{document.getElementById(`sub_${lab_id}`).click()}} type="button" className="btn text-green-600">
+                <button disabled={submitting} onClick={()=>{document.getElementById(`sub_reserva_${lab_id}`).click()}} type="button" className="btn text-green-600">
                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Realizar pagamento'}
                 </button>
                 

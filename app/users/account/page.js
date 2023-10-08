@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
-
+import DelModalAccount from '@components/deleteModalAccount';
 
 const UserAccount = () => {
   const {data:session, update} = useSession()
@@ -69,35 +69,35 @@ const UserAccount = () => {
   }, [reset, session?.user.access, session?.user.id])
 
 
-  const handleDelete = async() => {
-    const hasConfirmed = confirm("Você tem certeza que deseja excluir sua conta?")
+  // const handleDelete = async() => {
+  //   const hasConfirmed = confirm("Você tem certeza que deseja excluir sua conta?")
 
-    if(hasConfirmed){
-      try{
-        const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${session?.user.id}/`,{
-          method:"DELETE",
+  //   if(hasConfirmed){
+  //     try{
+  //       const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${session?.user.id}/`,{
+  //         method:"DELETE",
 
-          headers: { 
-              "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
-          }
-        })
+  //         headers: { 
+  //             "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
+  //         }
+  //       })
 
-        if(response.ok){
+  //       if(response.ok){
 
-          signOut()
-          window.location.replace('/')
-          window.flash(`Sua conta foi excluída.`, 'success')
+  //         signOut()
+  //         window.location.replace('/')
+  //         window.flash(`Sua conta foi excluída.`, 'success')
 
-        } else {
-          window.flash(`Erro. Favor, tentar novamente.`, 'error')
-          setIsLoading(false)
-        }
+  //       } else {
+  //         window.flash(`Erro. Favor, tentar novamente.`, 'error')
+  //         setIsLoading(false)
+  //       }
 
-      }catch(err){
-        console.log(err)
-      }
-    }
-  } 
+  //     }catch(err){
+  //       console.log(err)
+  //     }
+  //   }
+  // } 
 
 
   async function onSubmit(form ,event){
@@ -163,8 +163,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="first_name"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   
@@ -194,8 +194,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="username"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -213,8 +213,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="password"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -229,8 +229,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="password_confirmation"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
@@ -250,8 +250,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="email"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -269,8 +269,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="cpf_cnpj"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                     <p className="text-gray-600 text-xs italic">Digite apenas números</p>
@@ -314,8 +314,8 @@ const UserAccount = () => {
                       errors={errors}
                       name="birth_date"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -349,7 +349,7 @@ const UserAccount = () => {
                     </div>
                     
                     <div className="w-full">
-                      <button onClick={() => handleDelete()} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type='button' >
+                      <button onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type='button' >
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Excluir conta'}
                       </button>
                       
@@ -363,7 +363,7 @@ const UserAccount = () => {
 
             </div>
         </div>
-        
+        <DelModalAccount user_id={session?.user.id} user_access={session?.user.access} />
     </div>
     
   )

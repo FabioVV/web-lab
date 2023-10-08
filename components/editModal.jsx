@@ -110,8 +110,8 @@ function EdModal({lab_id}) {
                                 errors={errors}
                                 name="name"
                                 render={({ message }) => 
-                                <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                <strong class="font-bold">* {message}</strong>
+                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                <strong className="font-bold">* {message}</strong>
                                 </div>}
                             />
                             
@@ -127,8 +127,8 @@ function EdModal({lab_id}) {
                                 errors={errors}
                                 name="capacity"
                                 render={({ message }) => 
-                                <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                <strong class="font-bold">* {message}</strong>
+                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                <strong className="font-bold">* {message}</strong>
                                 </div>}
                             />
                             </div>
@@ -147,8 +147,8 @@ function EdModal({lab_id}) {
                             errors={errors}
                             name="about"
                             render={({ message }) => 
-                            <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                <strong class="font-bold">* {message}</strong>
+                            <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                <strong className="font-bold">* {message}</strong>
                             </div>}
                             />
                             

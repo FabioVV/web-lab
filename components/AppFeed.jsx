@@ -122,9 +122,9 @@ function LabFeed() {
             <div>
 
                 <div id='tab_container' className="tabs">
-                    <Link onClick={() => {setActiveTab('tab1')}}  href="#tab-1" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
-                    <Link onClick={() => {setActiveTab('tab2')}}  href="#tab-2" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
-                    <Link onClick={() => {setActiveTab('tab3')}}  href="#tab-3" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
+                    <Link onClick={() => {setActiveTab('tab1')}}  href="#laboratorios" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
+                    <Link onClick={() => {setActiveTab('tab2')}}  href="#reservas" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
+                    <Link onClick={() => {setActiveTab('tab3')}}  href="#suas-reservas" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
                 </div>
 
                 <div id='tab-content'>

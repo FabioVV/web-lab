@@ -85,8 +85,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="first_name"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   
@@ -116,8 +116,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="username"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -135,8 +135,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="password"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -151,8 +151,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="password_confirmation"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
@@ -172,8 +172,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="email"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>
@@ -191,8 +191,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="cpf_cnpj"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                     <p className="text-gray-600 text-xs italic">Digite apenas números</p>
@@ -229,8 +229,8 @@ const RegisterUser = () => {
                       errors={errors}
                       name="birth_date"
                       render={({ message }) => 
-                      <div class="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong class="font-bold">* {message}</strong>
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
                   </div>

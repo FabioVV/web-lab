@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import DelModalBooking from './deleteModalBooking'
+import EdModal from './editModal'
 import { useSession } from 'next-auth/react'
-
 
 
 function Booking({book, handleClick, handleEdit, handleRemove}) {
@@ -44,9 +45,10 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
             <th>
             {session?.user.id === book.user.id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
-                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Editar</button>
-                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Remover</button>
-                    {/* MODALS DE CONTROLE DAS RESERVAS IRÃO AQUI */}
+                    {/* <button onClick={() => {document.getElementById(`my_modal_edit_${book.laboratory}`)?.showModal()}} className="btn btn-ghost btn-xs">Editar</button> */}
+                    <button onClick={() => {document.getElementById(`my_modal_delete_${book.laboratory}`)?.showModal()}} className="btn btn-ghost btn-xs">Remover</button>
+                    <DelModalBooking book_id={book.laboratory}/>
+                    {/* <EdModal lab_id={book.laboratory}/> */}
                 </div>
                 :
                 ""

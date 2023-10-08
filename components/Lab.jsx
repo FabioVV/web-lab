@@ -83,7 +83,6 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                     <DelModal lab_id={lab.id}/>
                     <EdModal lab_id={lab.id}/>
                     <BookingModal lab_id={lab.id}/>
-
                 </div>
                 :
                 ""

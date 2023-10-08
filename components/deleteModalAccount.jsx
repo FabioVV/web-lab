@@ -3,40 +3,37 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-function DelModal({lab_id}) {
+function DelModalAccount({user_id, user_access}) {
     const {data:session} = useSession()
     const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
 
-    const DesativarLab = async() => {
+    const DesativarConta = async() => {
         setSubmitting(true)
+
         try{
-            const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${lab_id}/`,{
-                method:"DELETE",
+            const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${user_id}/`,{
+              method:"DELETE",
     
-                headers: { 
-                    "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
-                }
+              headers: { 
+                  "Content-Type":"application/json", Authorization:`Bearer ${user_access}`
+              }
             })
     
             if(response.ok){
-                setSubmitting(false)
-
-                document.getElementById('close').click()
-                window.location.replace('/')
-                window.flash(`Laboratório desativado.`, 'success')
+    
+              signOut()
+              window.location.replace('/')
+              window.flash(`Sua conta foi excluída.`, 'success')
     
             } else {
-                window.flash(`Erro ao desativar laboratório.`, 'error')
+              window.flash(`Erro. Favor, tentar novamente.`, 'error')
+              setIsLoading(false)
             }
     
-        } catch(err) {
+          }catch(err){
             console.log(err)
-
-        } finally {
-            setSubmitting(true)
-
-        }
+          }
         
     } 
     
@@ -44,7 +41,7 @@ function DelModal({lab_id}) {
 
 
   return (
-    <dialog id={`my_modal_delete_${lab_id}`} className="modal">
+    <dialog id={`my_modal_delete_user_${user_id}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">
                 <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -52,12 +49,12 @@ function DelModal({lab_id}) {
               </svg>Você tem certeza?
                 
             </h3>
-            <p className="py-4">Está ação ira <span className='text-red-600'>desativar</span> o Laboratório.<br></br> 
-            Reativação somente mediante contato com os administradores.</p>
+            <p className="py-4">Ação <span className='text-red-600 font-bold'>irreversível.</span><br></br> 
+                Você não poderá mais recuperar sua conta.<br></br>  Somente mediante contato com os administradores do site.</p>
             <div className="modal-action">
 
-                <button disabled={submitting} onClick={() => DesativarLab()} type="button" className="btn text-red-600">
-                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Remover laboratório'}
+                <button disabled={submitting} onClick={() => DesativarConta()} type="button" className="btn text-red-600">
+                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : <span>Concordo com as condições.</span>}
                 </button>
 
                 <form method="dialog">
@@ -70,4 +67,4 @@ function DelModal({lab_id}) {
   )
 }
 
-export default DelModal
+export default DelModalAccount

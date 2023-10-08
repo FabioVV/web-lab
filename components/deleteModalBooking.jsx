@@ -3,15 +3,16 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-function DelModal({lab_id}) {
+function DelModalBooking({book_id}) {
     const {data:session} = useSession()
     const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
 
     const DesativarLab = async() => {
         setSubmitting(true)
+
         try{
-            const response = await fetch(`http://127.0.0.1:8000/api/v3/laboratorios/${lab_id}/`,{
+            const response = await fetch(`http://127.0.0.1:8000/api/v3/reservas/${book_id}/`,{
                 method:"DELETE",
     
                 headers: { 
@@ -24,10 +25,10 @@ function DelModal({lab_id}) {
 
                 document.getElementById('close').click()
                 window.location.replace('/')
-                window.flash(`Laboratório desativado.`, 'success')
+                window.flash(`Reserva removida.`, 'success')
     
             } else {
-                window.flash(`Erro ao desativar laboratório.`, 'error')
+                window.flash(`Erro ao remover reserva.`, 'error')
             }
     
         } catch(err) {
@@ -44,7 +45,7 @@ function DelModal({lab_id}) {
 
 
   return (
-    <dialog id={`my_modal_delete_${lab_id}`} className="modal">
+    <dialog id={`my_modal_delete_${book_id}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">
                 <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -52,12 +53,12 @@ function DelModal({lab_id}) {
               </svg>Você tem certeza?
                 
             </h3>
-            <p className="py-4">Está ação ira <span className='text-red-600'>desativar</span> o Laboratório.<br></br> 
-            Reativação somente mediante contato com os administradores.</p>
+            <p className="py-4">Está ação ira <span className='text-red-600'>remover</span> a reserva.<br></br> 
+                Para refazer a reserva, será necessário pagar novamente.</p>
             <div className="modal-action">
 
                 <button disabled={submitting} onClick={() => DesativarLab()} type="button" className="btn text-red-600">
-                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Remover laboratório'}
+                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Remover reserva'}
                 </button>
 
                 <form method="dialog">
@@ -70,4 +71,4 @@ function DelModal({lab_id}) {
   )
 }
 
-export default DelModal
+export default DelModalBooking

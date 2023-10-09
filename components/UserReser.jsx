@@ -27,7 +27,9 @@ function UserBooking({book, handleClick, handleEdit, handleRemove}) {
 
             </th>
 
-
+            <td>
+                {book?.id}
+            </td>
 
             <td>
             <div className="flex items-center space-x-3">

@@ -97,7 +97,14 @@ const RegisterUser = () => {
                     </label>
                     <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="last_name" type="text" placeholder="Doe" name='last_name'
                     {...register("last_name", { required: "Campo obrigatório." })}
-
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="last_name"
+                      render={({ message }) => 
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
+                      </div>}
                     />
                   </div>
                 </div>

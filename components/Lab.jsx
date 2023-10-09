@@ -9,7 +9,6 @@ import BookingModal from './registerBooking'
 function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
 
     const {data:session} = useSession()
-    const router = useRouter()
   
     
     function handleBooking(id){
@@ -27,6 +26,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
 
   return (
         <tr>
+            
             <th title='Laboratório está disponível para reserva?'>
                 {!lab.is_booked ? 
                 <label className='cursor-help' title='Laboratório está disponível para reserva'>
@@ -39,6 +39,10 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
 
 
             
+            </th>
+
+            <th>
+                {lab.id}
             </th>
 
             <td>
@@ -61,10 +65,6 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                 <span className="badge badge-ghost badge-sm">Capacidade: {lab.capacity} lugares</span>
             </td>
 
-            {/* <td>
-                ?
-            </td> */}
-
             <th>
                 {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
@@ -83,18 +83,6 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                 :
                 ""
                 }
-
-                {/* {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff )? 
-                <div>
-                    <button onClick={() => handleEditLab(lab.id)} className="btn btn-ghost btn-xs">Editar</button>
-                    <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
-                    <DelModal lab_id={lab.id}/>
-                    <EdModal lab_id={lab.id}/>
-                    <BookingModal lab_id={lab.id}/>
-                </div>
-                :
-                ""
-                } */}
 
             </th>
 

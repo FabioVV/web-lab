@@ -158,6 +158,7 @@ function LabFeed() {
                                             Disponivel?
                                         </label>
                                     </th>
+                                    <th>ID do laboratório</th>
                                     <th>Nome</th>
                                     <th>Descrição</th>
                                     {/* <th>?</th> */}
@@ -175,6 +176,7 @@ function LabFeed() {
                                 <tfoot>
                                 <tr>
                                     <th></th>
+                                    <th>ID do laboratório</th>
                                     <th>Nome</th>
                                     <th>Descrição</th>
                                     {/* <th>?</th> */}
@@ -203,6 +205,7 @@ function LabFeed() {
                                             Nº
                                         </label>
                                     </th>
+                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data de reserva</th>
                                     <th>Quem reservou</th>
@@ -218,6 +221,7 @@ function LabFeed() {
                                 <tfoot>
                                 <tr>
                                     <th></th>
+                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data de reserva</th>
                                     <th>Quem reservou</th>
@@ -251,6 +255,7 @@ function LabFeed() {
                                             Ainda reservado?
                                         </label>
                                     </th>
+                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data da reserva</th>
                                     {/* <th>?</th> */}
@@ -266,6 +271,12 @@ function LabFeed() {
                                 <tfoot>
                                 <tr>
                                     <th></th>
+                                    <th>
+                                        <label>
+                                            Ainda reservado?
+                                        </label>
+                                    </th>
+                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data da reserva</th>
                                     {/* <th>?</th> */}

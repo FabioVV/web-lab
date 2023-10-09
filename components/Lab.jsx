@@ -13,7 +13,6 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
   
     
     function handleBooking(id){
-        //router.push(`/bookings/register?id=${id}`)
         document.getElementById(`my_modal_booking_${id}`)?.showModal()
     }
 
@@ -67,16 +66,25 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
             </td> */}
 
             <th>
-
                 {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
-                <div className='border-solid border-b-2 border-indigo-600'>
-                    <button onClick={() => handleBooking(lab.id)} className="btn btn-ghost btn-xs">Reservar</button>
+                <div>
+                    <div className='border-solid border-b-2 border-indigo-600'>
+                        <button onClick={() => handleBooking(lab.id)} className="btn btn-ghost btn-xs">Reservar</button>
+                    </div>
+                    
+                    <div>
+                        <button onClick={() => handleEditLab(lab.id)} className="btn btn-ghost btn-xs">Editar</button>
+                        <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
+                        <DelModal lab_id={lab.id}/>
+                        <EdModal lab_id={lab.id}/>
+                        <BookingModal lab_id={lab.id}/>
+                    </div>
                 </div>
                 :
                 ""
                 }
 
-                {session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff ? 
+                {/* {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff )? 
                 <div>
                     <button onClick={() => handleEditLab(lab.id)} className="btn btn-ghost btn-xs">Editar</button>
                     <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
@@ -86,7 +94,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
                 </div>
                 :
                 ""
-                }
+                } */}
 
             </th>
 

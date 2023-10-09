@@ -39,7 +39,7 @@ function UserBooking({book, handleClick, handleEdit, handleRemove}) {
                 </div> */}
                 <div>
                     <div className="font-bold">{book.laboratory_name}</div>
-                    <div className="text-sm opacity-50">última vez atualizado: {book.updated_at}</div>
+                    <div className="text-sm opacity-50">Reserva atualizada em: {book.updated_at ? book.updated_at: 'Não foi atualizada.'}</div>
                 </div>
             </div>
             </td>

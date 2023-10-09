@@ -45,7 +45,7 @@ function DelModalBooking({book_id}) {
 
 
   return (
-    <dialog id={`my_modal_delete_${book_id}`} className="modal">
+    <dialog id={`my_modal_delete_booking_${book_id}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">
                 <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

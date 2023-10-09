@@ -40,8 +40,9 @@ function CreModal({lab_id}) {
           if(response.ok){
   
             document.getElementById('closer').click()
+            window.location.replace('/')
             window.flash(`Laboratório registrado.`, 'success')
-            
+
           } else {
             window.flash(`Erro ao registrar laboratório`, 'error')
           }

@@ -2,8 +2,9 @@ import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { signOut } from 'next-auth/react'
 
-function DelModalAccount({user_id, user_access}) {
+function DelModalAccount() {
     const {data:session} = useSession()
     const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
@@ -12,11 +13,11 @@ function DelModalAccount({user_id, user_access}) {
         setSubmitting(true)
 
         try{
-            const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${user_id}/`,{
+            const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${session?.user.id}/`,{
               method:"DELETE",
     
               headers: { 
-                  "Content-Type":"application/json", Authorization:`Bearer ${user_access}`
+                  "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
               }
             })
     
@@ -41,7 +42,7 @@ function DelModalAccount({user_id, user_access}) {
 
 
   return (
-    <dialog id={`my_modal_delete_user_${user_id}`} className="modal">
+    <dialog id={`my_modal_delete_user_${session?.user.id}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">
                 <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

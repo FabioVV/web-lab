@@ -22,7 +22,6 @@ const UserAccount = () => {
     birth_date: '',
     sex: '',
     last_name: '',
-
   })
 
   useEffect(()=>{
@@ -67,37 +66,6 @@ const UserAccount = () => {
     if(session?.user.id) fetchUser()
 
   }, [reset, session?.user.access, session?.user.id])
-
-
-  // const handleDelete = async() => {
-  //   const hasConfirmed = confirm("Você tem certeza que deseja excluir sua conta?")
-
-  //   if(hasConfirmed){
-  //     try{
-  //       const response = await fetch(`http://127.0.0.1:8000/api/v3/usuarios/${session?.user.id}/`,{
-  //         method:"DELETE",
-
-  //         headers: { 
-  //             "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
-  //         }
-  //       })
-
-  //       if(response.ok){
-
-  //         signOut()
-  //         window.location.replace('/')
-  //         window.flash(`Sua conta foi excluída.`, 'success')
-
-  //       } else {
-  //         window.flash(`Erro. Favor, tentar novamente.`, 'error')
-  //         setIsLoading(false)
-  //       }
-
-  //     }catch(err){
-  //       console.log(err)
-  //     }
-  //   }
-  // } 
 
 
   async function onSubmit(form ,event){
@@ -350,7 +318,7 @@ const UserAccount = () => {
                     
                     <div className="w-full">
                       <button onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type='button' >
-                        {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Excluir conta'}
+                        Excluir conta
                       </button>
                       
                     </div>
@@ -363,7 +331,7 @@ const UserAccount = () => {
 
             </div>
         </div>
-        <DelModalAccount user_id={session?.user.id} user_access={session?.user.access} />
+        <DelModalAccount />
     </div>
     
   )

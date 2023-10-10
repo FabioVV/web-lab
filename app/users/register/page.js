@@ -4,14 +4,25 @@ import React from 'react'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 
 const RegisterUser = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const router = useRouter()
+  const [user, setUser] = useState({
+    first_name: '',
+    username: '',
+    phone: '',
+    email: '',
+    cpf_cnpj: "",
+    user_type: '',
+    birth_date: '',
+    sex: '',
+    last_name: '',
+    password_confirmation: '',
+    password: '',
+  })
 
 
   //CASO EU PRECISE DE SELECT MULTIPLE E CHECKBOXES
@@ -28,6 +39,8 @@ const RegisterUser = () => {
   //   object[key].push(value);
   // });
   // var json = JSON.stringify(object);}
+  // const formData = new FormData(document.getElementById('form'))
+  //        body: JSON.stringify(Object.fromEntries(formData)),
 
 
   async function onSubmit(form ,event){
@@ -44,7 +57,20 @@ const RegisterUser = () => {
             "Content-Type":"application/json",
         }, 
 
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify({
+          first_name: user.first_name,
+          last_name: user.last_name,
+          username: user.username,
+          phone: user.phone,
+          email: user.email,
+          cpf_cnpj: user.cpf_cnpj,
+          user_type: user.user_type ? user.user_type : '1',
+          birth_date: user.birth_date,
+          sex: user.sex ? user.sex: 'M',
+          password: user.password,
+          password_confirmation: user.password_confirmation
+
+        }),
       });
   
       const user_created = await res.json()
@@ -79,7 +105,7 @@ const RegisterUser = () => {
                       Primeiro nome *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Jane" name='first_name' id='first_name'
-                      {...register("first_name", { required: "Campo obrigatório." })}
+                      {...register("first_name", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, first_name:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -96,7 +122,7 @@ const RegisterUser = () => {
                       Sobrenome *
                     </label>
                     <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="last_name" type="text" placeholder="Doe" name='last_name'
-                    {...register("last_name", { required: "Campo obrigatório." })}
+                    {...register("last_name", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, last_name:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -116,7 +142,7 @@ const RegisterUser = () => {
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" 
                     id="username" type="text" placeholder="Jane123" name='username' 
-                      {...register("username", { required: "Campo obrigatório." })}
+                      {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
 
                     />
                     <ErrorMessage
@@ -136,7 +162,7 @@ const RegisterUser = () => {
                       Senha *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password" type="password" placeholder="************" name='password'
-                      {...register("password", { required: "Campo obrigatório." })}
+                      {...register("password",{ required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -152,7 +178,7 @@ const RegisterUser = () => {
                       Confirme sua senha *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
-                      {...register("password_confirmation", { required: "Campo obrigatório." })}
+                      {...register("password_confirmation", { required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -173,7 +199,7 @@ const RegisterUser = () => {
                       Email *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="email" type="email" placeholder="jane@email.com" name='email'
-                     {...register("email", { required: "Campo obrigatório." , pattern: { value: /.+@.+/, message: 'Email inválido' },})}
+                     {...register("email", { required: "Campo obrigatório.", maxLength:{value:45, message:'Máximo de 45 caracteres'}, minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setUser({...user, email:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -192,7 +218,7 @@ const RegisterUser = () => {
                       CPF/CNPJ *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
-                      {...register("cpf_cnpj", { required: "Campo obrigatório." })}
+                      {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, minLength:{value:14, message:'Necessita no minímo 14 caracteres '}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -209,19 +235,38 @@ const RegisterUser = () => {
                       Sexo *
                     </label>
                     <div className="relative">
-                      <select  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="sex" name='sex'>
+                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="sex" name='sex'>
                         <option value='M'>Masculino</option>
                         <option value='F'>Feminino</option>
                       </select>
+
+                      <ErrorMessage
+                      errors={errors}
+                      name="sex"
+                      render={({ message }) => 
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
+                      </div>}
+                      />
                     </div>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
                       Telefone
                     </label>
-                    <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="phone" type='tel' placeholder="11975461285" name='phone'/>
-                  </div>
+                    <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="phone" type='tel' placeholder="11975461285" name='phone'
+                      {...register("phone", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 20 caracteres'}, minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setUser({...user, phone:e.target.value})}, })}
 
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="phone"
+                      render={({ message }) => 
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
+                      </div>}
+                      />
+                  </div>
                 </div>
 
                 <div style={{marginTop:30}} className="flex flex-wrap -mx-3 mb-2">
@@ -230,7 +275,7 @@ const RegisterUser = () => {
                       Data de nascimento *
                     </label>
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="birth_date" type="date"  name='birth_date'
-                      {...register("birth_date", { required: "Campo obrigatório." })}
+                      {...register("birth_date", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, birth_date:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -246,10 +291,21 @@ const RegisterUser = () => {
                       Inscreva-se como *
                     </label>
                     <div className="relative">
-                      <select  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="user_type" name='user_type'>
+                      <select {...register("user_type", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, user_type:e.target.value})}, })}
+ 
+                        className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="user_type" name='user_type'>
                         <option value='1'>Aluno</option>
                         <option value='2'>Professor</option>
-                      </select>
+                      </ select >
+
+                      <ErrorMessage
+                      errors={errors}
+                      name="user_type"
+                      render={({ message }) => 
+                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                        <strong className="font-bold">* {message}</strong>
+                      </div>}
+                      />
                     </div>
                   </div>
                 </div>

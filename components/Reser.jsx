@@ -35,7 +35,7 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
             </td>
 
             <td>
-                {book?.booked_at.replaceAll('-', '/')}
+                {book?.booked_at?.replaceAll('-', '/')}
                 <br/>
                 <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span>
             </td>
@@ -45,11 +45,11 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
             </td>
 
             <th>
-            {session?.user.id === book.user.id || session?.user.is_superuser || session?.user.is_staff ? 
+            {session?.user.id === book?.user?.id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
                     {/* <button onClick={() => {document.getElementById(`my_modal_edit_${book.laboratory}`)?.showModal()}} className="btn btn-ghost btn-xs">Editar</button> */}
-                    <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Remover</button>
-                    <DelModalBooking book_id={book.id}/>
+                    <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Remover</button>
+                    <DelModalBooking book_id={book?.id}/>
                     {/* <EdModal lab_id={book.laboratory}/> */}
                 </div>
                 :

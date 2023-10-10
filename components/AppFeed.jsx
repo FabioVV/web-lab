@@ -8,6 +8,8 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import CreModal from './createModal'
 import UserBooking from './UserReser'
+import Pagination from './pagination'
+
 
 function LabsList({data, handleClick}){ 
     return (
@@ -60,59 +62,66 @@ function LabFeed() {
     const [userBookings, setuserBookings] = useState([])
     const {data:session} = useSession()
     const [activeTab, setActiveTab] = useState("tab1");
+    const [submitting, setSubmitting] = useState(false)
 
+    const fetchLabs = async (url = 'http://127.0.0.1:8000/api/v3/laboratorios/') => {
+        setSubmitting(true)
+
+        const response = await fetch(url, {
+        method:'GET',
+        headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+            },
+        })
+
+        if(response.ok){
+            const data = await response.json()
+            setLabs(data)
+        } 
+        setSubmitting(false)
+
+    }
+
+    const fetchBookings = async (url = 'http://127.0.0.1:8000/api/v3/reservas/') => {
+        setSubmitting(true)
+
+        const response = await fetch(url, {
+        method:'GET',
+        headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+            },
+        })
+
+        if(response.ok){
+            const data = await response.json()
+            setbookings(data)
+        } 
+        setSubmitting(false)
+
+    }
+
+    const fetchUserBookings = async (url = 'http://127.0.0.1:8000/api/v3/user-reservas/') => {
+        setSubmitting(true)
+
+        const response = await fetch(url, {
+        method:'GET',
+        headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+            },
+        })
+
+        if(response.ok){
+            const data = await response.json()
+            setuserBookings(data)
+        } 
+        setSubmitting(false)
+
+    }
 
     useEffect(() =>{
 
-        const fetchLabs = async () => {
-            const response = await fetch('http://127.0.0.1:8000/api/v3/laboratorios/', {
-            method:'GET',
-            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
-                },
-            })
-
-            if(response.ok){
-                const data = await response.json()
-                setLabs(data)
-            } 
-        }
         fetchLabs()
-    }, [session?.user.access])
-
-
-    useEffect(() =>{
-
-        const fetchBookings = async () => {
-            const response = await fetch('http://127.0.0.1:8000/api/v3/reservas/', {
-            method:'GET',
-            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
-                },
-            })
-
-            if(response.ok){
-                const data = await response.json()
-                setbookings(data)
-            } 
-        }
         fetchBookings()
-    }, [session?.user.access])
-
-
-    useEffect(() =>{
-
-        const fetchUserBookings = async () => {
-            const response = await fetch('http://127.0.0.1:8000/api/v3/user-reservas/', {
-            method:'GET',
-            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
-                },
-            })
-
-            if(response.ok){
-                const data = await response.json()
-                setuserBookings(data)
-            } 
-        }
         fetchUserBookings()
+
+
     }, [session?.user.access])
 
 
@@ -129,7 +138,7 @@ function LabFeed() {
 
                 <div id='tab-content'>
                     {activeTab === "tab1" ?
-                    <section className=''>
+                    <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
                         {session?.user.user_type === 2 || session?.user.is_superuser? 
@@ -166,13 +175,14 @@ function LabFeed() {
                                 </tr>
                                 </thead>
                                 
-                                
-                                    <LabsList
-                                        data = {labs}
-                                        handleClick = {()=>{}}
-                                    />
-
-        
+                                    {submitting ?  
+                                        <span className="loading loading-spinner loading-lg"></span>
+                                    :
+                                        <LabsList
+                                            data = {labs}
+                                            handleClick = {()=>{}}/>
+                                    }
+                                    
                                 <tfoot>
                                 <tr>
                                     <th></th>
@@ -185,12 +195,21 @@ function LabFeed() {
                                 </tfoot>
                             </table>
                         </div>
+                        <Pagination page_size={labs?.page_size} 
+                        count={labs?.count} 
+                        total_pages={labs?.total_pages}
+                        current_page_number={labs?.current_page_number} 
+                        next={labs?.next} 
+                        previous={labs?.previous}
+                        fetch={fetchLabs}
+                        url={'http://127.0.0.1:8000/api/v3/laboratorios/'}/>
+                        
                     </section>
                     :
                     ""
                     }
                     {activeTab === "tab2" ?
-                    <section>
+                    <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas</h1>
 
                         <div className="overflow-x-auto pb-10">
@@ -230,13 +249,21 @@ function LabFeed() {
                                 </tfoot>
                             </table>
                         </div>
+                        <Pagination page_size={bookings?.page_size} 
+                        count={bookings?.count} 
+                        total_pages={bookings?.total_pages}
+                        current_page_number={bookings?.current_page_number} 
+                        next={bookings?.next} 
+                        previous={bookings?.previous}
+                        fetch={fetchBookings}
+                        url={'http://127.0.0.1:8000/api/v3/reservas/'}/>
                     </section>
                     :
                     ""
                     }
 
                     {activeTab === "tab3" ?
-                    <section>
+                    <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
 
                         <div className="overflow-x-auto pb-10">
@@ -285,6 +312,14 @@ function LabFeed() {
                                 </tfoot>
                             </table>
                         </div>
+                        <Pagination page_size={userBookings?.page_size} 
+                        count={userBookings?.count} 
+                        total_pages={userBookings?.total_pages}
+                        current_page_number={userBookings?.current_page_number} 
+                        next={userBookings?.next} 
+                        previous={userBookings?.previous}
+                        fetch={fetchUserBookings}
+                        url={'http://127.0.0.1:8000/api/v3/user-reservas/'}/>
                     </section>
                     :
                     ""

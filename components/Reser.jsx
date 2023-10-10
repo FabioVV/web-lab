@@ -3,7 +3,7 @@ import Link from 'next/link'
 import DelModalBooking from './deleteModalBooking'
 import EdModal from './editModal'
 import { useSession } from 'next-auth/react'
-
+import EdModalBooking from './editModalBooking'
 
 function Booking({book, handleClick, handleEdit, handleRemove}) {
 
@@ -17,9 +17,7 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
                 {book.id}
             </label>
             </th>
-            <th>
-                {book.id}
-            </th>
+
             <td>
             <div className="flex items-center space-x-3">
                 {/* <div className="avatar">
@@ -37,26 +35,24 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
             <td>
                 {book?.booked_at?.replaceAll('-', '/')}
                 <br/>
-                <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span>
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
             </td>
 
             <td>
-                {book.user_name}
+                {book?.username}
             </td>
 
             <th>
-            {session?.user.id === book?.user?.id || session?.user.is_superuser || session?.user.is_staff ? 
+            {session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
-                    {/* <button onClick={() => {document.getElementById(`my_modal_edit_${book.laboratory}`)?.showModal()}} className="btn btn-ghost btn-xs">Editar</button> */}
+                    <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Editar</button>
                     <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Remover</button>
                     <DelModalBooking book_id={book?.id}/>
-                    {/* <EdModal lab_id={book.laboratory}/> */}
+                    <EdModalBooking book_id={book?.id}/>
                 </div>
                 :
                 ""
                 }
-                {/* <Link href="" className="btn btn-ghost btn-xs">Editar</Link>
-                <Link href="" className="btn btn-ghost btn-xs">Cancelar</Link> */}
             </th>
 
         </tr>

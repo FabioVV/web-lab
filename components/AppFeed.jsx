@@ -224,7 +224,6 @@ function LabFeed() {
                                             Nº
                                         </label>
                                     </th>
-                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data de reserva</th>
                                     <th>Quem reservou</th>
@@ -240,7 +239,6 @@ function LabFeed() {
                                 <tfoot>
                                 <tr>
                                     <th></th>
-                                    <th>ID do laboratório</th>
                                     <th>Laboratório</th>
                                     <th>Data de reserva</th>
                                     <th>Quem reservou</th>

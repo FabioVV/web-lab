@@ -48,7 +48,7 @@ function UserBooking({book, handleClick, handleEdit, handleRemove}) {
             <td>
                 {book?.booked_at.replaceAll('-', '/')}
                 <br/>
-                <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span>
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
             </td>
 
             <th>

@@ -68,7 +68,7 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
             <th>
                 {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
-                    <div className='border-solid border-b-2 border-indigo-600'>
+                    <div className='border-solid border-b-2 border-indigo-600 mb-2'>
                         <button onClick={() => handleBooking(lab.id)} className="btn btn-ghost btn-xs">Reservar</button>
                     </div>
                     

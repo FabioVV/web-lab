@@ -145,6 +145,8 @@ const RegisterUser = () => {
                       {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
 
                     />
+                    <p className="text-gray-600 text-xs italic">Esse nome será sua identificação.</p>
+
                     <ErrorMessage
                       errors={errors}
                       name="username"
@@ -180,6 +182,8 @@ const RegisterUser = () => {
                     <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
                       {...register("password_confirmation", { required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
                     />
+                      <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
+
                     <ErrorMessage
                       errors={errors}
                       name="password_confirmation"
@@ -189,7 +193,6 @@ const RegisterUser = () => {
                       </div>}
                     />
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
-                    <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
                   </div>
                 </div>
 

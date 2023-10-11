@@ -10,8 +10,8 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
         </button>)
     }
 
-  return (
-    <div className='mb-8 text-center'>
+  return ( 
+    <div className='mt-3 mb-8 text-center'>
         <div className="join">
 
             <button onClick={()=>{fetch(`${previous}`); window.scrollTo({ top: 0, behavior: 'smooth' });} } className="join-item btn">&lt;</button>
@@ -19,9 +19,9 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
             <button onClick={()=>{fetch(`${next}`); window.scrollTo({ top: 0, behavior: 'smooth' });}} className="join-item btn">&gt;</button>
 
         </div>
-        <div>
-            <span>Total de páginas: {total_pages ? total_pages:'1'}</span>
-        </div>
+        {/* <div>
+            <span className='font-bold'>Total de páginas: {total_pages ? total_pages:'1'}</span>
+        </div> */}
   </div>
   )
 }

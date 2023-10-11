@@ -50,6 +50,9 @@
     margin: 0 auto;
 }
 
+.app{
+    margin-top: 5rem;
+}
 /* footer{
     position: fixed;
     left: 0px;

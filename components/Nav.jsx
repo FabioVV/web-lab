@@ -13,10 +13,10 @@ const Nav = () => {
 
   return (
     <nav>
-        {console.log(session)}
+        {/* {console.log(session)} */}
         {session?.user ? (
                 
-                <div className=''>
+                <div className='fixed top-0 w-full z-40 bg-white'>
                 <nav className="w-full border-b-2 border-white-900">
                   <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div>

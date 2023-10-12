@@ -1,15 +1,15 @@
 "use client"
 
-import React from 'react'
 import { useState, useEffect } from 'react'
+import { motion } from "framer-motion"
+import { useSession } from 'next-auth/react'
+
 import Laboratory from './Lab'
 import Booking from './Reser'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import CreModal from './createModal'
 import UserBooking from './UserReser'
 import Pagination from './pagination'
-import { motion } from "framer-motion"
 
 function LabsList({data, handleClick}){ 
     return (
@@ -291,7 +291,7 @@ function LabFeed() {
                                             animate={{  opacity:1 }} 
                                             transition={{ duration: 0.3 }}
                                             className="overflow-x-auto pb-10 mt-5">
-                                                
+
                                     <table className="table mb-8">
                 
                                         {/* head */}

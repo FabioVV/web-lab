@@ -123,9 +123,7 @@ function LabFeed() {
 
     }, [session?.user.access])
 
-
-    session?.user.access ? "a":"b"
-
+    
     if(session?.user){
         return (
             <div>

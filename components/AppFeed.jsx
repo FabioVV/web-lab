@@ -14,7 +14,7 @@ import { motion } from "framer-motion"
 function LabsList({data, handleClick}){ 
     return (
         <tbody>
-            {data.results?.map((laboratory) => (
+            {data?.results?.map((laboratory) => (
                 <Laboratory 
                     key={laboratory.id}
                     lab={laboratory}
@@ -29,7 +29,7 @@ function LabsList({data, handleClick}){
 function BookingList({data, handleClick}){ 
     return (
         <tbody>
-            {data.results?.map((booking) => (
+            {data?.results?.map((booking) => (
                 <Booking 
                     key={booking.id}
                     book={booking}
@@ -158,11 +158,11 @@ function LabFeed() {
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
                         :
                             <>
-                                <motion.div   initial={{ opacity:0 }}
-                                             animate={{ opacity:1 }} 
-                                             transition={{ duration: 0.5, delay: 0.1 }}
+                                <motion.div initial={{ opacity:0 }}
+                                            animate={{  opacity:1 }} 
+                                            transition={{ duration: 0.3 }}
 
-                                             className="overflow-x-auto pb-10 mt-5">
+                                            className="overflow-x-auto pb-10 mt-5">
                                                 
                                     <table className="table mb-8">
                 
@@ -223,7 +223,11 @@ function LabFeed() {
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
                         :
                             <>
-                                <div className="overflow-x-auto pb-10 mt-5">
+                                <motion.div initial={{ opacity:0 }}
+                                            animate={{  opacity:1 }} 
+                                            transition={{ duration: 0.3 }}
+                                            className="overflow-x-auto pb-10 mt-5">
+
                                     <table className="table mb-8">
                 
                                         {/* head */}
@@ -257,7 +261,7 @@ function LabFeed() {
                                         </tr>
                                         </tfoot>
                                     </table>
-                                </div>
+                                </motion.div>
                                 <Pagination page_size={bookings?.page_size} 
                                 count={bookings?.count} 
                                 total_pages={bookings?.total_pages}
@@ -283,7 +287,11 @@ function LabFeed() {
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
                         :
                             <>
-                                <div className="overflow-x-auto pb-10 mt-5">
+                                <motion.div initial={{ opacity:0 }}
+                                            animate={{  opacity:1 }} 
+                                            transition={{ duration: 0.3 }}
+                                            className="overflow-x-auto pb-10 mt-5">
+                                                
                                     <table className="table mb-8">
                 
                                         {/* head */}
@@ -328,7 +336,7 @@ function LabFeed() {
                                         </tr>
                                         </tfoot>
                                     </table>
-                                </div>
+                                </motion.div>
                                 <Pagination page_size={userBookings?.page_size} 
                                 count={userBookings?.count} 
                                 total_pages={userBookings?.total_pages}

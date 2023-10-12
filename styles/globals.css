@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 
-
- .alert {
+.alert {
     border-radius: 10px;
     position: absolute;
     top: 80px;
@@ -15,44 +14,19 @@
     width: 320px;
     height: 85px;
 
-    }
-
-    /*.alert p {
-    margin: 0;
-    font: bold;
-    }
-
-    .alert-error {
-    background: lightcoral;
-    border-radius: 0.25rem; 
-    border-width: 1px; 
-    border-color: #F87171; 
-    background-color: #FEE2E2; 
-    font: bold;
-
-    }
-
-    .alert-success {
-    background: #51a315;
-    }
-
-    .close {
-        cursor: pointer;
-        margin-right: 10px;
-        width: 1.5rem; 
-        height: 1.5rem; 
-        color: #EF4444; 
-        fill: currentColor; 
-    } */
+}
 
 
 .app section{
     margin: 0 auto;
 }
 
+
 .app{
     margin-top: 5rem;
 }
+
+
 /* footer{
     position: fixed;
     left: 0px;

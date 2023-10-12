@@ -101,10 +101,10 @@ const RegisterUser = () => {
               <form method='post' onSubmit={handleSubmit(onSubmit)} id='form' className="w-full p-6">
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="first_name">
                       Primeiro nome *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Jane" name='first_name' id='first_name'
+                    <input  className="input input-bordered w-full max-w" type="text" placeholder="Jane" name='first_name' id='first_name'
                       {...register("first_name", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, first_name:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -118,10 +118,10 @@ const RegisterUser = () => {
                   
                   </div>
                   <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="last_name">
                       Sobrenome *
                     </label>
-                    <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="last_name" type="text" placeholder="Doe" name='last_name'
+                    <input className="input input-bordered w-full max-w" id="last_name" type="text" placeholder="Doe" name='last_name'
                     {...register("last_name", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, last_name:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -137,10 +137,10 @@ const RegisterUser = () => {
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="username">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="username">
                       Nome de usuário *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" 
+                    <input  className="input input-bordered w-full max-w" 
                     id="username" type="text" placeholder="Jane123" name='username' 
                       {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
 
@@ -160,10 +160,10 @@ const RegisterUser = () => {
                 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password">
                       Senha *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password" type="password" placeholder="************" name='password'
+                    <input  className="input input-bordered w-full max-w" id="password" type="password" placeholder="************" name='password'
                       {...register("password",{ required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -176,10 +176,10 @@ const RegisterUser = () => {
                     />
                   </div>
                   <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password_confirmation">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password_confirmation">
                       Confirme sua senha *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
+                    <input  className="input input-bordered w-full max-w" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
                       {...register("password_confirmation", { required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
                     />
                       <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
@@ -198,10 +198,10 @@ const RegisterUser = () => {
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="email">
                       Email *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="email" type="email" placeholder="jane@email.com" name='email'
+                    <input  className="input input-bordered w-full max-w" id="email" type="email" placeholder="jane@email.com" name='email'
                      {...register("email", { required: "Campo obrigatório.", maxLength:{value:45, message:'Máximo de 45 caracteres'}, minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setUser({...user, email:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -217,10 +217,10 @@ const RegisterUser = () => {
 
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cpf_cnpj">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="cpf_cnpj">
                       CPF/CNPJ *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
+                    <input  className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
                       {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, minLength:{value:14, message:'Necessita no minímo 14 caracteres '}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -234,11 +234,11 @@ const RegisterUser = () => {
                     <p className="text-gray-600 text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="sex">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="sex">
                       Sexo *
                     </label>
                     <div className="relative">
-                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="sex" name='sex'>
+                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} className="input input-bordered w-full max-w" id="sex" name='sex'>
                         <option value='M'>Masculino</option>
                         <option value='F'>Feminino</option>
                       </select>
@@ -254,10 +254,10 @@ const RegisterUser = () => {
                     </div>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="phone">
                       Telefone
                     </label>
-                    <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="phone" type='tel' placeholder="11975461285" name='phone'
+                    <input className="input input-bordered w-full max-w" id="phone" type='tel' placeholder="11975461285" name='phone'
                       {...register("phone", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 20 caracteres'}, minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setUser({...user, phone:e.target.value})}, })}
 
                     />
@@ -274,10 +274,10 @@ const RegisterUser = () => {
 
                 <div style={{marginTop:30}} className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="birth_date">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="birth_date">
                       Data de nascimento *
                     </label>
-                    <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="birth_date" type="date"  name='birth_date'
+                    <input  className="input input-bordered w-full max-w" id="birth_date" type="date"  name='birth_date'
                       {...register("birth_date", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, birth_date:e.target.value})}, })}
                     />
                     <ErrorMessage
@@ -290,13 +290,13 @@ const RegisterUser = () => {
                     />
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="user_type">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="user_type">
                       Inscreva-se como *
                     </label>
                     <div className="relative">
                       <select {...register("user_type", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, user_type:e.target.value})}, })}
  
-                        className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="user_type" name='user_type'>
+                        className="input input-bordered w-full max-w" id="user_type" name='user_type'>
                         <option value='1'>Aluno</option>
                         <option value='2'>Professor</option>
                       </ select >

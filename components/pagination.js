@@ -14,9 +14,9 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
     <div className='mt-3 mb-8 text-center'>
         <div className="join">
 
-            <button onClick={()=>{fetch(`${previous}`); window.scrollTo({ top: 0, behavior: 'smooth' });} } className="join-item btn">&lt;</button>
+            <button onClick={()=>{fetch(`${previous}`); window.scrollTo({ top: 0, behavior: 'smooth' });} } className="join-item btn bg-black">&lt;</button>
             {links}
-            <button onClick={()=>{fetch(`${next}`); window.scrollTo({ top: 0, behavior: 'smooth' });}} className="join-item btn">&gt;</button>
+            <button onClick={()=>{fetch(`${next}`); window.scrollTo({ top: 0, behavior: 'smooth' });}} className="join-item btn bg-black">&gt;</button>
 
         </div>
         {/* <div>

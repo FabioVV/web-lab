@@ -121,8 +121,8 @@ function BookingModal({lab_id}) {
     {paid ? 
         <dialog id={`my_modal_booking_${lab_id}`}  className="modal" data-theme='dark'>
             <motion.div       
-            initial={{ x: 600,opacity: 0 }}
-            animate={{   x: 0,opacity: 1 }}
+            initial={{ x: 600, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2 }} 
             className="modal-box">
                 <div class="">
@@ -164,10 +164,10 @@ function BookingModal({lab_id}) {
                                     <legend className="font-bold text-lg text-green-600">Dados do laboratório</legend>
                                     <div className="flex flex-wrap -mx-3 mb-6">
                                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">
+                                        <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="name">
                                             Nome
                                         </label>
-                                        <input disabled className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Laboratório 201" name='name' id='name' 
+                                        <input disabled className="input input input-bordered w-full max-w" type="text" placeholder="Laboratório 201" name='name' id='name' 
                                             {...register("name", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 15 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, name:e.target.value})}, })}
                                         />
                                         <ErrorMessage
@@ -181,10 +181,10 @@ function BookingModal({lab_id}) {
                                         
                                         </div>
                                         <div className="w-full md:w-1/2 px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+                                        <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="last_name">
                                             Capacidade
                                         </label>
-                                        <input disabled className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="capacity" type="number" placeholder="25" name='capacity' 
+                                        <input disabled className="input input input-bordered w-full max-w" id="capacity" type="number" placeholder="25" name='capacity' 
                                         {...register("capacity", { required: "Campo obrigatório.", valueAsNumber: true, max:{value:100, message:'Máximo de 100 lugares'}, min:{value:1, message:'Necessita no minímo 1 lugar '}, onChange: (e) => {setLab({...lab, capacity:e.target.value})}, })}
                                         />
                                         <ErrorMessage
@@ -204,7 +204,7 @@ function BookingModal({lab_id}) {
                                             Descrição do laboratório
                                         </label>
 
-                                        <textarea disabled className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" name="about" id="about"  rows="3" 
+                                        <textarea disabled className="textarea textarea-bordered textarea-xs w-full max-w" name="about" id="about"  rows="3" 
                                         {...register("about", { required: "Campo obrigatório.", maxLength:{value:50, message:'Máximo de 30 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, about:e.target.value})}, })}
                                         />
                                         <ErrorMessage
@@ -239,10 +239,10 @@ function BookingModal({lab_id}) {
                                 <legend className="font-bold text-lg text-green-600">Dados de pagamento</legend>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">
+                                        <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="name">
                                             Boleto
                                         </label>
-                                        <input disabled className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="xxxxxxxx" name='bol_number' id='bol_number' 
+                                        <input disabled className="input input input-bordered w-full max-w" type="text" placeholder="xxxxxxxx" name='bol_number' id='bol_number' 
                                             {...register("bol_number", { required: "Campo obrigatório.", minLength:{value:5, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setLab({...lab, bol_number:e.target.value})}, })}
                                         />
                                         <ErrorMessage
@@ -256,10 +256,10 @@ function BookingModal({lab_id}) {
                                         
                                         </div>
                                         <div className="w-full md:w-1/2 px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+                                        <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="last_name">
                                             Preço (R$)
                                         </label>
-                                        <input disabled className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="price" type="number" placeholder="250.00" name='price' 
+                                        <input disabled className="input input input-bordered w-full max-w" id="price" type="number" placeholder="250.00" name='price' 
                                             {...register("price", { required: "Campo obrigatório.", maxLength:{value:100, message:'Máximo de 100 lugares'}, minLength:{value:1, message:'Necessita no minímo 1 lugar '}, onChange: (e) => {setLab({...lab, price:e.target.value})}, })}
                                         />
                                         <ErrorMessage

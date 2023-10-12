@@ -70,7 +70,7 @@ export default function LoginPage() {
             </label>
             <input
                name="email" type="email" onChange={(e)=>{email.current = e.target.value}} placeholder="john@email.com"
-              className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="input input-bordered w-full max-w"
             />
           </div>
           <div className="mb-2">
@@ -82,7 +82,7 @@ export default function LoginPage() {
             </label>
             <input placeholder="******"
               name="password" type="password" onChange={(e)=>{password.current = e.target.value}}
-              className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="input input-bordered w-full max-w"
             />
           </div>
           <Link

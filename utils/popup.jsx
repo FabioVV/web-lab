@@ -116,13 +116,13 @@ const Popup = ({isVisible, onClose}) => {
                 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first_name">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="first_name">
                       Primeiro nome
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Jane" name='first_name' id='first_name'/>
                   </div>
                   <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="last_name">
                       Sobrenome
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="last_name" type="text" placeholder="Doe" name='last_name'/>
@@ -131,7 +131,7 @@ const Popup = ({isVisible, onClose}) => {
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="username">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="username">
                       Nome de usuário
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="username" type="text" placeholder="Jane123" name='username'/>
@@ -140,13 +140,13 @@ const Popup = ({isVisible, onClose}) => {
                 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password">
                       Senha
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="password" type="password" placeholder="************" name='password'/>
                   </div>
                   <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password_confirmation">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password_confirmation">
                       Confirme sua senha
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'/>
@@ -157,7 +157,7 @@ const Popup = ({isVisible, onClose}) => {
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="email">
                       Email
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="email" placeholder="jane@email.com" name='email'/>
@@ -166,14 +166,14 @@ const Popup = ({isVisible, onClose}) => {
 
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cpf_cnpj">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="cpf_cnpj">
                       CPF/CNPJ
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'/>
                     <p className="text-gray-600 text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="sex">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="sex">
                       Sexo
                     </label>
                     <div className="relative">
@@ -187,7 +187,7 @@ const Popup = ({isVisible, onClose}) => {
                     </div>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="phone">
                       Telefone
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" type='tel' placeholder="11975461285" name='phone'/>
@@ -197,13 +197,13 @@ const Popup = ({isVisible, onClose}) => {
 
                 <div style={{marginTop:30}} className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="birth_date">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="birth_date">
                       Data de nascimento
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="birth_date" type="date"  name='birth_date'/>
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="user_type">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="user_type">
                       Inscreva-se como
                     </label>
                     <div className="relative">

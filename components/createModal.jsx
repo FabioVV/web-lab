@@ -73,10 +73,10 @@ function CreModal({lab_id}) {
                         <form method='post' onSubmit={handleSubmit(CreateLab)} id='form' className="w-full p-6">
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">
+                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="name">
                                 Nome
                             </label>
-                            <input  className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text" placeholder="Laboratório 201" name='name' id='name' 
+                            <input  className="input input-bordered w-full max-w" type="text" placeholder="Laboratório 201" name='name' id='name' 
                                 {...register("name", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 15 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, name:e.target.value})}, })}
                             />
                             <ErrorMessage
@@ -90,10 +90,10 @@ function CreModal({lab_id}) {
                             
                             </div>
                             <div className="w-full md:w-1/2 px-3">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last_name">
+                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="last_name">
                                 Capacidade
                             </label>
-                            <input className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" id="capacity" type="number" placeholder="25" name='capacity' 
+                            <input className="input input-bordered w-full max-w" id="capacity" type="number" placeholder="25" name='capacity' 
                                 {...register("capacity", { required: "Campo obrigatório.", valueAsNumber: true, max:{value:100, message:'Máximo de 100 lugares'}, min:{value:1, message:'Necessita no minímo 1 lugar '}, onChange: (e) => {setLab({...lab, capacity:e.target.value})}, })}
                                 />
                             <ErrorMessage
@@ -109,11 +109,11 @@ function CreModal({lab_id}) {
 
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
-                            <label  htmlFor="username">
+                            <label  htmlFor="about">
                                 Descrição do laboratório
                             </label>
 
-                            <textarea className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40" name="about" id="about"  rows="3" 
+                            <textarea className="textarea textarea-bordered textarea-xs w-full max-w" name="about" id="about"  rows="3" 
                             {...register("about", { required: "Campo obrigatório.", maxLength:{value:50, message:'Máximo de 30 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, about:e.target.value})}, })}
                             />
                             <ErrorMessage

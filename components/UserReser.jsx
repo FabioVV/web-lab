@@ -2,7 +2,7 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 
-function UserBooking({book, handleClick, handleEdit, handleRemove}) {
+function UserBooking({book}) {
 
     const {data:session} = useSession()
 

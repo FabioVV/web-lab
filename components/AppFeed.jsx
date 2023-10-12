@@ -9,7 +9,7 @@ import Link from 'next/link'
 import CreModal from './createModal'
 import UserBooking from './UserReser'
 import Pagination from './pagination'
-
+import { motion } from "framer-motion"
 
 function LabsList({data, handleClick}){ 
     return (
@@ -43,7 +43,7 @@ function BookingList({data, handleClick}){
 function UserBookingList({data, handleClick}){ 
     return (
         <tbody>
-            {data?.map((booking) => (
+            {data?.results?.map((booking) => (
                 <UserBooking 
                     key={booking.id}
                     book={booking}
@@ -154,12 +154,16 @@ function LabFeed() {
                         ""
                         }
 
-
                         {submitting ?  
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
                         :
                             <>
-                                <div className="overflow-x-auto pb-10 mt-5">
+                                <motion.div   initial={{ opacity:0 }}
+                                             animate={{ opacity:1 }} 
+                                             transition={{ duration: 0.5, delay: 0.1 }}
+
+                                             className="overflow-x-auto pb-10 mt-5">
+                                                
                                     <table className="table mb-8">
                 
                                         {/* head */}
@@ -194,7 +198,7 @@ function LabFeed() {
                                         </tr>
                                         </tfoot>
                                     </table>
-                                </div>
+                                </motion.div>
                                 <Pagination page_size={labs?.page_size} 
                                 count={labs?.count} 
                                 total_pages={labs?.total_pages}

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
+import { motion } from "framer-motion"
 
 function NumeroDoBoletoAleatorio8Digitos() {
     const randomNumber = Math.floor(Math.random() * 100000000);
@@ -119,7 +120,11 @@ function BookingModal({lab_id}) {
     <div>
     {paid ? 
         <dialog id={`my_modal_booking_${lab_id}`}  className="modal" data-theme='dark'>
-            <div className="modal-box">
+            <motion.div       
+            initial={{ x: 600,opacity: 0 }}
+            animate={{   x: 0,opacity: 1 }}
+            transition={{ delay: 0.2 }} 
+            className="modal-box">
                 <div class="">
                     <div class="p-6 md:mx-auto">
                         <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">
@@ -136,13 +141,13 @@ function BookingModal({lab_id}) {
                                     GO BACK 
                                 </a> */}
                                 <button onClick={() =>{document.getElementById('closer').click();window.location.reload();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
-                                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Fechar'}
+                                    {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </dialog>
     :
         <dialog id={`my_modal_booking_${lab_id}`}  className="modal">

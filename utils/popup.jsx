@@ -151,7 +151,7 @@ const Popup = ({isVisible, onClose}) => {
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'/>
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
-                    <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
+                    <p className="text-accent text-xs italic">Suas senhas precisam coincidir.</p>
                   </div>
                 </div>
 
@@ -170,7 +170,7 @@ const Popup = ({isVisible, onClose}) => {
                       CPF/CNPJ
                     </label>
                     <input  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'/>
-                    <p className="text-gray-600 text-xs italic">Digite apenas números</p>
+                    <p className="text-accent text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="sex">

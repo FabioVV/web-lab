@@ -201,7 +201,7 @@ const UserAccount = () => {
                       </div>}
                     />
                     <p id='password_errors' className="text-lightcoral text-xs italic"></p>
-                    <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
+                    <p className="text-accent text-xs italic">Suas senhas precisam coincidir.</p>
                   </div>
                 </div> */}
 
@@ -240,7 +240,7 @@ const UserAccount = () => {
                         <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
-                    <p className="text-gray-600 text-xs italic">Digite apenas números</p>
+                    <p className="text-accent text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="sex">

@@ -145,7 +145,7 @@ const RegisterUser = () => {
                       {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
 
                     />
-                    <p className="text-gray-600 text-xs italic">Esse nome será sua identificação.</p>
+                    <p className="text-accent text-xs italic">Esse nome será sua identificação.</p>
 
                     <ErrorMessage
                       errors={errors}
@@ -182,7 +182,7 @@ const RegisterUser = () => {
                     <input  className="input input-bordered w-full max-w" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
                       {...register("password_confirmation", { required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
                     />
-                      <p className="text-gray-600 text-xs italic">Suas senhas precisam coincidir.</p>
+                      <p className="text-accent text-xs italic">Suas senhas precisam coincidir.</p>
 
                     <ErrorMessage
                       errors={errors}
@@ -231,7 +231,7 @@ const RegisterUser = () => {
                         <strong className="font-bold">* {message}</strong>
                       </div>}
                     />
-                    <p className="text-gray-600 text-xs italic">Digite apenas números</p>
+                    <p className="text-accent text-xs italic">Digite apenas números</p>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="sex">

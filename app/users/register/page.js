@@ -180,7 +180,7 @@ const RegisterUser = () => {
                       Confirme sua senha *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
-                      {...register("password_confirmation", { required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
+                      {...register("password_confirmation", {validate:(password) =>{if(watch('password')!=password)return "Suas senhas não coincidem."}, required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password_confirmation:e.target.value})}, })}
                     />
                       <p className="text-accent text-xs italic">Suas senhas precisam coincidir.</p>
 

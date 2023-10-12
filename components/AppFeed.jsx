@@ -125,13 +125,14 @@ function LabFeed() {
 
     
     if(session?.user){
+        
         return (
             <div>
 
                 <div id='tab_container' className="tabs">
                     <Link onClick={() => {setActiveTab('tab1')}}  href="#" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
                     <Link onClick={() => {setActiveTab('tab2')}}  href="#" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
-                    <Link onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
+                    <Link id='minhas-reservas' onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
                 </div>
 
                 <div id='tab-content'>

@@ -96,7 +96,7 @@ function BookingModal({lab_id}) {
             //document.getElementById('closer').click()
             setPaid(true)
             //window.location.reload()
-            window.flash(`Laboratório reservado.`, 'success')
+            //window.flash(`Laboratório reservado.`, 'success')
             
           } else {
             window.flash(`Erro ao reservar laboratório`, 'error')
@@ -138,9 +138,9 @@ function BookingModal({lab_id}) {
                             <p> Tenha um ótimo dia!  </p>
                             <div class="py-10 text-center">
                                 {/* <a href="#" class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
-                                    GO BACK 
+                                    GO BACK window.location.reload();
                                 </a> */}
-                                <button onClick={() =>{document.getElementById('closer').click();window.location.reload();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
+                                <button onClick={() =>{document.getElementById('closer').click();document.getElementById('minhas-reservas').click();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
                                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                 </button>
                             </div>

@@ -121,23 +121,24 @@ function LabFeed() {
         fetchBookings()
         fetchUserBookings()
 
-
     }, [session?.user.access])
 
 
-    
+    session?.user.access ? "a":"b"
+
     if(session?.user){
         return (
             <div>
 
                 <div id='tab_container' className="tabs">
-                    <Link onClick={() => {setActiveTab('tab1')}}  href="#laboratorios" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
-                    <Link onClick={() => {setActiveTab('tab2')}}  href="#reservas" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
-                    <Link onClick={() => {setActiveTab('tab3')}}  href="#suas-reservas" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
+                    <Link onClick={() => {setActiveTab('tab1')}}  href="#" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
+                    <Link onClick={() => {setActiveTab('tab2')}}  href="#" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
+                    <Link onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
                 </div>
 
                 <div id='tab-content'>
                     {activeTab === "tab1" ?
+
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
@@ -156,54 +157,58 @@ function LabFeed() {
                         }
 
 
-                        <div className="overflow-x-auto pb-10 mt-5">
-                            <table className="table mb-8">
-        
-                                {/* head */}
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <label>
-                                            Disponivel?
-                                        </label>
-                                    </th>
-                                    <th>ID do laboratório</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    {/* <th>?</th> */}
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                
-                                    {submitting ?  
-                                        <span className="loading loading-spinner loading-lg"></span>
-                                    :
-                                        <LabsList
-                                            data = {labs}
-                                            handleClick = {()=>{}}/>
-                                    }
-                                    
-                                <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>ID do laboratório</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    {/* <th>?</th> */}
-                                    <th></th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <Pagination page_size={labs?.page_size} 
-                        count={labs?.count} 
-                        total_pages={labs?.total_pages}
-                        current_page_number={labs?.current_page_number} 
-                        next={labs?.next} 
-                        previous={labs?.previous}
-                        fetch={fetchLabs}
-                        url={'http://127.0.0.1:8000/api/v3/laboratorios/'}/>
-                        
+                        {submitting ?  
+                            <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
+                        :
+                            <>
+                                <div className="overflow-x-auto pb-10 mt-5">
+                                    <table className="table mb-8">
+                
+                                        {/* head */}
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <label>
+                                                    Disponivel?
+                                                </label>
+                                            </th>
+                                            <th>ID do laboratório</th>
+                                            <th>Nome</th>
+                                            <th>Descrição</th>
+                                            {/* <th>?</th> */}
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        
+                                            <LabsList
+                                                data = {labs}
+                                                handleClick = {()=>{}}
+                                            />
+                                            
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>ID do laboratório</th>
+                                            <th>Nome</th>
+                                            <th>Descrição</th>
+                                            {/* <th>?</th> */}
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <Pagination page_size={labs?.page_size} 
+                                count={labs?.count} 
+                                total_pages={labs?.total_pages}
+                                current_page_number={labs?.current_page_number} 
+                                next={labs?.next} 
+                                previous={labs?.previous}
+                                fetch={fetchLabs}
+                                url={'http://127.0.0.1:8000/api/v3/laboratorios/'}/>
+                            </>
+                        }
+
+
                     </section>
                     :
                     ""
@@ -212,49 +217,57 @@ function LabFeed() {
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas</h1>
 
-                        <div className="overflow-x-auto pb-10">
-                            <table className="table mb-8">
-        
-                                {/* head */}
-                                <thead>
-                                <tr>
+                        {submitting ? 
+                            <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
+                        :
+                            <>
+                                <div className="overflow-x-auto pb-10 mt-5">
+                                    <table className="table mb-8">
+                
+                                        {/* head */}
+                                        <thead>
+                                        <tr>
 
-                                    <th title='Número da reserva'>
-                                        <label title='Número da reserva'>
-                                            Nº
-                                        </label>
-                                    </th>
-                                    <th>Laboratório</th>
-                                    <th>Data de reserva</th>
-                                    <th>Quem reservou</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-        
-                                    <BookingList
-                                        data = {bookings}
-                                        handleClick = {()=>{}}
-                                    />
-        
-                                <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>Laboratório</th>
-                                    <th>Data de reserva</th>
-                                    <th>Quem reservou</th>
-                                    <th></th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <Pagination page_size={bookings?.page_size} 
-                        count={bookings?.count} 
-                        total_pages={bookings?.total_pages}
-                        current_page_number={bookings?.current_page_number} 
-                        next={bookings?.next} 
-                        previous={bookings?.previous}
-                        fetch={fetchBookings}
-                        url={'http://127.0.0.1:8000/api/v3/reservas/'}/>
+                                            <th title='Número da reserva'>
+                                                <label title='Número da reserva'>
+                                                    Nº
+                                                </label>
+                                            </th>
+                                            <th>Laboratório</th>
+                                            <th>Data de reserva</th>
+                                            <th>Quem reservou</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                
+                                            <BookingList
+                                                data = {bookings}
+                                                handleClick = {()=>{}}
+                                            />
+                
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>Laboratório</th>
+                                            <th>Data de reserva</th>
+                                            <th>Quem reservou</th>
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <Pagination page_size={bookings?.page_size} 
+                                count={bookings?.count} 
+                                total_pages={bookings?.total_pages}
+                                current_page_number={bookings?.current_page_number} 
+                                next={bookings?.next} 
+                                previous={bookings?.previous}
+                                fetch={fetchBookings}
+                                url={'http://127.0.0.1:8000/api/v3/reservas/'}/>
+                            </>
+                        }
+
+
                     </section>
                     :
                     ""
@@ -264,60 +277,68 @@ function LabFeed() {
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
 
-                        <div className="overflow-x-auto pb-10">
-                            <table className="table mb-8">
-        
-                                {/* head */}
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <label>
-                                            Nº
-                                        </label>
-                                    </th>
-                                    <th>
-                                        <label>
-                                            Ainda reservado?
-                                        </label>
-                                    </th>
-                                    <th>ID do laboratório</th>
-                                    <th>Laboratório</th>
-                                    <th>Data da reserva</th>
-                                    {/* <th>?</th> */}
-                                    <th></th>
-                                </tr>
-                                </thead>
-        
-                                    <UserBookingList
-                                            data = {userBookings}
-                                            handleClick = {()=>{}}
-                                    />
-        
-                                <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>
-                                        <label>
-                                            Ainda reservado?
-                                        </label>
-                                    </th>
-                                    <th>ID do laboratório</th>
-                                    <th>Laboratório</th>
-                                    <th>Data da reserva</th>
-                                    {/* <th>?</th> */}
-                                    <th></th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <Pagination page_size={userBookings?.page_size} 
-                        count={userBookings?.count} 
-                        total_pages={userBookings?.total_pages}
-                        current_page_number={userBookings?.current_page_number} 
-                        next={userBookings?.next} 
-                        previous={userBookings?.previous}
-                        fetch={fetchUserBookings}
-                        url={'http://127.0.0.1:8000/api/v3/user-reservas/'}/>
+                        {submitting ? 
+                            <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
+                        :
+                            <>
+                                <div className="overflow-x-auto pb-10 mt-5">
+                                    <table className="table mb-8">
+                
+                                        {/* head */}
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <label>
+                                                    Nº
+                                                </label>
+                                            </th>
+                                            <th>
+                                                <label>
+                                                    Ainda reservado?
+                                                </label>
+                                            </th>
+                                            <th>ID do laboratório</th>
+                                            <th>Laboratório</th>
+                                            <th>Data da reserva</th>
+                                            {/* <th>?</th> */}
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                
+                                            <UserBookingList
+                                                    data = {userBookings}
+                                                    handleClick = {()=>{}}
+                                            />
+                
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                <label>
+                                                    Ainda reservado?
+                                                </label>
+                                            </th>
+                                            <th>ID do laboratório</th>
+                                            <th>Laboratório</th>
+                                            <th>Data da reserva</th>
+                                            {/* <th>?</th> */}
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <Pagination page_size={userBookings?.page_size} 
+                                count={userBookings?.count} 
+                                total_pages={userBookings?.total_pages}
+                                current_page_number={userBookings?.current_page_number} 
+                                next={userBookings?.next} 
+                                previous={userBookings?.previous}
+                                fetch={fetchUserBookings}
+                                url={'http://127.0.0.1:8000/api/v3/user-reservas/'}/>
+                            </>
+                        }
+
+
                     </section>
                     :
                     ""

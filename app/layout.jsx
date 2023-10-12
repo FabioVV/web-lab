@@ -24,7 +24,7 @@ function RootLayout({children}) {
     
 
   return (
-    <html lang='en' data-theme="corporate">
+    <html lang='en' data-theme="dracula">
         <body>
             <Provider>
 

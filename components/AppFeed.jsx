@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import { useSession } from 'next-auth/react'
-
+import Auto_ from './AutocompleteLab'
 import Laboratory from './Lab'
 import Booking from './Reser'
 import Link from 'next/link'
@@ -119,13 +119,10 @@ function LabFeed() {
         fetchLabs()
         fetchBookings()
         fetchUserBookings()
-
     }
 
     useEffect(() =>{
-
         fetchAll()
-
     }, [session?.user.access])
 
     
@@ -145,6 +142,7 @@ function LabFeed() {
 
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
+                        <Auto_/>
 
                         {session?.user.user_type === 2 || session?.user.is_superuser? 
                         <div>

@@ -85,7 +85,6 @@ function EdModalBooking({book_id, HandleFetch}) {
     <dialog id={`my_modal_edit_booking_${book_id}`}  className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Alterar reserva Nº{book_id}</h3>
-            <Auto_/>
 
             <hr />
 
@@ -100,6 +99,7 @@ function EdModalBooking({book_id, HandleFetch}) {
                                         Nome
                                     </label>
                                     <Auto_/>
+
                                 </div>
                                  
                             </div> 

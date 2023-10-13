@@ -1,12 +1,10 @@
 import React from 'react'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import DelModal from './deleteModal'
 import EdModal from './editModal'
 import BookingModal from './registerBooking'
 
-function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
+function Laboratory({lab}) {
 
     const {data:session} = useSession()
   
@@ -68,13 +66,13 @@ function Laboratory({lab, handleClick, handleEdit, handleRemove}) {
             <th>
                 {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
-                    <div className='border-solid border-b-2 border-indigo-600 mb-2'>
-                        <button onClick={() => handleBooking(lab.id)} className="btn btn-ghost btn-xs">Reservar</button>
+                    <div className='border-solid mb-1'>
                     </div>
                     
                     <div>
-                        <button onClick={() => handleEditLab(lab.id)} className="btn btn-ghost btn-xs">Editar</button>
-                        <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-ghost btn-xs">Remover</button>
+                        <button onClick={() => handleBooking(lab.id)} className="btn btn-outline btn-success btn-xs mr-2 mb-2">Reservar</button>
+                        <button onClick={() => handleEditLab(lab.id)} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
+                        <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
                         <DelModal lab_id={lab.id}/>
                         <EdModal lab_id={lab.id}/>
                         <BookingModal lab_id={lab.id}/>

@@ -16,8 +16,8 @@ const Nav = () => {
         {/* {console.log(session)} */}
         {session?.user ? (
                 
-                <div data-theme='dracula' className='fixed top-0 w-full z-40'>
-                <nav className="w-full border-b-2 border-white-900">
+                <div data-theme='dracula' className='fixed top-0 w-full z-40 bg-base-200'>
+                <nav className="w-full">
                   <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div>
                       <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -97,8 +97,8 @@ const Nav = () => {
           
         ):(
         <>
-        <div className=''>
-        <nav className="w-full border-b-2 border-white-900">
+        <div data-theme='dracula' className='fixed top-0 w-full z-40 bg-base-200'>
+        <nav className="w-full">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
             <div>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">

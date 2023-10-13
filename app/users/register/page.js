@@ -238,7 +238,7 @@ const RegisterUser = () => {
                       Sexo *
                     </label>
                     <div className="relative">
-                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} className="input input-bordered w-full max-w" id="sex" name='sex'>
+                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} className="select select-bordered w-full max-w" id="sex" name='sex'>
                         <option value='M'>Masculino</option>
                         <option value='F'>Feminino</option>
                       </select>
@@ -296,7 +296,7 @@ const RegisterUser = () => {
                     <div className="relative">
                       <select {...register("user_type", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, user_type:e.target.value})}, })}
  
-                        className="input input-bordered w-full max-w" id="user_type" name='user_type'>
+                        className="select select-bordered w-full max-w" id="user_type" name='user_type'>
                         <option value='1'>Aluno</option>
                         <option value='2'>Professor</option>
                       </ select >
@@ -319,7 +319,7 @@ const RegisterUser = () => {
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 
                     <div className="w-full md:w-1/2 mt-5">
-                      <button disabled={isLoading} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type='submit' >
+                      <button disabled={isLoading} className="btn btn-outline btn-success" type='submit'>
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Finalizar'}
 
                       </button>

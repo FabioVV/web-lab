@@ -247,7 +247,7 @@ const UserAccount = () => {
                       Sexo *
                     </label>
                     <div className="relative">
-                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })}
+                      <select {...register("sex", { required: "Campo obrigatório.", onChange: (e) => {setUser({...user, sex:e.target.value})}, })} 
 
                         className="select select-bordered w-full max-w" id="sex" name='sex'>
                         <option value='N'>Não especificado</option>
@@ -305,22 +305,19 @@ const UserAccount = () => {
 
                 <div className="flex flex-wrap -mx-3 mb-2"> 
 
-                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  <div className="px-3 mb-6 md:mb-0">
 
-                    <div className="w-full md:w-1/2 mt-5">
-                    <button type="submit" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <div className="mt-2">
+                      <button type="submit" className="btn btn-outline btn-success mr-3">
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Salvar'}
 
                       </button>
-                      
-                    </div>
-                    
-                    <div className="w-full">
-                      <button onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type='button' >
+
+                      <button onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="btn btn-outline btn-error" type='button' >
                         Excluir conta
                       </button>
-                      
                     </div>
+                    
 
                   </div>
 

@@ -146,7 +146,7 @@ function LabFeed() {
                             {/* <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 Registrar laboratório
                             </Link> */}
-                            <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="btn btn-sm btn-outline btn-success">
                                 Registrar laboratório
                             </button>
                             <CreModal/>
@@ -165,7 +165,7 @@ function LabFeed() {
 
                                             className="overflow-x-auto pb-10 mt-5">
                                                 
-                                    <table className="table mb-8">
+                                    <table className="table mb-8 bg-base-200">
                 
                                         {/* head */}
                                         <thead>
@@ -229,7 +229,7 @@ function LabFeed() {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-x-auto pb-10 mt-5">
 
-                                    <table className="table mb-8">
+                                    <table className="table mb-8 bg-base-200">
                 
                                         {/* head */}
                                         <thead>
@@ -293,7 +293,7 @@ function LabFeed() {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-x-auto pb-10 mt-5">
 
-                                    <table className="table mb-8">
+                                    <table className="table mb-8 bg-base-200">
                 
                                         {/* head */}
                                         <thead>

@@ -45,8 +45,8 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
             <th>
             {session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
-                    <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Editar</button>
-                    <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-ghost btn-xs">Remover</button>
+                    <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
+                    <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
                     <DelModalBooking book_id={book?.id}/>
                     <EdModalBooking book_id={book?.id}/>
                 </div>

@@ -55,7 +55,7 @@ function UserBooking({book}) {
             </td>
 
             <th>
-            {session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff ? 
+            {book?.is_active && (session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
                     <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
                     <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>

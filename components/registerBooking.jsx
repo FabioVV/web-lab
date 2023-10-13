@@ -12,7 +12,7 @@ function NumeroDoBoletoAleatorio8Digitos() {
     const randomNumber = Math.floor(Math.random() * 100000000);
     const randomString = randomNumber.toString();
 
-    // If the random number is less than 10000000, pad it with leading zeros
+    // Se o número for menor que 10000000, preencha com zeros a frente
     if (randomString.length < 8) {
       return '0'.repeat(8 - randomString.length) + randomString;
     }
@@ -138,7 +138,7 @@ function BookingModal({lab_id}) {
                                 {/* <a href="#" className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                                     GO BACK window.location.reload();
                                 </a> */}
-                                <button onClick={() =>{document.getElementById('closer').click();document.getElementById('minhas-reservas').click();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
+                                <button onClick={() =>{document.getElementById('closer').click();window.location.reload();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
                                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                 </button>
                             </div>

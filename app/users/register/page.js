@@ -1,6 +1,5 @@
 "use client"
 
-import React from 'react'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -164,7 +163,7 @@ const RegisterUser = () => {
                       Senha *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="password" type="password" placeholder="************" name='password'
-                      {...register("password",{ required: "Campo obrigatório.", minLength:{value:6, message:'Necessita no minímo 6 caracteres '}, onChange: (e) => {setUser({...user, password:e.target.value})}, })}
+                      {...register("password",{ required: "Campo obrigatório.", minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setUser({...user, password:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -221,7 +220,7 @@ const RegisterUser = () => {
                       CPF/CNPJ *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
-                      {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, minLength:{value:14, message:'Necessita no minímo 14 caracteres '}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
+                      {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}

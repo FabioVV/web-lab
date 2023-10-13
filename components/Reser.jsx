@@ -1,9 +1,7 @@
-import React from 'react'
-import Link from 'next/link'
-import DelModalBooking from './deleteModalBooking'
-import EdModal from './editModal'
 import { useSession } from 'next-auth/react'
+
 import EdModalBooking from './editModalBooking'
+import DelModalBooking from './deleteModalBooking'
 
 function Booking({book, handleClick, handleEdit, handleRemove}) {
 

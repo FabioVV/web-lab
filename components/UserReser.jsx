@@ -1,6 +1,9 @@
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
+import EdModalBooking from './editModalBooking'
+import DelModalBooking from './deleteModalBooking'
+
 
 function UserBooking({book}) {
 
@@ -46,23 +49,22 @@ function UserBooking({book}) {
             </td>
 
             <td>
-                {book?.booked_at.replaceAll('-', '/')}
+                {book?.booked_at?.replaceAll('-', '/')}
                 <br/>
                 {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
             </td>
 
             <th>
-            {session?.user.id === book.user.id || session?.user.is_superuser || session?.user.is_staff ? 
+            {session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff ? 
                 <div>
-                    {/* <button onClick={() => {}} className="btn btn-ghost btn-xs">Editar</button>
-                    <button onClick={() => {}} className="btn btn-ghost btn-xs">Remover</button> */}
-                    {/* MODALS DE CONTROLE DAS RESERVAS IRÃO AQUI */}
+                    <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
+                    <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
+                    <DelModalBooking book_id={book?.id}/>
+                    <EdModalBooking book_id={book?.id}/>
                 </div>
                 :
                 ""
                 }
-                {/* <Link href="" className="btn btn-ghost btn-xs">Editar</Link>
-                <Link href="" className="btn btn-ghost btn-xs">Cancelar</Link> */}
             </th>
 
         </tr>

@@ -5,7 +5,8 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
-import auto_ from './AutocompleteLab'
+import Auto_ from './AutocompleteLab'
+import AutoComplete from "@geist-ui/core/esm/auto-complete/auto-complete"
 
 
 function EdModalBooking({book_id, HandleFetch}) {
@@ -84,6 +85,8 @@ function EdModalBooking({book_id, HandleFetch}) {
     <dialog id={`my_modal_edit_booking_${book_id}`}  className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Alterar reserva Nº{book_id}</h3>
+            <Auto_/>
+
             <hr />
 
             <div className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -96,9 +99,9 @@ function EdModalBooking({book_id, HandleFetch}) {
                                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="name">
                                         Nome
                                     </label>
-                                    <auto_ /> 
+                                    <Auto_/>
                                 </div>
-                                
+                                 
                             </div> 
 
                         </form>

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Children, useEffect } from 'react'
+import { useEffect } from 'react'
 import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'

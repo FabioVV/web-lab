@@ -1,6 +1,5 @@
 "use client"
 
-import { signIn } from "next-auth/react"
 import { useRef } from "react"
 import Link from "next/link"
 import { useState } from "react"
@@ -39,10 +38,7 @@ export default function PasswordReset() {
 
       } else {
 
-        //window.location.replace('/')
-        // router.push('/')
         setEmailSent(true)
-        //window.flash(`Email enviado!`, 'success')
         document.getElementById('my_modal_email').showModal()
 
       }

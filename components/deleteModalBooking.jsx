@@ -1,11 +1,9 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-function DelModalBooking({book_id}) {
+function DelModalBooking({book_id, HandleFetch}) {
     const {data:session} = useSession()
-    const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
 
     const DesativarLab = async() => {
@@ -24,7 +22,7 @@ function DelModalBooking({book_id}) {
                 setSubmitting(false)
 
                 document.getElementById('close').click()
-                window.location.replace('/')
+                HandleFetch()
                 window.flash(`Reserva removida.`, 'success')
     
             } else {

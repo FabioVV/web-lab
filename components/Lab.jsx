@@ -4,7 +4,7 @@ import DelModal from './deleteModal'
 import EdModal from './editModal'
 import BookingModal from './registerBooking'
 
-function Laboratory({lab}) {
+function Laboratory({lab, HandleFetch}) {
 
     const {data:session} = useSession()
   
@@ -60,11 +60,11 @@ function Laboratory({lab}) {
             <td>
                 {lab.about}
                 <br/>
-                <span className="badge badge-ghost badge-sm">Capacidade: {lab.capacity} lugares</span>
+                <span className="badge badge-ghost badge-sm text-sm opacity-50">Capacidade: {lab.capacity} lugares</span>
             </td>
 
             <th>
-                {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
+                {!lab.is_booked && lab.user_id == session?.user.id && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
                     <div className='border-solid mb-1'>
                     </div>
@@ -73,9 +73,9 @@ function Laboratory({lab}) {
                         <button onClick={() => handleBooking(lab.id)} className="btn btn-outline btn-success btn-xs mr-2 mb-2">Reservar</button>
                         <button onClick={() => handleEditLab(lab.id)} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
                         <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
-                        <DelModal lab_id={lab.id}/>
-                        <EdModal lab_id={lab.id}/>
-                        <BookingModal lab_id={lab.id}/>
+                        <DelModal HandleFetch={HandleFetch} lab_id={lab.id}/>
+                        <EdModal HandleFetch={HandleFetch} lab_id={lab.id}/>
+                        <BookingModal HandleFetch={HandleFetch} lab_id={lab.id}/>
                     </div>
                 </div>
                 :

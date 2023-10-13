@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import EdModalBooking from './editModalBooking'
 import DelModalBooking from './deleteModalBooking'
 
-function Booking({book, handleClick, handleEdit, handleRemove}) {
+function Booking({book, HandleFetch}) {
 
     const {data:session} = useSession()
 
@@ -45,8 +45,8 @@ function Booking({book, handleClick, handleEdit, handleRemove}) {
                 <div>
                     <button onClick={() => {document.getElementById(`my_modal_edit_booking_${book.id}`)?.showModal()}} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
                     <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
-                    <DelModalBooking book_id={book?.id}/>
-                    <EdModalBooking book_id={book?.id}/>
+                    <DelModalBooking HandleFetch={HandleFetch} book_id={book?.id}/>
+                    <EdModalBooking HandleFetch={HandleFetch} book_id={book?.id}/>
                 </div>
                 :
                 ""

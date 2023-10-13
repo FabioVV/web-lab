@@ -11,14 +11,14 @@ import CreModal from './createModal'
 import UserBooking from './UserReser'
 import Pagination from './pagination'
 
-function LabsList({data, handleClick}){ 
+function LabsList({data, HandleFetch}){ 
     return (
         <tbody>
             {data?.results?.map((laboratory) => (
                 <Laboratory 
                     key={laboratory.id}
                     lab={laboratory}
-                    handleClick={handleClick}
+                    HandleFetch={HandleFetch}
                 />
             ))}
         </tbody>
@@ -26,28 +26,28 @@ function LabsList({data, handleClick}){
 }
 
 
-function BookingList({data, handleClick}){ 
+function BookingList({data, HandleFetch}){ 
     return (
         <tbody>
             {data?.results?.map((booking) => (
                 <Booking 
                     key={booking.id}
                     book={booking}
-                    handleClick={handleClick}
+                    HandleFetch={HandleFetch}
                 />
             ))}
         </tbody>
     ) 
 }
 
-function UserBookingList({data, handleClick}){ 
+function UserBookingList({data, HandleFetch}){ 
     return (
         <tbody>
             {data?.results?.map((booking) => (
                 <UserBooking 
                     key={booking.id}
                     book={booking}
-                    handleClick={handleClick}
+                    HandleFetch={HandleFetch}
                 />
             ))}
         </tbody>
@@ -114,12 +114,17 @@ function LabFeed() {
         setSubmitting(false)
 
     }
-
-    useEffect(() =>{
-
+    
+    const fetchAll =  () => {
         fetchLabs()
         fetchBookings()
         fetchUserBookings()
+
+    }
+
+    useEffect(() =>{
+
+        fetchAll()
 
     }, [session?.user.access])
 
@@ -149,7 +154,7 @@ function LabFeed() {
                             <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="btn btn-sm btn-outline btn-success">
                                 Registrar laboratório
                             </button>
-                            <CreModal/>
+                            <CreModal HandleFetch={fetchAll}/>
                         </div>
                         :
                         ""
@@ -185,8 +190,8 @@ function LabFeed() {
                                         
                                             <LabsList
                                                 data = {labs}
-                                                handleClick = {()=>{}}
-                                            />
+                                                HandleFetch={fetchAll}
+                                                />
                                             
                                         <tfoot>
                                         <tr>
@@ -218,7 +223,7 @@ function LabFeed() {
                     }
                     {activeTab === "tab2" ?
                     <section className='p-3'>
-                        <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas</h1>
+                        <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas ativas</h1>
 
                         {submitting ? 
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
@@ -249,7 +254,7 @@ function LabFeed() {
                 
                                             <BookingList
                                                 data = {bookings}
-                                                handleClick = {()=>{}}
+                                                HandleFetch={fetchAll}
                                             />
                 
                                         <tfoot>
@@ -318,7 +323,7 @@ function LabFeed() {
                 
                                             <UserBookingList
                                                     data = {userBookings}
-                                                    handleClick = {()=>{}}
+                                                    HandleFetch={fetchAll}
                                             />
                 
                                         <tfoot>

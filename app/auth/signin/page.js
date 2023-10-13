@@ -4,7 +4,6 @@ import { signIn } from "next-auth/react"
 import { useRef } from "react"
 import Link from "next/link"
 import { useState } from "react"
-import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import PasswordReset from "@app/users/password-reset/page"
 
@@ -36,7 +35,6 @@ export default function LoginPage() {
 
       } else {
 
-        //window.location.replace('/')
         router.push('/')
         window.flash(`Seja bem vindo(a)!`, 'success')
 

@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-function DelModal({lab_id}) {
+function DelModal({lab_id, HandleFetch}) {
     const {data:session} = useSession()
     const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
@@ -18,24 +18,28 @@ function DelModal({lab_id}) {
                     "Content-Type":"application/json", Authorization:`Bearer ${session?.user.access}`
                 }
             })
-    
+            
             if(response.ok){
                 setSubmitting(false)
 
                 document.getElementById('close').click()
-                window.location.replace('/')
+                HandleFetch()
                 window.flash(`Laboratório desativado.`, 'success')
     
             } else {
+                document.getElementById('close').click()
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 window.flash(`Erro ao desativar laboratório.`, 'error')
+
             }
     
         } catch(err) {
+
             console.log(err)
-
+            
         } finally {
-            setSubmitting(true)
 
+            setSubmitting(false)
         }
         
     } 

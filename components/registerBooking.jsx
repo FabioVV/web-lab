@@ -20,7 +20,7 @@ function NumeroDoBoletoAleatorio8Digitos() {
     return randomString;
 }
 
-function BookingModal({lab_id}) {
+function BookingModal({lab_id, HandleFetch}) {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
@@ -91,10 +91,7 @@ function BookingModal({lab_id}) {
   
           if(response.ok){
   
-            //document.getElementById('closer').click()
             setPaid(true)
-            //window.location.reload()
-            //window.flash(`Laboratório reservado.`, 'success')
             
           } else {
             window.flash(`Erro ao reservar laboratório`, 'error')
@@ -135,10 +132,8 @@ function BookingModal({lab_id}) {
                             <p className="my-2 mt-7">Obrigado! Seu laboratório foi reservado.</p>
                             <p> Tenha um ótimo dia!  </p>
                             <div className="py-10 text-center">
-                                {/* <a href="#" className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
-                                    GO BACK window.location.reload();
-                                </a> */}
-                                <button onClick={() =>{document.getElementById('closer').click();window.location.reload();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
+
+                                <button onClick={() =>{document.getElementById('closer').click();HandleFetch();}} id={`sub_reserva_${lab_id}`} className="btn text-green-600" type='button' >
                                     {submitting ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                 </button>
                             </div>

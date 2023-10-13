@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
@@ -9,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import auto_ from './AutocompleteLab'
 
 
-function EdModalBooking({book_id}) {
+function EdModalBooking({book_id, HandleFetch}) {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
@@ -61,7 +60,7 @@ function EdModalBooking({book_id}) {
           if(response.ok){
   
             document.getElementById('closerr').click()
-            window.location.reload()
+            HandleFetch()            
             window.flash(`Reserva atualizada.`, 'success')
             
           } else {

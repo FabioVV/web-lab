@@ -1,16 +1,14 @@
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 
-function CreModal() {
+function CreModal({HandleFetch}) {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
-    const router = useRouter()
     const [lab, setLab] = useState({
         name: '',
         about: '',
@@ -39,7 +37,7 @@ function CreModal() {
           if(response.ok){
   
             document.getElementById('closer').click()
-            window.location.replace('/')
+            HandleFetch()
             window.flash(`Laboratório registrado.`, 'success')
 
           } else {

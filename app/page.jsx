@@ -1,5 +1,4 @@
 
-import React from 'react'
 import AppFeed from '@components/AppFeed'
 
 function Home() {

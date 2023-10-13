@@ -1,17 +1,14 @@
 
-import React from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 
-function EdModal({lab_id}) {
+function EdModal({lab_id, HandleFetch}) {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
-    const router = useRouter()
     const [lab, setLab] = useState({
         name: '',
         about: '',
@@ -63,15 +60,25 @@ function EdModal({lab_id}) {
               capacity:lab.capacity,
             })
           })
-  
+
+
           if(response.ok){
-  
-            document.getElementById('closer').click()
-            window.location.reload()
-            window.flash(`Laboratório atualizado.`, 'success')
-            
+              setSubmitting(false)
+
+              document.getElementById(`my_modal_edit_${lab_id}`).close()
+              HandleFetch()
+              window.flash(`Laboratório atualizado.`, 'success')
+
+          } else if(response.status == 403){
+
+              document.getElementById(`my_modal_edit_${lab_id}`).close()
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.flash(`Você não possui permissão para alterar este laboratório.`, 'error')
+
           } else {
-            window.flash(`Erro ao atualizar laboratório`, 'error')
+              document.getElementById(`my_modal_edit_${lab_id}`).close()
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.flash(`Erro ao atualizar laboratório.`, 'error')
           }
   
         } catch(err){

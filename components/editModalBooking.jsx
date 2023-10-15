@@ -4,9 +4,9 @@ import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form';
 import Auto_ from './AutocompleteLab'
-import AutoComplete from "@geist-ui/core/esm/auto-complete/auto-complete"
 
 
 function EdModalBooking({book_id, HandleFetch}) {
@@ -27,6 +27,7 @@ function EdModalBooking({book_id, HandleFetch}) {
           },
           })
           const data = await response.json()
+
           setBooking({
             laboratory: data.laboratory,
           })

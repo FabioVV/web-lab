@@ -25,7 +25,7 @@ function RootLayout({children}) {
 
   return (
     <html lang='en' data-theme="dracula">
-        <body>
+        <body className='min-h-screen'>
             <Provider>
 
                 <Nav />

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.MuiTextField-root{
+    border-color: black;
+    color: white;
+}
+
+
+.login-body{
+    margin-top: 12%;
+}
+
 
 .alert {
     border-radius: 10px;

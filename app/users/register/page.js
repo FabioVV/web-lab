@@ -8,7 +8,7 @@ import { signIn } from 'next-auth/react';
 
 const RegisterUser = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, setError, watch, formState: { errors } } = useForm();
   const [user, setUser] = useState({
     first_name: '',
     username: '',
@@ -73,19 +73,41 @@ const RegisterUser = () => {
       });
   
       const user_created = await res.json()
+
       if(res.status == 201){
 
-        //window.location.replace('/auth/signin')
-        //router.push('auth/signin')
         signIn()
         window.flash(`Conta criada! Você já pode fazer login.`, 'success')
 
-      } else {
-        
-        window.flash(`Erro. Favor, tentar novamente.`, 'error')
+      } else if(user_created['cpf_cnpj']){
+
+        setError('cpf_cnpj', {
+          type: 'cpf_ja_existe',
+          message:'Já existe cadastro para este CPF/CNPJ.'
+        })
         setIsLoading(false)
 
+      } else if(user_created['email']){
+
+        setError('email', {
+          type: 'email_ja_existe',
+          message:'Já existe cadastro para este E-mail.'
+        })
+        setIsLoading(false)
+
+      } else if(user_created['username']){
+
+        setError('username', {
+          type: 'username_ja_existe',
+          message:'Já existe cadastro para este nome de usuário.'
+        })
+        setIsLoading(false)
+
+      } else {
+        window.flash(`Erro. Favor, tentar novamente.`, 'error')
+        setIsLoading(false)
       }
+      
 
   }
 
@@ -222,6 +244,7 @@ const RegisterUser = () => {
                     <input  className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
                       {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
                     />
+
                     <ErrorMessage
                       errors={errors}
                       name="cpf_cnpj"

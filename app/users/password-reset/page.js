@@ -32,14 +32,18 @@ export default function PasswordReset() {
         })
       })
 
-      if ((result.status == 400 && result['email']) || !result.ok) {
+      const error = await result.json()
+      if ((error['email'])) {
 
         window.flash(`Não existe uma conta associada a este email.`, 'error')
 
-      } else {
-
+      } else if(result.ok){
         setEmailSent(true)
         document.getElementById('my_modal_email').showModal()
+
+      } else {
+
+        window.flash(`Erro. Favor, tentar novamente.`, 'error')
 
       }
 

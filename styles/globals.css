@@ -48,3 +48,17 @@
 
 tbody tr:nth-child(even){}
 
+
+
+.MuiOutlinedInput-notchedOutline{
+    border-color: white;
+}
+
+.MuiFormLabel-root{
+    /* color: antiquewhite; */
+    color: white;
+}
+
+.MuiInputBase-input{
+    color: white;
+}

@@ -1,7 +1,5 @@
 import { useSession } from 'next-auth/react'
-import EdModalBooking from './editModalBooking'
 import DelModalBooking from './deleteModalBooking'
-import BookingEdit from '@app/booking/edit/page'
 import Link from 'next/link'
 
 function Booking({book, HandleFetch}) {
@@ -47,7 +45,6 @@ function Booking({book, HandleFetch}) {
                     <Link className="btn btn-outline btn-info btn-xs mr-2 mb-2" href={`/booking/edit?id=${book?.id}`}>Editar</Link>
                     <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
                     <DelModalBooking HandleFetch={HandleFetch} book_id={book?.id}/>
-                    <EdModalBooking HandleFetch={HandleFetch} book_id={book?.id}/>
                     
                 </div>
                 :

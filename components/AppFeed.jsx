@@ -59,9 +59,9 @@ function LabFeed() {
     const [labs, setLabs] = useState([])
     const [bookings, setbookings] = useState([])
     const [userBookings, setuserBookings] = useState([])
-    const {data:session} = useSession()
     const [activeTab, setActiveTab] = useState("tab1");
     const [submitting, setSubmitting] = useState(false)
+    const {data:session} = useSession()
 
     const fetchLabs = async (url = 'http://127.0.0.1:8000/api/v3/laboratorios/') => {
         setSubmitting(true)

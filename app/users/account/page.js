@@ -10,7 +10,7 @@ import DelModalAccount from '@components/deleteModalAccount';
 const UserAccount = () => {
   const {data:session, update} = useSession()
   const [isLoading, setIsLoading] = useState(false)
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, setError, watch, reset, formState: { errors } } = useForm();
   const [user, setUser] = useState({
     first_name: '',
     username: '',
@@ -91,21 +91,45 @@ const UserAccount = () => {
         }),
       });
   
+      const user_updated = await res.json()
+
       if(res.status == 200){
 
-        const user = await res.json()
         window.scrollTo({ top: 0, behavior: 'smooth' });
         window.flash(`Dados alterados.`, 'success')
-        await update({ ...user })
+        await update({ ...user_updated })
 
+        setIsLoading(false)
+
+      } else if(user_updated['cpf_cnpj']){
+
+        setError('cpf_cnpj', {
+          type: 'cpf_ja_existe',
+          message:'Já existe cadastro para este CPF/CNPJ.'
+        })
+        setIsLoading(false)
+
+      } else if(user_updated['email']){
+
+        setError('email', {
+          type: 'email_ja_existe',
+          message:'Já existe cadastro para este E-mail.'
+        })
+        setIsLoading(false)
+
+      } else if(user_updated['username']){
+
+        setError('username', {
+          type: 'username_ja_existe',
+          message:'Já existe cadastro para este nome de usuário.'
+        })
         setIsLoading(false)
 
       } else {
-        
         window.flash(`Erro. Favor, tentar novamente.`, 'error')
-        setIsLoading(false)
-
       }
+      
+      setIsLoading(false)
 
   }
 

@@ -47,7 +47,7 @@ const RegisterUser = () => {
       setIsLoading(true)
 
 
-      const formData = new FormData(document.getElementById('form'))
+      // const formData = new FormData(document.getElementById('form'))
 
       const res = await fetch("http://127.0.0.1:8000/api/v3/usuarios/", {
         method:"POST",
@@ -76,8 +76,9 @@ const RegisterUser = () => {
 
       if(res.status == 201){
 
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         signIn()
-        window.flash(`Conta criada! Você já pode fazer login.`, 'success')
+        window.flash(`Conta criada! Você já pode fazer login. Por favor, aguarde.`, 'success')
 
       } else if(user_created['cpf_cnpj']){
 
@@ -85,7 +86,6 @@ const RegisterUser = () => {
           type: 'cpf_ja_existe',
           message:'Já existe cadastro para este CPF/CNPJ.'
         })
-        setIsLoading(false)
 
       } else if(user_created['email']){
 
@@ -93,7 +93,6 @@ const RegisterUser = () => {
           type: 'email_ja_existe',
           message:'Já existe cadastro para este E-mail.'
         })
-        setIsLoading(false)
 
       } else if(user_created['username']){
 
@@ -101,13 +100,12 @@ const RegisterUser = () => {
           type: 'username_ja_existe',
           message:'Já existe cadastro para este nome de usuário.'
         })
-        setIsLoading(false)
 
       } else {
         window.flash(`Erro. Favor, tentar novamente.`, 'error')
-        setIsLoading(false)
       }
-      
+
+      setIsLoading(false)
 
   }
 

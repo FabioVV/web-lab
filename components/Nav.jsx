@@ -73,11 +73,11 @@ const Nav = () => {
                               Início
                             </Link>
                           </li>
-                          <li className="">
+                          {/* <li className="">
                             <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
                               Sobre
                             </Link>
-                          </li>
+                          </li> */}
                           <li className="">
                             <Link  className='hover:border-b-2 hover:border-white-900 ' href="/users/account">
                               Conta
@@ -150,24 +150,24 @@ const Nav = () => {
                 >
                 <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                     <li className="">
-                    <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
-                        Início
-                    </Link>
+                      <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
+                          Início
+                      </Link>
+                    </li>
+                    {/* <li className="">
+                      <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
+                          Sobre
+                      </Link>
+                    </li> */}
+                    <li className="">
+                      <button className='hover:border-b-2 hover:border-white-900'  onClick={signIn}>
+                          Entrar
+                      </button>
                     </li>
                     <li className="">
-                    <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
-                        Sobre
-                    </Link>
-                    </li>
-                    <li className="">
-                    <button className='hover:border-b-2 hover:border-white-900'  onClick={signIn}>
-                        Entrar
-                    </button>
-                    </li>
-                    <li className="">
-                    <Link className='hover:border-b-2 hover:border-white-900' href="/users/register">
-                        Criar conta
-                    </Link>
+                      <Link className='hover:border-b-2 hover:border-white-900' href="/users/register">
+                          Criar conta
+                      </Link>
                     
                     </li>
                 </ul>

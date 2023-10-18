@@ -201,7 +201,7 @@ export default function BookingEdit() {
                                 {/* <a href="#" className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                                     GO BACK window.location.reload();
                                 </a> */}
-                                <button onClick={() =>{document.getElementById('close_lab').click(); window.location.replace('/')}} id={`confirmed`} className="btn text-green-600" type='button' >
+                                <button onClick={() =>{document.getElementById('close_lab').click(); window.location.replace('/');}} id={`confirmed`} className="btn text-green-600" type='button' >
                                     {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                 </button>
                             </div>
@@ -376,7 +376,7 @@ export default function BookingEdit() {
                 </div>
               </dialog>
 
-              <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
+              <div className="booking-body relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
                 <div className="w-full p-6 rounded-md shadow-lg lg:max-w-xl">
                   <h1 className="text-3xl font-bold text-center "> Digite o nome do laboratório desejado </h1>
 

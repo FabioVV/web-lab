@@ -31,6 +31,7 @@ function BookingModal({lab_id, HandleFetch}) {
         capacity: '',
         bol_number:'',
         price:'',
+        booking_end:'',
     })
 
 
@@ -85,7 +86,8 @@ function BookingModal({lab_id, HandleFetch}) {
   
             body:JSON.stringify({
                 laboratory: lab_id,
-                bol_number:lab.bol_number
+                bol_number:lab.bol_number,
+                booking_end:lab.booking_end
             })
           })
   
@@ -153,6 +155,34 @@ function BookingModal({lab_id, HandleFetch}) {
                         <div className=''>
 
                             <form method='post' onSubmit={handleSubmit(BookLab)} id='form' className="w-full p-6">
+                                <fieldset className='border-l-2 border-zinc-300 p-5'>
+                                    <legend className="font-bold text-lg text-green-600">Dados da reserva</legend>
+                                    <div className="flex flex-wrap -mx-3 mb-6">
+                                        <div className="w-full px-3 mb-6 md:mb-0">
+                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                Sua reserva irá até qual dia e horário? 
+                                            </label>
+                                            <input className="input input input-bordered w-full max-w" type="datetime-local" placeholder="Laboratório 201" name='booking_end' id='booking_end' 
+                                                {...register("booking_end", { valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
+                                            />
+                                            <ErrorMessage
+                                                errors={errors}
+                                                name="booking_end"
+                                                render={({ message }) => 
+                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                <strong className="font-bold">* {message}</strong>
+                                                </div>}
+                                            />
+                                            
+                                        </div>
+            
+                                    </div>
+
+
+
+                                </fieldset>
+                                
+                                
                                 <fieldset className='border-l-2 border-zinc-300 p-5'>
                                     <legend className="font-bold text-lg text-green-600">Dados do laboratório</legend>
                                     <div className="flex flex-wrap -mx-3 mb-6">

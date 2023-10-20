@@ -243,6 +243,7 @@ function LabFeed() {
                                             </th>
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
+                                            <th>Data do fim da reserva</th>
                                             <th>Quem reservou</th>
                                             <th></th>
                                         </tr>
@@ -258,6 +259,7 @@ function LabFeed() {
                                             <th></th>
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
+                                            <th>Data do fim da reserva</th>
                                             <th>Quem reservou</th>
                                             <th></th>
                                         </tr>
@@ -312,7 +314,7 @@ function LabFeed() {
                                             <th>ID do laboratório</th>
                                             <th>Laboratório</th>
                                             <th>Data da reserva</th>
-                                            {/* <th>?</th> */}
+                                            <th>Data do fim da reserva</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -333,7 +335,7 @@ function LabFeed() {
                                             <th>ID do laboratório</th>
                                             <th>Laboratório</th>
                                             <th>Data da reserva</th>
-                                            {/* <th>?</th> */}
+                                            <th>Data do fim da reserva</th>
                                             <th></th>
                                         </tr>
                                         </tfoot>

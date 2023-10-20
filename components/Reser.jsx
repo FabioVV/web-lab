@@ -36,6 +36,12 @@ function Booking({book, HandleFetch}) {
             </td>
 
             <td>
+                {book?.booking_end?.replaceAll('-', '/')}
+                <br/>
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
+            </td>
+            
+            <td>
                 {book?.username}
             </td>
 

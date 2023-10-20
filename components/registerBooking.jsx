@@ -163,7 +163,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                 Sua reserva irá até qual dia e horário? 
                                             </label>
                                             <input className="input input input-bordered w-full max-w" type="datetime-local" placeholder="Laboratório 201" name='booking_end' id='booking_end' 
-                                                {...register("booking_end", { valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
+                                                {...register("booking_end", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
                                             />
                                             <ErrorMessage
                                                 errors={errors}

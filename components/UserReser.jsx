@@ -53,6 +53,12 @@ function UserBooking({book, HandleFetch}) {
                 {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
             </td>
 
+            <td>
+                {book?.booking_end?.replaceAll('-', '/')}
+                <br/>
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
+            </td>
+            
             <th>
             {book?.is_active && (session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>

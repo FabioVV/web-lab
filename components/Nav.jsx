@@ -163,6 +163,9 @@ const Nav = () => {
                       <button className='hover:border-b-2 hover:border-white-900'  onClick={signIn}>
                           Entrar
                       </button>
+                      {/* <button className='hover:border-b-2 hover:border-white-900'  onClick={()=>{signIn('google')}}>
+                          Entrar com a google
+                      </button> */}
                     </li>
                     <li className="">
                       <Link className='hover:border-b-2 hover:border-white-900' href="/users/register">

@@ -6,7 +6,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 
 function CreModal({HandleFetch}) {
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, setError, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
     const [lab, setLab] = useState({
@@ -33,6 +33,8 @@ function CreModal({HandleFetch}) {
               capacity:lab.capacity,
             })
           })
+
+          const lab_return = await response.json()
   
           if(response.ok){
   
@@ -40,8 +42,18 @@ function CreModal({HandleFetch}) {
             HandleFetch()
             window.flash(`Laboratório registrado.`, 'success')
 
+          } else if (lab_return['lab_name_about']){
+            
+            setError('name', {
+              type: 'name_lab_equals_about',
+              message:'O nome do laboratório não pode ser igual a sua descrição.'
+            })
+
+            setSubmitting(false)
+
           } else {
             window.flash(`Erro ao registrar laboratório`, 'error')
+
           }
   
         } catch(err){

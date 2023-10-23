@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import { useSession } from 'next-auth/react'
-import Laboratory from './Lab'
-import Booking from './Reser'
+import Laboratory from './Laboratory'
+import Booking from './Booking'
 import Link from 'next/link'
-import CreModal from './createModal'
-import UserBooking from './UserReser'
-import Pagination from './pagination'
+import CreModal from './createLaboratoryModal'
+import UserBooking from './UserBookings'
+import Pagination from './Pagination'
 
 function LabsList({data, HandleFetch}){ 
     return (

@@ -1,6 +1,6 @@
 
 import { useSession } from 'next-auth/react'
-import DelModalBooking from './deleteModalBooking'
+import DelModalBooking from './deleteBookingModal'
 import Link from 'next/link'
 
 

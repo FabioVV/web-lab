@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import '@styles/globals.css'
-import Nav from '@components/Nav'
+import Nav from '@components/Navbar'
 import Provider from '@components/Provider'
 import { Flash } from '@components/Flash';
 import Bus from '@utils/Bus'

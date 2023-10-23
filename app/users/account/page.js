@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from 'next-auth/react';
-import DelModalAccount from '@components/deleteModalAccount';
+import DelModalAccount from '@components/deleteAccountModal';
 
 const UserAccount = () => {
   const {data:session, update} = useSession()
@@ -332,12 +332,12 @@ const UserAccount = () => {
                   <div className="px-3 mb-6 md:mb-0">
 
                     <div className="mt-2">
-                      <button type="submit" className="btn btn-outline btn-success mr-3">
+                      <button id='account-save-button' disabled={isLoading} type="submit" className="btn btn-outline btn-success mr-3">
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Salvar'}
 
                       </button>
 
-                      <button onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="btn btn-outline btn-error" type='button' >
+                      <button disabled={isLoading} onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="btn btn-outline btn-error" type='button' >
                         Excluir conta
                       </button>
                     </div>

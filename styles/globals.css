@@ -7,7 +7,6 @@
     color: white;
 }
 
-
 .login-body{
     margin-top: 12%;
 }
@@ -30,7 +29,6 @@
 
 }
 
-
 .app section{
     margin: 0 auto;
 }
@@ -40,29 +38,27 @@
     margin-top: 5rem;
 }
 
-
-/* footer{
+footer{
     position: fixed;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
-} */
-
-
+  left: 0;
+  bottom: 0;
+  width: 100%;
+} 
 
 tbody tr:nth-child(even){}
-
-
 
 .MuiOutlinedInput-notchedOutline{
     border-color: white;
 }
 
 .MuiFormLabel-root{
-    /* color: antiquewhite; */
     color: white;
 }
 
 .MuiInputBase-input{
     color: white;
+}
+
+#account-save-button{
+    margin-bottom: 10px;
 }

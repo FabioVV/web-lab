@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import DelModal from './deleteModal'
-import EdModal from './editModal'
-import BookingModal from './registerBooking'
+import DelModal from './deleteLaboratoryModal'
+import EdModal from './editLaboratoryModal'
+import BookingModal from './registerBookingModal'
 
 function Laboratory({lab, HandleFetch}) {
 
@@ -64,28 +64,41 @@ function Laboratory({lab, HandleFetch}) {
             </td>
 
             <th>
-                {!lab.is_booked && lab.user_id == session?.user.id && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
                 <div>
-                    <div className='border-solid mb-1'>
-                    </div>
+                    {/* <div className='border-solid mb-1'>
+                    </div> */}
                     
-                    <div>
-                        <button onClick={() => handleBooking(lab.id)} className="btn btn-outline btn-success btn-xs mr-2 mb-2">Reservar</button>
-                        <button onClick={() => handleEditLab(lab.id)} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
-                        <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
-                        <DelModal HandleFetch={HandleFetch} lab_id={lab.id}/>
-                        <EdModal HandleFetch={HandleFetch} lab_id={lab.id}/>
-                        <BookingModal HandleFetch={HandleFetch} lab_id={lab.id}/>
+                    <div className='border-solid mb-1'>
+                        {!lab.is_booked && (session?.user.user_type == 2 || session?.user.is_superuser || session?.user.is_staff) ? 
+                            <>
+                                <button onClick={() => handleBooking(lab.id)} className="btn btn-outline btn-success btn-xs mr-2 mb-2">Reservar</button>
+                            </>
+                        :
+
+                        ""
+                        }
+
+                        {!lab.is_booked && lab.user_id == session?.user.id && session?.user.user_type == 2 || (session?.user.is_superuser || session?.user.is_staff) ? 
+                            <>
+                                <button onClick={() => handleEditLab(lab.id)} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
+                                <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
+                            </>
+                        :
+
+                        ""
+                        }
                     </div>
                 </div>
-                :
-                ""
-                }
+                
 
             </th>
-
+            
+            <DelModal HandleFetch={HandleFetch} lab_id={lab.id}/>
+            <EdModal HandleFetch={HandleFetch} lab_id={lab.id}/>
+            <BookingModal HandleFetch={HandleFetch} lab_id={lab.id}/>
 
         </tr>
+        
   )
 }
 

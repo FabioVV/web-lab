@@ -8,7 +8,7 @@ import Booking from './Booking'
 import Link from 'next/link'
 import CreModal from './createLaboratoryModal'
 import UserBooking from './UserBookings'
-import Pagination from './Pagination'
+import Pagination from './Pagination_component'
 
 function LabsList({data, HandleFetch}){ 
     return (

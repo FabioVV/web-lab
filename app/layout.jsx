@@ -8,9 +8,11 @@ import { Flash } from '@components/Flash';
 import Bus from '@utils/Bus'
 import Footer from '@components/Footer'
 
+
+
 export const metada = {
-    title:'Laboratory booking app',
-    description: 'Booking an laboratory has never been easier.'
+    title:'Sistema web para reserva de laboratórios, salas e auditórios.',
+    description: 'Reservar um laboratório nunca foi tão fácil.'
 }
 
 
@@ -24,13 +26,14 @@ function RootLayout({children}) {
     
 
   return (
-    <html lang='en' data-theme="dracula">
+    <html lang='pt-BR' data-theme="dracula">
         <body className='min-h-screen'>
             <Provider>
 
                 <Nav />
                 <Flash />
                 <main className='app'>
+
                     {children}
                     <Footer />
 

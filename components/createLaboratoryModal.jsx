@@ -40,10 +40,12 @@ function CreModal({HandleFetch}) {
   
             document.getElementById('closer').click()
             HandleFetch()
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             window.flash(`Laboratório registrado.`, 'success')
 
           } else if (lab_return['lab_name_about']){
             
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setError('name', {
               type: 'name_lab_equals_about',
               message:'O nome do laboratório não pode ser igual a sua descrição.'
@@ -52,8 +54,9 @@ function CreModal({HandleFetch}) {
             setSubmitting(false)
 
           } else {
-            window.flash(`Erro ao registrar laboratório`, 'error')
 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.flash(`Erro ao registrar laboratório`, 'error')
           }
   
         } catch(err){

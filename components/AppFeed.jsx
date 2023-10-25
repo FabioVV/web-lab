@@ -59,6 +59,7 @@ function LabFeed() {
     const [labSearch, setlabSearch] = useState('')
     const [userBookingsSearch, setuserBookingsSearch] = useState('')
     const [bookingsSearch, setbookingsSearch] = useState('')
+    const [userSearch, setuserSearch] = useState('')
 
     
     const [labs, setLabs] = useState([])
@@ -97,10 +98,10 @@ function LabFeed() {
         setSubmitting(true)
 
 
-        const response = await fetch(`http://127.0.0.1:8000/api/v3/reservas-search/?q=${bookingsSearch}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/reservas-search/?q=${bookingsSearch}&username=${userSearch}`, {
             method:'GET',
             headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
-                },
+            },
         })
     
     
@@ -197,7 +198,7 @@ function LabFeed() {
 
     useEffect(() =>{fetchAll()}, [session?.user.access])
     useEffect(()=>{fetchLabsSearch();},[labSearch])
-    useEffect(()=>{fetchbookingsSearch();},[bookingsSearch])
+    useEffect(()=>{fetchbookingsSearch();},[bookingsSearch, userSearch])
     useEffect(()=>{fetchuserBookingsSearch();},[userBookingsSearch])
 
 
@@ -232,22 +233,36 @@ function LabFeed() {
                         :
                             ""
                         }
-  
-                        <div className="form-control w-full max-w-xs mt-4">
-                            <label className="label">
-                                <span className="label-text">Qual laboratório você deseja?</span>
-                                <span className="label-text-alt"></span>
-                            </label>
 
-                            <input onInput={(e)=>{setlabSearch(e.target.value);}} id='search_input_labs' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+                        <div style={{display: 'flex', flexDirection:'row', justifyContent:'left', gap:'15px', flexWrap:'wrap'}}>
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Qual laboratório você deseja?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
 
-                            <label className="label">
-                                <span className="label-text-alt"></span>
-                                <span className="label-text-alt"></span>
-                            </label>
+                                <input onInput={(e)=>{setlabSearch(e.target.value);}} id='search_input_labs' type="search" placeholder="Digite aqui nome do laboratório..." className="input input-bordered w-full max-w-xs" />
+                                
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div>
+{/*                             
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Quem você deseja?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+
+                                <input onInput={(e)=>{setlabSearch(e.target.value);}} id='search_input_labs' type="search" placeholder="Digite aqui o username..." className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div> */}
                         </div>
-
-                        
 
                         {submitting ?  
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
@@ -325,18 +340,36 @@ function LabFeed() {
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas ativas</h1>
 
-                        <div className="form-control w-full max-w-xs mt-4">
-                            <label className="label">
-                                <span className="label-text">Qual reserva você deseja?</span>
-                                <span className="label-text-alt"></span>
-                            </label>
+                        
 
-                            <input onInput={(e)=>{setbookingsSearch(e.target.value);}} id='search_input_bookings' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+                        <div style={{display: 'flex', flexDirection:'row', justifyContent:'left', gap:'15px', flexWrap:'wrap'}}>
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Qual reserva você deseja?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
 
-                            <label className="label">
-                                <span className="label-text-alt"></span>
-                                <span className="label-text-alt"></span>
-                            </label>
+                                <input onInput={(e)=>{setbookingsSearch(e.target.value);}} id='search_input_bookings' type="search" placeholder="Digite aqui nome do laboratório..." className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div>
+                            
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Quem você deseja?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+
+                                <input onInput={(e)=>{setuserSearch(e.target.value);}} id='search_input_users' type="search" placeholder="Digite aqui o username..." className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div>
                         </div>
 
                         {submitting ? 
@@ -422,7 +455,7 @@ function LabFeed() {
                                 <span className="label-text-alt"></span>
                             </label>
 
-                            <input onInput={(e)=>{setuserBookingsSearch(e.target.value);}} id='search_input_your_bookings' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+                            <input onInput={(e)=>{setuserBookingsSearch(e.target.value);}} id='search_input_your_bookings' type="search" placeholder="Digite aqui nome do laboratório..." className="input input-bordered w-full max-w-xs" />
 
                             <label className="label">
                                 <span className="label-text-alt"></span>

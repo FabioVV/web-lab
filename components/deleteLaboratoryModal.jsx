@@ -24,6 +24,7 @@ function DelModal({lab_id, HandleFetch}) {
 
                 document.getElementById('close').click()
                 HandleFetch()
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 window.flash(`Laboratório desativado.`, 'success')
     
             } else {

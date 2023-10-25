@@ -19,13 +19,16 @@ function DelModalBooking({book_id, HandleFetch}) {
             })
     
             if(response.ok){
-                setSubmitting(false)
+                setSubmitting(false) 
 
                 document.getElementById('close').click()
                 HandleFetch()
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 window.flash(`Reserva removida.`, 'success')
     
             } else {
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 window.flash(`Erro ao remover reserva.`, 'error')
             }
     

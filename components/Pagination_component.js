@@ -9,10 +9,9 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
         {index+1}
         </button>)
     }
-    
-    // if(links.length > 10){
 
-    // }
+    
+
 
   return ( 
     <div className='mt-3 mb-8 text-center'>

@@ -94,15 +94,18 @@ function BookingModal({lab_id, HandleFetch}) {
           const error = await response.json()
 
           if(response.ok){
-  
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setPaid(true)
             
           } else if(error['error_payment']){
 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             window.flash(`O pagamento falhou. Por favor, tente novamente ou entre em contato com o nosso time.`, 'error')
 
           } else if(error['error_booking']){
 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             window.flash(`Apenas professores, funcionários e administradores podem fazer reservas.`, 'error')
 
           }

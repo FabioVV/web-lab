@@ -28,6 +28,8 @@ function DelModalAccount() {
               window.flash(`Sua conta foi excluída.`, 'success')
     
             } else {
+              
+              window.scrollTo({ top: 0, behavior: 'smooth' });
               window.flash(`Erro. Favor, tentar novamente.`, 'error')
               setIsLoading(false)
             }

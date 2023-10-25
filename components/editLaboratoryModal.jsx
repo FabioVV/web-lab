@@ -67,6 +67,7 @@ function EdModal({lab_id, HandleFetch}) {
 
               document.getElementById(`my_modal_edit_${lab_id}`).close()
               HandleFetch()
+              window.scrollTo({ top: 0, behavior: 'smooth' });
               window.flash(`Laboratório atualizado.`, 'success')
 
           } else if(response.status == 403){

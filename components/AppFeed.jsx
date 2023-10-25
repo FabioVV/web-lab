@@ -56,6 +56,10 @@ function UserBookingList({data, HandleFetch}){
 
 function LabFeed() {
 
+    const [labBookedSearch, setlabBookedSearch] = useState('')
+    const [userlabBookedSearch, setuserlabBookedSearch] = useState('')
+
+
     const [labSearch, setlabSearch] = useState('')
     const [userBookingsSearch, setuserBookingsSearch] = useState('')
     const [bookingsSearch, setbookingsSearch] = useState('')
@@ -77,7 +81,7 @@ function LabFeed() {
         setSubmitting(true)
 
 
-        const response = await fetch(`http://127.0.0.1:8000/api/v3/search-labs/?q=${labSearch}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/search-labs/?q=${labSearch}&booked=${labBookedSearch}`, {
             method:'GET',
             headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
                 },
@@ -119,7 +123,7 @@ function LabFeed() {
         setSubmitting(true)
 
 
-        const response = await fetch(`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}&booked=${userlabBookedSearch}`, {
             method:'GET',
             headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
                 },
@@ -197,9 +201,9 @@ function LabFeed() {
     }
 
     useEffect(() =>{fetchAll()}, [session?.user.access])
-    useEffect(()=>{fetchLabsSearch();},[labSearch])
+    useEffect(()=>{fetchLabsSearch();},[labSearch, labBookedSearch])
     useEffect(()=>{fetchbookingsSearch();},[bookingsSearch, userSearch])
-    useEffect(()=>{fetchuserBookingsSearch();},[userBookingsSearch])
+    useEffect(()=>{fetchuserBookingsSearch();},[userBookingsSearch, userlabBookedSearch])
 
 
     if(session?.user){
@@ -248,20 +252,24 @@ function LabFeed() {
                                     <span className="label-text-alt"></span>
                                 </label>
                             </div>
-{/*                             
+                                                         
                             <div className="form-control w-full max-w-xs mt-4">
                                 <label className="label">
-                                    <span className="label-text">Quem você deseja?</span>
+                                    <span className="label-text">Laboratório reservado?</span>
                                     <span className="label-text-alt"></span>
                                 </label>
 
-                                <input onInput={(e)=>{setlabSearch(e.target.value);}} id='search_input_labs' type="search" placeholder="Digite aqui o username..." className="input input-bordered w-full max-w-xs" />
+                                <select onChange={(e) =>{setlabBookedSearch(e.target.value)}} className="select select-bordered w-full max-w-xs">
+                                    <option value=''>Indiferente</option>
+                                    <option value='N'>Não reservado</option>
+                                    <option value='R'>Reservado</option>
+                                </select>
 
                                 <label className="label">
                                     <span className="label-text-alt"></span>
                                     <span className="label-text-alt"></span>
                                 </label>
-                            </div> */}
+                            </div> 
                         </div>
 
                         {submitting ?  
@@ -449,19 +457,48 @@ function LabFeed() {
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
 
-                        <div className="form-control w-full max-w-xs mt-4">
-                            <label className="label">
-                                <span className="label-text">Qual reserva sua você deseja?</span>
-                                <span className="label-text-alt"></span>
-                            </label>
 
-                            <input onInput={(e)=>{setuserBookingsSearch(e.target.value);}} id='search_input_your_bookings' type="search" placeholder="Digite aqui nome do laboratório..." className="input input-bordered w-full max-w-xs" />
 
-                            <label className="label">
-                                <span className="label-text-alt"></span>
-                                <span className="label-text-alt"></span>
-                            </label>
+
+                        <div style={{display: 'flex', flexDirection:'row', justifyContent:'left', gap:'15px', flexWrap:'wrap'}}>
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Qual reserva sua você deseja?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+
+                                <input onInput={(e)=>{setuserBookingsSearch(e.target.value);}} id='search_input_your_bookings' type="search" placeholder="Digite aqui nome do laboratório..." className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div>
+                                                         
+                            <div className="form-control w-full max-w-xs mt-4">
+                                <label className="label">
+                                    <span className="label-text">Laboratório reservado?</span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+
+                                <select onChange={(e) =>{setuserlabBookedSearch(e.target.value)}} className="select select-bordered w-full max-w-xs">
+                                    <option value=''>Indiferente</option>
+                                    <option value='N'>Não reservado</option>
+                                    <option value='R'>Reservado</option>
+                                </select>
+
+                                <label className="label">
+                                    <span className="label-text-alt"></span>
+                                    <span className="label-text-alt"></span>
+                                </label>
+                            </div> 
                         </div>
+
+
+
+
+
+                        
 
                         {submitting ? 
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>

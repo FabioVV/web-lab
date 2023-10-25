@@ -91,12 +91,20 @@ function BookingModal({lab_id, HandleFetch}) {
             })
           })
   
+          const error = await response.json()
+
           if(response.ok){
   
             setPaid(true)
             
-          } else {
-            window.flash(`Erro ao reservar laboratório`, 'error')
+          } else if(error['error_payment']){
+
+            window.flash(`O pagamento falhou. Por favor, tente novamente ou entre em contato com o nosso time.`, 'error')
+
+          } else if(error['error_booking']){
+
+            window.flash(`Apenas professores, funcionários e administradores podem fazer reservas.`, 'error')
+
           }
   
         } catch(err){
@@ -340,4 +348,3 @@ function BookingModal({lab_id, HandleFetch}) {
 }
 
 export default BookingModal
-

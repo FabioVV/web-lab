@@ -56,12 +56,87 @@ function UserBookingList({data, HandleFetch}){
 
 function LabFeed() {
 
+    const [labSearch, setlabSearch] = useState('')
+    const [userBookingsSearch, setuserBookingsSearch] = useState('')
+    const [bookingsSearch, setbookingsSearch] = useState('')
+
+    
     const [labs, setLabs] = useState([])
     const [bookings, setbookings] = useState([])
     const [userBookings, setuserBookings] = useState([])
     const [activeTab, setActiveTab] = useState("tab1");
     const [submitting, setSubmitting] = useState(false)
     const {data:session} = useSession()
+
+
+
+
+    /////////// SEARCH FUNCTIONS
+    const fetchLabsSearch = async () => {
+        setSubmitting(true)
+
+
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/search-labs/?q=${labSearch}`, {
+            method:'GET',
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+                },
+        })
+    
+    
+        if(response.ok){
+            const data = await response.json()
+            setLabs(data)
+        } 
+        
+
+        setSubmitting(false)
+
+    }
+
+    const fetchbookingsSearch = async () => {
+        setSubmitting(true)
+
+
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/reservas-search/?q=${bookingsSearch}`, {
+            method:'GET',
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+                },
+        })
+    
+    
+        if(response.ok){
+            const data = await response.json()
+            setbookings(data)
+        } 
+        
+
+        setSubmitting(false)
+
+    }
+    
+    const fetchuserBookingsSearch = async () => {
+        setSubmitting(true)
+
+
+        const response = await fetch(`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}`, {
+            method:'GET',
+            headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'
+                },
+        })
+    
+    
+        if(response.ok){
+            const data = await response.json()
+            setuserBookings(data)
+        } 
+        
+
+        setSubmitting(false)
+
+    }
+    /////////// SEARCH FUNCTIONS
+
+
 
     const fetchLabs = async (url = 'http://127.0.0.1:8000/api/v3/laboratorios/') => {
         setSubmitting(true)
@@ -120,11 +195,12 @@ function LabFeed() {
         fetchUserBookings()
     }
 
-    useEffect(() =>{
-        fetchAll()
-    }, [session?.user.access])
+    useEffect(() =>{fetchAll()}, [session?.user.access])
+    useEffect(()=>{fetchLabsSearch();},[labSearch])
+    useEffect(()=>{fetchbookingsSearch();},[bookingsSearch])
+    useEffect(()=>{fetchuserBookingsSearch();},[userBookingsSearch])
 
-    
+
     if(session?.user){
         
         return (
@@ -143,18 +219,35 @@ function LabFeed() {
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
                         {session?.user.user_type === 2 || session?.user.is_superuser? 
-                        <div>
-                            {/* <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                Registrar laboratório
-                            </Link> */}
-                            <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="btn btn-sm btn-outline btn-success">
-                                Registrar laboratório
-                            </button>
-                            <CreModal HandleFetch={fetchAll}/>
-                        </div>
+                            <div>
+                                {/* <Link href='laboratories/register' className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 mr-2 mb-4 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    Registrar laboratório
+                                </Link> */}
+                                <button onClick={()=>{document.getElementById('my_modal_3').showModal()}} className="btn btn-sm btn-outline btn-success">
+                                    Registrar laboratório
+                                </button>
+                                <CreModal HandleFetch={fetchAll}/>
+
+                            </div>
                         :
-                        ""
+                            ""
                         }
+  
+                        <div className="form-control w-full max-w-xs mt-4">
+                            <label className="label">
+                                <span className="label-text">Qual laboratório você deseja?</span>
+                                <span className="label-text-alt"></span>
+                            </label>
+
+                            <input onInput={(e)=>{setlabSearch(e.target.value);}} id='search_input_labs' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+
+                            <label className="label">
+                                <span className="label-text-alt"></span>
+                                <span className="label-text-alt"></span>
+                            </label>
+                        </div>
+
+                        
 
                         {submitting ?  
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
@@ -201,14 +294,25 @@ function LabFeed() {
                                         </tfoot>
                                     </table>
                                 </motion.div>
-                                <Pagination page_size={labs?.page_size} 
-                                count={labs?.count} 
-                                total_pages={labs?.total_pages}
-                                current_page_number={labs?.current_page_number} 
-                                next={labs?.next} 
-                                previous={labs?.previous}
-                                fetch={fetchLabs}
-                                url={'http://127.0.0.1:8000/api/v3/laboratorios/'}/>
+                                {!labSearch ? 
+                                    <Pagination page_size={labs?.page_size} 
+                                    count={labs?.count} 
+                                    total_pages={labs?.total_pages}
+                                    current_page_number={labs?.current_page_number} 
+                                    next={labs?.next} 
+                                    previous={labs?.previous}
+                                    fetch={fetchLabs}
+                                    url={'http://127.0.0.1:8000/api/v3/laboratorios/'}/>
+                                :
+                                    <Pagination page_size={labs?.page_size} 
+                                    count={labs?.count} 
+                                    total_pages={labs?.total_pages}
+                                    current_page_number={labs?.current_page_number} 
+                                    next={labs?.next} 
+                                    previous={labs?.previous}
+                                    fetch={fetchLabsSearch}
+                                    url={`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}`}/>
+                                }
                             </>
                         }
 
@@ -220,6 +324,20 @@ function LabFeed() {
                     {activeTab === "tab2" ?
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Reservas ativas</h1>
+
+                        <div className="form-control w-full max-w-xs mt-4">
+                            <label className="label">
+                                <span className="label-text">Qual reserva você deseja?</span>
+                                <span className="label-text-alt"></span>
+                            </label>
+
+                            <input onInput={(e)=>{setbookingsSearch(e.target.value);}} id='search_input_bookings' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+
+                            <label className="label">
+                                <span className="label-text-alt"></span>
+                                <span className="label-text-alt"></span>
+                            </label>
+                        </div>
 
                         {submitting ? 
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
@@ -266,14 +384,25 @@ function LabFeed() {
                                         </tfoot>
                                     </table>
                                 </motion.div>
-                                <Pagination page_size={bookings?.page_size} 
-                                count={bookings?.count} 
-                                total_pages={bookings?.total_pages}
-                                current_page_number={bookings?.current_page_number} 
-                                next={bookings?.next} 
-                                previous={bookings?.previous}
-                                fetch={fetchBookings}
-                                url={'http://127.0.0.1:8000/api/v3/reservas/'}/>
+                                {!bookingsSearch ? 
+                                    <Pagination page_size={bookings?.page_size} 
+                                    count={bookings?.count} 
+                                    total_pages={bookings?.total_pages}
+                                    current_page_number={bookings?.current_page_number} 
+                                    next={bookings?.next} 
+                                    previous={bookings?.previous}
+                                    fetch={fetchBookings}
+                                    url={'http://127.0.0.1:8000/api/v3/reservas/'}/>
+                                :
+                                    <Pagination page_size={bookings?.page_size} 
+                                    count={bookings?.count} 
+                                    total_pages={bookings?.total_pages}
+                                    current_page_number={bookings?.current_page_number} 
+                                    next={bookings?.next} 
+                                    previous={bookings?.previous}
+                                    fetch={fetchbookingsSearch}
+                                    url={`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}`}/>
+                                }
                             </>
                         }
 
@@ -286,6 +415,20 @@ function LabFeed() {
                     {activeTab === "tab3" ?
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Suas reservas</h1>
+
+                        <div className="form-control w-full max-w-xs mt-4">
+                            <label className="label">
+                                <span className="label-text">Qual reserva sua você deseja?</span>
+                                <span className="label-text-alt"></span>
+                            </label>
+
+                            <input onInput={(e)=>{setuserBookingsSearch(e.target.value);}} id='search_input_your_bookings' type="search" placeholder="Digite aqui..." className="input input-bordered w-full max-w-xs" />
+
+                            <label className="label">
+                                <span className="label-text-alt"></span>
+                                <span className="label-text-alt"></span>
+                            </label>
+                        </div>
 
                         {submitting ? 
                             <div className='flex justify-center'><span className="loading loading-spinner loading-lg w-20 m-10"></span></div>
@@ -341,14 +484,27 @@ function LabFeed() {
                                         </tfoot>
                                     </table>
                                 </motion.div>
-                                <Pagination page_size={userBookings?.page_size} 
-                                count={userBookings?.count} 
-                                total_pages={userBookings?.total_pages}
-                                current_page_number={userBookings?.current_page_number} 
-                                next={userBookings?.next} 
-                                previous={userBookings?.previous}
-                                fetch={fetchUserBookings}
-                                url={'http://127.0.0.1:8000/api/v3/user-reservas/'}/>
+
+                                
+                                {!userBookingsSearch ? 
+                                    <Pagination page_size={userBookings?.page_size} 
+                                    count={userBookings?.count} 
+                                    total_pages={userBookings?.total_pages}
+                                    current_page_number={userBookings?.current_page_number} 
+                                    next={userBookings?.next} 
+                                    previous={userBookings?.previous}
+                                    fetch={fetchUserBookings}
+                                    url={'http://127.0.0.1:8000/api/v3/user-reservas/'}/>
+                                :
+                                    <Pagination page_size={userBookings?.page_size} 
+                                    count={userBookings?.count} 
+                                    total_pages={userBookings?.total_pages}
+                                    current_page_number={userBookings?.current_page_number} 
+                                    next={userBookings?.next} 
+                                    previous={userBookings?.previous}
+                                    fetch={fetchuserBookingsSearch}
+                                    url={`http://127.0.0.1:8000/api/v3/user-reservas-search/?q=${userBookingsSearch}`}/>
+                                }
                             </>
                         }
 

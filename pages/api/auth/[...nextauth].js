@@ -37,7 +37,7 @@ export default NextAuth({
               
             });
            const user_token = await res.json()
-           console.log(user_token)
+           //console.log(user_token)
 
            if(res.status != 200){
 

@@ -78,7 +78,7 @@ function Laboratory({lab, HandleFetch}) {
                         ""
                         }
 
-                        {!lab.is_booked && lab.user_id == session?.user.id && session?.user.user_type == 2 || (session?.user.is_superuser || session?.user.is_staff) ? 
+                        {!lab.is_booked && (lab.user_id == session?.user.id && session?.user.user_type == 2 || (session?.user.is_superuser || session?.user.is_staff)) ? 
                             <>
                                 <button onClick={() => handleEditLab(lab.id)} className="btn btn-outline btn-info btn-xs mr-2 mb-2">Editar</button>
                                 <button onClick={() => handleDeleteLab(lab.id)} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>

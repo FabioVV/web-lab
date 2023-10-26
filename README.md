@@ -132,12 +132,12 @@ Para iniciar o projeto em uma cópia local, siga os passos abaixo.
 <!-- USAGE EXAMPLES -->
 ## Rodando o projeto
 
- - Para rodar API, na pasta em que está presente o back-end (api-lab), rode o servidor Django:
+ - Para rodar a API, na pasta em que está presente o back-end (api-lab), rode o servidor Django:
     ```sh
     python manage.py runserver
    ```
 
- - Agora para rodar a parte Web, na pasta em que está present o front, rode o servidor de desenvolvimento do Node:
+ - Agora para rodar a parte Web, na pasta em que está presente o front, rode o servidor de desenvolvimento do Node:
     ```sh
     npm run dev
    ```

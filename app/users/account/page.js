@@ -310,7 +310,7 @@ const UserAccount = () => {
                       </div>}
                     />
                   </div>
-                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  {/* <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="user_type">
                       MANTER SOMENTE NO DEV *
                     </label>
@@ -323,7 +323,7 @@ const UserAccount = () => {
                         <option value='2'>Professor</option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
 

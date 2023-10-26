@@ -211,15 +211,19 @@ function LabFeed() {
         return (
             <div>
 
-                <div id='tab_container' className="tabs">
+                <motion.div initial={{ x: 600, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 }}  
+                    id='tab_container' className="tabs">
+
                     <Link onClick={() => {setActiveTab('tab1')}}  href="#" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
                     <Link onClick={() => {setActiveTab('tab2')}}  href="#" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
-                    <Link id='minhas-reservas' onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>
-                </div>
+                    {session?.user.user_type == 1 && !session?.user.is_superuser && !session?.user.is_staff ? "":<Link id='minhas-reservas' onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>}
+                </motion.div>
+
 
                 <div id='tab-content'>
                     {activeTab === "tab1" ?
-
                     <section className='p-3'>
                         <h1 className='text-6xl font-bold pb-8 text-justify'>Laboratórios</h1>
 
@@ -341,6 +345,7 @@ function LabFeed() {
 
 
                     </section>
+
                     :
                     ""
                     }

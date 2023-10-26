@@ -22,9 +22,10 @@ function DelModalAccount() {
             })
     
             if(response.ok){
-    
-              signOut()
+              
+              window.scrollTo({ top: 0, behavior: 'smooth' });
               window.location.replace('/')
+              signOut()
               window.flash(`Sua conta foi excluída.`, 'success')
     
             } else {

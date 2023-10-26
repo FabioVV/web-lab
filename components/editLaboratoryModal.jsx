@@ -6,7 +6,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 
 function EdModal({lab_id, HandleFetch}) {
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit,setError, reset, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
     const [lab, setLab] = useState({
@@ -61,7 +61,7 @@ function EdModal({lab_id, HandleFetch}) {
             })
           })
 
-
+          const errors = await response.json()
           if(response.ok){
               setSubmitting(false)
 
@@ -76,7 +76,13 @@ function EdModal({lab_id, HandleFetch}) {
               window.scrollTo({ top: 0, behavior: 'smooth' });
               window.flash(`Você não possui permissão para alterar este laboratório.`, 'error')
 
-          } else {
+          } else if(errors['lab_name_about']){
+            setError('name', {
+              type: 'lab_name_about',
+              message:'O campo nome não pode ser igual ao campo de descrição.'
+            })
+          }
+          else {
               document.getElementById(`my_modal_edit_${lab_id}`).close()
               window.scrollTo({ top: 0, behavior: 'smooth' });
               window.flash(`Erro ao atualizar laboratório.`, 'error')

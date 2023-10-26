@@ -109,8 +109,6 @@ export default function PasswordReset() {
             </dialog>
 
         :
-
-
         
             <dialog id='my_modal_email'  className="modal" data-theme='dark'>
                 <motion.div       

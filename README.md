@@ -261,7 +261,7 @@ Front-end: [https://github.com/FabioVV/web-lab](https://github.com/FabioVV/web-l
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
- https://www.markdownguide.org/basic-syntax/#reference-style-links 
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 [forks-url]: https://github.com/github_username/repo_name/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge

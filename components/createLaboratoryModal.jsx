@@ -75,7 +75,7 @@ function CreModal({HandleFetch}) {
   return (
     <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-            <h3 className="font-bold text-lg">Registrar laboratório</h3>
+            <h3 className="font-bold text-lg"><span className='text'>Registrar</span> laboratório</h3>
             <hr />
 
             <div className="relative flex flex-col items-center justify-center overflow-hidden">

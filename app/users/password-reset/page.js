@@ -36,6 +36,9 @@ export default function PasswordReset() {
       if ((error['email'])) {
 
         window.flash(`Não existe uma conta associada a este email.`, 'error')
+        setIsLoading(false)
+
+        return false;
 
       } else if(result.ok){
         setEmailSent(true)
@@ -44,6 +47,9 @@ export default function PasswordReset() {
       } else {
 
         window.flash(`Erro. Favor, tentar novamente.`, 'error')
+        setIsLoading(false)
+
+        return false;
 
       }
 

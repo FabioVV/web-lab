@@ -143,9 +143,6 @@ export default function PasswordReset() {
                                     <button id='email-reset-send' disabled={isLoading} onClick={submit} className="btn btn-wide btn-outline btn-success mr-3">
                                         {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Enviar'}
                                     </button>
-                                    <Link disabled={isLoading} href='/auth/signin' className="btn btn-wide">
-                                        {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Retornar a tela de login'}
-                                    </Link>
                                 </div>
                             </form>
                     

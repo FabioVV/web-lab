@@ -1,4 +1,3 @@
-<html style='scroll-behavior: smooth;'>
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
@@ -260,9 +259,9 @@ Front-end: [https://github.com/FabioVV/web-lab](https://github.com/FabioVV/web-l
 <p align="right">(<a href="#readme-top">De volta ao topo</a>)</p> 
 
 
-</html>
+
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+ https://www.markdownguide.org/basic-syntax/#reference-style-links 
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 [forks-url]: https://github.com/github_username/repo_name/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
@@ -290,4 +289,5 @@ Front-end: [https://github.com/FabioVV/web-lab](https://github.com/FabioVV/web-l
 [Python]: https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org/
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
-[Node-url]: https://nodejs.org/en
+[Node-url]: https://nodejs.org/en 
+

@@ -1,11 +1,34 @@
+import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import DelModalBooking from './deleteBookingModal'
 import Link from 'next/link'
+
+// require('dayjs/locale/pt-br')
+let relativeTime = require('dayjs/plugin/relativeTime')
+const dayjs = require('dayjs')
+dayjs.extend(relativeTime)
+// dayjs.locale('pt-br')
+
 
 function Booking({book, HandleFetch}) {
 
     const {data:session} = useSession()
 
+
+    // CRIANDO DATA DO FIM DA RESERV
+    let dateEnd = book?.booking_end.substring(0, 10) //27-10-2023 DATE
+    let timeEnd = book?.booking_end.substring(11, 19) //11:21:22 TIME
+    let yearEnd = dateEnd.substring(6, 10) //2023
+    let monthEnd = dateEnd.substring(3, 5) //10
+    let dayEnd = dateEnd.substring(0, 2) //27
+    let hoursEnd = timeEnd.substring(0, 2) //11
+    let minutesEnd = timeEnd.substring(3, 5) //21
+    let secondsEnd = timeEnd.substring(6, 8) //22
+
+
+    let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
+    let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
+    const tempo_restante = dayjs(data_inicio).to(data_fim)
 
   return (
         <tr>
@@ -39,6 +62,10 @@ function Booking({book, HandleFetch}) {
                 {book?.booking_end?.replaceAll('-', '/')}
                 <br/>
                 {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
+            </td>
+
+            <td>
+                <span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span>
             </td>
             
             <td>

@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
+import dayjs from "dayjs";
 
 function NumeroDoBoletoAleatorio8Digitos() {
   const randomNumber = Math.floor(Math.random() * 100000000);
@@ -43,7 +44,7 @@ export default function BookingEdit() {
     about: '',
     capacity: '',
     price:'',
-
+    booking_end:'',
   })
 
 
@@ -62,8 +63,8 @@ export default function BookingEdit() {
         headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'},
 
         body:JSON.stringify({
-            laboratory:lab.laboratory_id,
-            bol_number:lab.bol_number,
+          laboratory:lab.laboratory_id,
+          bol_number:lab.bol_number,
         })
       })
 
@@ -146,16 +147,39 @@ export default function BookingEdit() {
 
         headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'},
       })
+
       const data = await response.json()
 
+      const response_booking = await fetch(`http://127.0.0.1:8000/api/v3/reservas/${book_id}/`, {
+        method:'GET',
+
+        headers:{ Authorization:`Bearer ${session?.user.access}`, 'Content-Type': 'application/json'},
+      })
+
+      const data_booking = await response_booking.json()
+
+      let dateEnd = data_booking?.booking_end.substring(0, 10) //27-10-2023 DATE
+      let timeEnd = data_booking?.booking_end.substring(11, 19) //11:21:22 TIME
+      let yearEnd = dateEnd.substring(6, 10) //2023
+      let monthEnd = dateEnd.substring(3, 5) //10
+      let dayEnd = dateEnd.substring(0, 2) //27
+      let hoursEnd = timeEnd.substring(0, 2) //11
+      let minutesEnd = timeEnd.substring(3, 5) //21
+      let secondsEnd = timeEnd.substring(6, 8) //22
+      let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
+
+      console.log(data_booking?.booking_end)
       setLab({
         name: data.name,
         laboratory_id: data.id,
         about: data.about,
         capacity: data.capacity,
         price:data.price,
-        bol_number: numero_boleto
+        booking_end: data_booking?.booking_end,
+        bol_number:numero_boleto,
       })
+
+
 
       // FORMATAR CAMPOS TELEFONE, CNPJ CPF E PRECO
       defaultValues.name = data.name;
@@ -163,7 +187,8 @@ export default function BookingEdit() {
       defaultValues.capacity = data.capacity;
       defaultValues.price = data.price;
       defaultValues.bol_number = numero_boleto;
-
+      defaultValues.booking_end = dayjs(data_fim).format('YYYY-MM-DDTHH:mm');
+      
       reset({ ...defaultValues });
 
     }
@@ -227,6 +252,30 @@ export default function BookingEdit() {
                             <div className=''>
 
                                 <form method='post' onSubmit={handleSubmit(submit)} id='form' className="w-full p-6">
+                                    <fieldset className='border-l-2 border-zinc-300 p-5'>
+                                      <legend className="font-bold text-lg text-green-600">Dados da reserva</legend>
+                                      <div className="flex flex-wrap -mx-3 mb-6">
+                                          <div className="w-full px-3 mb-6 md:mb-0">
+                                              <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                  Sua reserva irá até qual dia e horário? 
+                                              </label>
+                                              <input className="input input input-bordered w-full max-w" type="datetime-local"  name='booking_end' id='booking_end' 
+                                                  {...register("booking_end", {disabled:true, validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", /*onChange: (e) => {setLab({...lab, booking_end:e.target.value})},*/ })}
+                                              />
+                                              <ErrorMessage
+                                                  errors={errors}
+                                                  name="booking_end"
+                                                  render={({ message }) => 
+                                                  <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                  <strong className="font-bold">* {message}</strong>
+                                                  </div>}
+                                              />
+                                              
+                                          </div>
+              
+                                      </div>
+                                    </fieldset>
+                                    
                                     <fieldset className='border-l-2 border-zinc-300 p-5'>
                                         <legend className="font-bold text-lg text-green-600">Dados do laboratório</legend>
                                         <div className="flex flex-wrap -mx-3 mb-6">

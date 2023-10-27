@@ -10,6 +10,7 @@ import CreModal from './createLaboratoryModal'
 import UserBooking from './UserBookings'
 import Pagination from './Pagination_component'
 
+
 function LabsList({data, HandleFetch}){ 
     return (
         <tbody>
@@ -408,6 +409,7 @@ function LabFeed() {
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
                                             <th>Data do fim da reserva</th>
+                                            <th>Tempo restante</th>
                                             <th>Quem reservou</th>
                                             <th></th>
                                         </tr>
@@ -424,6 +426,7 @@ function LabFeed() {
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
                                             <th>Data do fim da reserva</th>
+                                            <th>Tempo restante</th>
                                             <th>Quem reservou</th>
                                             <th></th>
                                         </tr>
@@ -480,7 +483,7 @@ function LabFeed() {
                                 </label>
                             </div>
                                                          
-                            <div className="form-control w-full max-w-xs mt-4">
+                            {/* <div className="form-control w-full max-w-xs mt-4">
                                 <label className="label">
                                     <span className="label-text">Laboratório reservado?</span>
                                     <span className="label-text-alt"></span>
@@ -496,7 +499,7 @@ function LabFeed() {
                                     <span className="label-text-alt"></span>
                                     <span className="label-text-alt"></span>
                                 </label>
-                            </div> 
+                            </div>  */}
                         </div>
 
 
@@ -529,10 +532,11 @@ function LabFeed() {
                                                     Ainda reservado?
                                                 </label>
                                             </th>
-                                            <th>ID do laboratório</th>
+                                            {/* <th>ID do laboratório</th> */}
                                             <th>Laboratório</th>
                                             <th>Data da reserva</th>
                                             <th>Data do fim da reserva</th>
+                                            <th>Tempo restante</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -550,10 +554,11 @@ function LabFeed() {
                                                     Ainda reservado?
                                                 </label>
                                             </th>
-                                            <th>ID do laboratório</th>
+                                            {/* <th>ID do laboratório</th> */}
                                             <th>Laboratório</th>
                                             <th>Data da reserva</th>
                                             <th>Data do fim da reserva</th>
+                                            <th>Tempo restante</th>
                                             <th></th>
                                         </tr>
                                         </tfoot>

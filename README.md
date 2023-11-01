@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+﻿<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
 
@@ -124,6 +124,10 @@ Para iniciar o projeto em uma cópia local, siga os passos abaixo.
    ```sh
     pip install -r requirements.txt
    ```
+4. Agora rode a migration do banco de dados
+  ```sh
+    python manage.py migrate
+  ```
 
 <p align="right">(<a href="#readme-top">De volta ao topo</a>)</p>
 
@@ -190,7 +194,25 @@ Distríbuido sob a licença GNU General Public License v3.0. Veja `LICENSE` para
 
 <!-- CONTACT -->
 ## Contato
+<!-- <ul>
+  <li></li>
+</ul> -->
 
+Derek Willian -
+<br>
+Fábio Varela - [@fabinhotk](https://twitter.com/fabinhotk) - fabio-varela@protonmail.com
+<br>
+Jhoselin Tito Pari - 
+<br>
+Luara Dantas Silveira - 
+<br>
+Luis Rene Tintaya Apaza - 
+<br>
+Sandra Santos Almeida - 
+<br>
+Vinicius Rosa - 
+<br>
+--
 
 Links do projeto ->
 <br>
@@ -215,23 +237,23 @@ Front-end: [https://github.com/FabioVV/web-lab](https://github.com/FabioVV/web-l
   </li>
 
   <li>
-   Luara 
+   Jhoselin Tito Pari 
   </li>
 
   <li>
-   Sandra
+   Luara Dantas Silveira
   </li>
 
   <li>
-   Luis
+   Luis Rene Tintaya Apaza
   </li>
 
   <li>
-   Vinicius
+   Sandra Santos Almeida
   </li>
 
   <li>
-   Jhoselin Tito Pari
+   Vinicius Rosa
   </li>
 </ul>
 

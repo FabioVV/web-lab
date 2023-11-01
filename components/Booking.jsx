@@ -1,13 +1,16 @@
-import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import DelModalBooking from './deleteBookingModal'
 import Link from 'next/link'
 
-// require('dayjs/locale/pt-br')
+require('dayjs/locale/pt-br')
 let relativeTime = require('dayjs/plugin/relativeTime')
 const dayjs = require('dayjs')
+var utc = require('dayjs/plugin/utc')
+var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+dayjs.locale('pt-br')
+dayjs.extend(utc)
+dayjs.extend(timezone)
 dayjs.extend(relativeTime)
-// dayjs.locale('pt-br')
 
 
 function Booking({book, HandleFetch}) {

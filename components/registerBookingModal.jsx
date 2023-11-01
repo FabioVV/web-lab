@@ -1,5 +1,8 @@
 
 
+// RESERVA DE NO MÁXIMO 7 DIAS
+
+
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
@@ -7,6 +10,18 @@ import { useEffect } from 'react'
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 import { motion } from "framer-motion"
+
+
+require('dayjs/locale/pt-br')
+let relativeTime = require('dayjs/plugin/relativeTime')
+const dayjs = require('dayjs')
+var utc = require('dayjs/plugin/utc')
+var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+dayjs.locale('pt-br')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(relativeTime)
+
 
 function NumeroDoBoletoAleatorio8Digitos() {
     const randomNumber = Math.floor(Math.random() * 100000000);
@@ -21,7 +36,7 @@ function NumeroDoBoletoAleatorio8Digitos() {
 }
 
 function BookingModal({lab_id, HandleFetch}) {
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, getValues, formState: { errors } } = useForm();
     const {data:session} = useSession()
     const [submitting, setSubmitting] = useState(false)
     const [paid, setPaid] = useState(false)
@@ -32,6 +47,7 @@ function BookingModal({lab_id, HandleFetch}) {
         bol_number:'',
         price:'',
         booking_end:'',
+        booking_start:'',
     })
 
 
@@ -54,7 +70,8 @@ function BookingModal({lab_id, HandleFetch}) {
             about: data.about,
             capacity: data.capacity,
             price:data.price,
-            bol_number: numero_boleto
+            bol_number: numero_boleto,
+            booking_start: getValues('booking_start'),
           })
 
           // FORMATAR CAMPOS TELEFONE, CNPJ CPF E PRECO
@@ -63,6 +80,8 @@ function BookingModal({lab_id, HandleFetch}) {
           defaultValues.capacity = data.capacity;
           defaultValues.price = data.price;
           defaultValues.bol_number = numero_boleto;
+
+          
 
           reset({ ...defaultValues });
 
@@ -87,7 +106,8 @@ function BookingModal({lab_id, HandleFetch}) {
             body:JSON.stringify({
                 laboratory: lab_id,
                 bol_number:lab.bol_number,
-                booking_end:lab.booking_end
+                booking_end:lab.booking_end,
+                booking_start:lab.booking_start,
             })
           })
   
@@ -174,7 +194,19 @@ function BookingModal({lab_id, HandleFetch}) {
                                                 Sua reserva irá até qual dia e horário? 
                                             </label>
                                             <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
-                                                {...register("booking_end", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
+                                                {...register("booking_end", { 
+                                                    
+                                                        validate: { PastData: (value, formValues) => {
+                                                            return(
+                                                                value > Date.now() || 'Você não pode escolher uma data do passado.'
+                                                            )
+                                                    }, }, BigData: (value, formValues) => {
+                                                            return(
+                                                                value >= dayjs().add(7, 'day')|| 'Sua reserva não pode durar mais que uma semana.'
+                                                            )
+                                                    }
+                                                    
+                                                ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
                                             />
                                             <ErrorMessage
                                                 errors={errors}
@@ -186,10 +218,29 @@ function BookingModal({lab_id, HandleFetch}) {
                                             />
                                             
                                         </div>
-            
+                                        
                                     </div>
-
-
+                                    {/* 
+                                    <div className="flex flex-wrap -mx-3 mb-6">
+                                        <div className="w-full px-3 mb-6 md:mb-0">
+                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                Para quando é sua reserva? 
+                                            </label>
+                                            <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
+                                                {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
+                                            />
+                                            <ErrorMessage
+                                                errors={errors}
+                                                name="booking_end"
+                                                render={({ message }) => 
+                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                <strong className="font-bold">* {message}</strong>
+                                                </div>}
+                                            />
+                                            
+                                        </div>
+                                        
+                                    </div> */}
 
                                 </fieldset>
                                 

@@ -190,27 +190,7 @@ Distríbuido sob a licença GNU General Public License v3.0. Veja `LICENSE` para
 
 <!-- CONTACT -->
 ## Contato
-<!-- <ul>
-  <li></li>
-</ul> -->
 
-Derek Willian -
-<br>
-Fábio Varela - [@fabinhotk](https://twitter.com/fabinhotk) - fabio-varela@protonmail.com
-<br>
-Jhoselin Tito Pari - 
-<br>
-Luara - 
-<br>
-Luis - 
-<br>
-Vinicius - 
-<br>
-Jhoselin Tito Pari - 
-<br>
-Sandra - 
-<br>
---
 
 Links do projeto ->
 <br>

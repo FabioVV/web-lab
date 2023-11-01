@@ -86,7 +86,7 @@ const UserAccount = () => {
           phone: user.phone,
           email: user.email,
           cpf_cnpj: user.cpf_cnpj,
-          user_type: user.user_type,
+          //user_type: user.user_type,
           birth_date: user.birth_date,
           sex: user.sex,
         }),
@@ -317,12 +317,12 @@ const UserAccount = () => {
                       </div>}
                     />
                   </div>
-                  {/* <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="user_type">
-                      MANTER SOMENTE NO DEV *
+                      Tipo de conta
                     </label>
                     <div className="relative">
-                      <select {...register("user_type", { required: "Campo obrigatório." , maxLength:{value:45, message:'Máximo de 45 caracteres'}, onChange: (e) => {setUser({...user, user_type:e.target.value})}, })}
+                      <select {...register("user_type", {disabled:true ,required: "Campo obrigatório." , maxLength:{value:45, message:'Máximo de 45 caracteres'}, onChange: (e) => {setUser({...user, user_type:e.target.value})}, })}
 
 
                        className="select select-bordered w-full max-w" id="user_type" name='user_type'>
@@ -330,7 +330,7 @@ const UserAccount = () => {
                         <option value='2'>Professor</option>
                       </select>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
 
 

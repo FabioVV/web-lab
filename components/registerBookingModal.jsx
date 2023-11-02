@@ -205,7 +205,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                     }, BigData: (value, formValues) => {
                                                         return(
                                                             
-                                                            dayjs(value).add(7, 'day') > dayjs()   /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
+                                                            dayjs().add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
                                                         )
                                                     }
                                                 }

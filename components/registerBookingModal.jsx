@@ -51,6 +51,8 @@ function BookingModal({lab_id, HandleFetch}) {
     })
 
 
+    const data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate() + 7, new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
+
     const numero_boleto = NumeroDoBoletoAleatorio8Digitos()
 
     useEffect(()=>{
@@ -184,7 +186,7 @@ function BookingModal({lab_id, HandleFetch}) {
                 <div className="relative flex flex-col items-center justify-center overflow-hidden">
                     <div className="w-full p-5">
                         <div className=''>
-
+                           
                             <form method='post' onSubmit={handleSubmit(BookLab)} id='form' className="w-full p-6">
                                 <fieldset className='border-l-2 border-zinc-300 p-5'>
                                     <legend className="font-bold text-lg text-green-600">Dados da reserva</legend>
@@ -200,12 +202,13 @@ function BookingModal({lab_id, HandleFetch}) {
                                                             return(
                                                                 value > Date.now() || 'Você não pode escolher uma data do passado.'
                                                             )
-                                                    }, }, BigData: (value, formValues) => {
-                                                            return(
-                                                                value >= dayjs().add(7, 'day')|| 'Sua reserva não pode durar mais que uma semana.'
-                                                            )
+                                                    }, BigData: (value, formValues) => {
+                                                        return(
+                                                            
+                                                            dayjs(value).add(7, 'day') > dayjs()   /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
+                                                        )
                                                     }
-                                                    
+                                                }
                                                 ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
                                             />
                                             <ErrorMessage

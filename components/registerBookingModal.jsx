@@ -326,7 +326,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                             Boleto
                                         </label>
                                         <input disabled className="input input input-bordered w-full max-w" type="text" placeholder="xxxxxxxx" name='bol_number' id='bol_number' 
-                                            {...register("bol_number", { required: "Campo obrigatório.", minLength:{value:5, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setLab({...lab, bol_number:e.target.value})}, })}
+                                            {...register("bol_number", { required: "Campo obrigatório.", minLength:{value:8, message:'Necessita no minímo 8 caracteres '}, onChange: (e) => {setLab({...lab, bol_number:e.target.value})}, })}
                                         />
                                         <ErrorMessage
                                             errors={errors}

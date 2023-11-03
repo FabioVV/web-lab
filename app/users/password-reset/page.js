@@ -1,20 +1,16 @@
 "use client"
 
-import { useRef } from "react"
-import Link from "next/link"
 import { useState } from "react"
-import Image from 'next/image'
-import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion"
-
+import { ErrorMessage } from '@hookform/error-message';
+import { useForm } from 'react-hook-form';
 
 export default function PasswordReset() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
-  const router = useRouter()
-
-  const email = useRef('')
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [email, setEmail] = useState({email:''})
 
   const submit = async() => {
 
@@ -28,7 +24,7 @@ export default function PasswordReset() {
         },
 
         body: JSON.stringify({
-            email:email.current
+            email:email.email
         })
       })
 
@@ -91,7 +87,7 @@ export default function PasswordReset() {
                                     {/* <a href="#" className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                                         GO BACK window.location.reload();
                                     </a> */}
-                                    <button onClick={() =>{document.getElementById('close-email-modal').click();}} id={`sub_email`} className="btn text-green-600" type='button'>
+                                    <button onClick={() =>{document.getElementById('close-email-modal').click();setEmailSent(false);}} id={`sub_email`} className="btn text-green-600" type='button'>
                                         {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}
                                     </button>
                                 </div>
@@ -107,9 +103,7 @@ export default function PasswordReset() {
                     </div>
                 </motion.div>
             </dialog>
-
         :
-        
             <dialog id='my_modal_email'  className="modal" data-theme='dark'>
                 <motion.div       
                 initial={{ x: 600, opacity: 0 }}
@@ -119,9 +113,9 @@ export default function PasswordReset() {
 
                     <div className="">
                         <div className="p-6 md:mx-auto">
-                            <h1 className="text-3xl font-bold text-center ">  Digite seu email </h1>
+                            <h1 className="text-3xl font-bold text-center "> Digite seu email </h1>
                     
-                            <form method="POST" className="mt-6">
+                            <form method="POST" className="mt-6" onSubmit={handleSubmit(submit)}>
                                 <div className="mb-4">
                                 <label
                                     htmlFor="email"
@@ -130,15 +124,24 @@ export default function PasswordReset() {
                                     Email *
                                 </label>
                                 <input
-                                    name="email" type="email" onChange={(e)=>{email.current = e.target.value}} placeholder="johndoe@email.com"
+                                    name="email" type="email" placeholder="john@email.com"
                                     className="input input-bordered w-full max-w"
+                                    {...register("email", { required: "Campo obrigatório.", minLength:{value:4, message:'Necessita no minímo 4 caracteres '}, onChange: (e) => {setEmail({...email, email:e.target.value})}, })}
+                                />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="email"
+                                    render={({ message }) => 
+                                    <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                    <strong className="font-bold">* {message}</strong>
+                                    </div>}
                                 />
                     
                                 <p className="italic">Digite o email da sua conta, para podermos entrar em contato.</p>
                     
                                 </div>
                                 <div className="hidden mt-2">
-                                    <button id='email-reset-send' disabled={isLoading} onClick={submit} className="btn btn-wide btn-outline btn-success mr-3">
+                                    <button id='email-reset-send' disabled={isLoading} type="submit" className="btn btn-wide btn-outline btn-success mr-3">
                                         {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Enviar'}
                                     </button>
                                 </div>

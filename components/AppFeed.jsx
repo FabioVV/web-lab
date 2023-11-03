@@ -483,23 +483,23 @@ function LabFeed() {
                                 </label>
                             </div>
                                                          
-                            {/* <div className="form-control w-full max-w-xs mt-4">
+                            <div className="form-control w-full max-w-xs mt-4">
                                 <label className="label">
-                                    <span className="label-text">Laboratório reservado?</span>
+                                    <span className="label-text">Reserva em andamento?</span>
                                     <span className="label-text-alt"></span>
                                 </label>
 
                                 <select onChange={(e) =>{setuserlabBookedSearch(e.target.value)}} className="select select-bordered w-full max-w-xs">
                                     <option value=''>Indiferente</option>
-                                    <option value='N'>Não reservado</option>
-                                    <option value='R'>Reservado</option>
+                                    <option value='N'>Finalizada</option>
+                                    <option value='R'>Em andamento</option>
                                 </select>
 
                                 <label className="label">
                                     <span className="label-text-alt"></span>
                                     <span className="label-text-alt"></span>
                                 </label>
-                            </div>  */}
+                            </div> 
                         </div>
 
 

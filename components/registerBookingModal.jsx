@@ -1,8 +1,3 @@
-
-
-// RESERVA DE NO MÁXIMO 7 DIAS
-
-
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'

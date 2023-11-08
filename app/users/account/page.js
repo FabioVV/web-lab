@@ -296,6 +296,7 @@ const UserAccount = () => {
                      {...register("phone", {  maxLength:{value:20, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, phone:e.target.value})}, })}
 
                     />
+                    <p className="text-accent text-xs italic">Digite apenas números</p>
                   </div>
 
                 </div>
@@ -344,8 +345,12 @@ const UserAccount = () => {
 
                       </button>
 
-                      <button disabled={isLoading} onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="btn btn-outline btn-error" type='button' >
+                      <button disabled={isLoading} onClick={() => {document.getElementById(`my_modal_delete_user_${session?.user.id}`)?.showModal()}} className="btn btn-outline btn-error mr-3" type='button' >
                         Excluir conta
+                      </button>
+
+                      <button onClick={()=>{window.location.href='/'}} disabled={isLoading} className="btn btn-outline btn-info mr-3" type='button' >
+                        Retornar
                       </button>
                     </div>
                     

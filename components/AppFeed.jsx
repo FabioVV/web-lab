@@ -217,9 +217,9 @@ function LabFeed() {
                             transition={{ delay: 0.1 }}  
                     id='tab_container' className="tabs">
 
-                    <Link onClick={() => {setActiveTab('tab1')}}  href="#" className={activeTab === "tab1" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Laboratórios</Link> 
-                    <Link onClick={() => {setActiveTab('tab2')}}  href="#" className={activeTab === "tab2" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Reservas</Link> 
-                    {session?.user.user_type == 1 && !session?.user.is_superuser && !session?.user.is_staff ? "":<Link id='minhas-reservas' onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active" : "tab tab-bordered"}>Suas reservas</Link>}
+                    <Link onClick={() => {setActiveTab('tab1')}}  href="#" className={activeTab === "tab1" ? " tab tab-bordered tab-active text-base" : "tab tab-bordered text-base"}>Laboratórios</Link> 
+                    <Link onClick={() => {setActiveTab('tab2')}}  href="#" className={activeTab === "tab2" ? " tab tab-bordered tab-active text-base" : "tab tab-bordered text-base"}>Reservas</Link> 
+                    {session?.user.user_type == 1 && !session?.user.is_superuser && !session?.user.is_staff ? "":<Link id='minhas-reservas' onClick={() => {setActiveTab('tab3')}}  href="#" className={activeTab === "tab3" ? " tab tab-bordered tab-active text-base" : "tab tab-bordered text-base"}>Suas reservas</Link>}
                 </motion.div>
 
 

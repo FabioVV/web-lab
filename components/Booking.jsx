@@ -50,8 +50,21 @@ function Booking({book, HandleFetch}) {
                 </div> */}
                 <div>
                     <div className="font-bold">{book.laboratory_name}</div>
-                    <div className="text-sm opacity-50">Atualizado em: {book.updated_at}</div>
-                </div>
+                        <div style={{cursor:'help'}}  className="text-sm opacity-50">
+                            {book.updated_at && book.updated_at != book.booked_at 
+                            ? 
+                                <>
+                                    Reserva foi atualizada em:
+                                    <div title={`'O laboratório foi trocado para ${book.laboratory_name}`} style={{display:'flex', flexDirection:'row', gap:'5px'}}>
+                                        <svg style={{cursor:'pointer'}}  xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        {book.updated_at.replaceAll('-', '/')}
+                                    </div>
+                                </>
+                            : 
+                            'Reserva não foi atualizada.'
+                            }
+                        </div>                
+                    </div>
             </div>
             </td>
 

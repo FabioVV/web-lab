@@ -82,7 +82,7 @@ export default function PasswordReset() {
                             </svg>
                             <div className="text-center">
                                 <h3 className="md:text-2xl text-base font-semibold text-center">Email enviado!</h3>
-                                <p className="my-2 mt-7">Confira sua caixa de entrada ou caixa spam.</p>
+                                <p className="my-2 mt-7">Se uma conta ativa com este email foi encontrada, confira sua caixa de entrada ou caixa spam.</p>
                                 <div className="py-10 text-center">
                                     <button onClick={() =>{document.getElementById('close-email-modal').click();setEmailSent(false);}} id={`sub_email`} className="btn text-green-600" type='button'>
                                         {isLoading ? <span className="loading loading-spinner loading-lg"></span> : 'Concluir'}

@@ -3,7 +3,7 @@ import React from 'react'
 function Pagination({page_size, count, total_pages, current_page_number, next, previous, fetch, url}) {
     
     const regex = /(page=[0-9])/g;
-    let next_r = next?.match(regex).toString()
+    let next_r = next?.match(regex)?.toString()
     let new_next = ''
     let page_value_next = ''
     if(next_r){
@@ -14,7 +14,7 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
     }
 
 
-    let previous_r = previous?.match(regex).toString()
+    let previous_r = previous?.match(regex)?.toString()
     let new_previous = ''
     let page_value_previous = ''
     if(previous_r){

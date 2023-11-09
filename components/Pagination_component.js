@@ -2,7 +2,10 @@ import React from 'react'
 
 function Pagination({page_size, count, total_pages, current_page_number, next, previous, fetch, url}) {
     
-    const regex = /(page=[0-9])/g;
+    const regex = /(page=\d+)/g;
+    let links = []
+
+
     let next_r = next?.match(regex)?.toString()
     let new_next = ''
     let page_value_next = ''
@@ -37,7 +40,6 @@ function Pagination({page_size, count, total_pages, current_page_number, next, p
     } 
  
     
-    let links = []
     for (let index = 0; index < total_pages; index++) {
         links.push(<button onClick={async ()=>{await fetch(`${url}?page=${index+1}`); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
         className={current_page_number === index + 1  ? "join-item btn btn-active":"join-item btn"}>

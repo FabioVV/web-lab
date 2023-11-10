@@ -44,9 +44,12 @@ function BookingModal({lab_id, HandleFetch}) {
         booking_end:'',
         booking_start:'',
     })
+    const [dia, setDia] = useState({
+        valor: 'hoje',
+    })
 
 
-    const data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate() + 7, new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
+    //const data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate() + 7, new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
 
     const numero_boleto = NumeroDoBoletoAleatorio8Digitos()
 
@@ -86,6 +89,11 @@ function BookingModal({lab_id, HandleFetch}) {
   
         if(lab_id)getLab()
       },[lab_id])
+
+      useEffect(()=>{
+
+
+      }, [dia.valor])
 
 
       const BookLab = async(form, e) => {
@@ -174,7 +182,7 @@ function BookingModal({lab_id, HandleFetch}) {
         </dialog>
     :
         <dialog id={`my_modal_booking_${lab_id}`}  className="modal">
-            <div className="modal-box">
+            <div className="modal-box booking">
                 <h3 className="font-bold text-lg">Reservar {lab?.name}</h3>
                 <hr />
 
@@ -185,6 +193,60 @@ function BookingModal({lab_id, HandleFetch}) {
                             <form method='post' onSubmit={handleSubmit(BookLab)} id='form' className="w-full p-6">
                                 <fieldset className='border-l-2 border-zinc-300 p-5'>
                                     <legend className="font-bold text-lg text-green-600">Dados da reserva</legend>
+                                   
+
+                                    <div className="flex flex-wrap -mx-3 mb-6">
+                                        <div className="w-full px-3 mb-6 md:mb-0">
+
+                                            <label className="block uppercase tracking-wide text-xs font-bold mb-3" htmlFor="booking_end">
+                                                Sua reserva é para hoje ou outro dia? 
+                                            </label>
+
+                                            <div className="form-control">
+                                                <label className="label cursor-pointer">
+                                                    <span className="label-text">Outro dia</span> 
+                                                    <input onClick={(e) => {setDia({...dia, valor:e.target.value});}} type="radio" value='outro' name="radioDia" className="radio checked:bg-red-500" checked={dia.valor == 'outro' ? 'checked':''}
+
+                                                    />
+
+
+                                                </label>
+                                                </div>
+                                                <div className="form-control">
+                                                <label className="label cursor-pointer">
+                                                    <span className="label-text">Hoje</span> 
+                                                    <input onClick={(e) => {setDia({...dia, valor:e.target.value});}}  type="radio" value='hoje' name="radioDia" className="radio checked:bg-blue-500" checked={dia.valor == 'hoje' ? 'checked':''} 
+
+                                                    />
+
+
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                 
+                                    <div className={dia.valor == 'hoje' ? "flex flex-wrap -mx-3 mb-6 hidden":"flex flex-wrap -mx-3 mb-6"}>
+                                        <div className="w-full px-3 mb-6 md:mb-0">
+                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                Para quando é sua reserva? 
+                                            </label>
+                                            <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
+                                                {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
+                                            />
+                                            <ErrorMessage
+                                                errors={errors}
+                                                name="booking_end"
+                                                render={({ message }) => 
+                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                <strong className="font-bold">* {message}</strong>
+                                                </div>}
+                                            />
+                                            
+                                        </div>
+                                        
+                                    </div> 
+
+
                                     <div className="flex flex-wrap -mx-3 mb-6">
                                         <div className="w-full px-3 mb-6 md:mb-0">
                                             <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
@@ -218,27 +280,6 @@ function BookingModal({lab_id, HandleFetch}) {
                                         </div>
                                         
                                     </div>
-                                    {/* 
-                                    <div className="flex flex-wrap -mx-3 mb-6">
-                                        <div className="w-full px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                Para quando é sua reserva? 
-                                            </label>
-                                            <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
-                                                {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
-                                            />
-                                            <ErrorMessage
-                                                errors={errors}
-                                                name="booking_end"
-                                                render={({ message }) => 
-                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                                <strong className="font-bold">* {message}</strong>
-                                                </div>}
-                                            />
-                                            
-                                        </div>
-                                        
-                                    </div> */}
 
                                 </fieldset>
                                 

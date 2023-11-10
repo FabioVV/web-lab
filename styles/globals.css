@@ -62,3 +62,7 @@ tbody tr:nth-child(even){}
 #account-save-button{
     margin-bottom: 10px;
 }
+
+.modal-box.booking{
+    max-width: 40rem;
+}

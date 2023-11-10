@@ -408,6 +408,7 @@ function LabFeed() {
                                             </th>
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
+                                            <th>Data do inicio reserva</th>
                                             <th>Data do fim da reserva</th>
                                             <th>Tempo restante</th>
                                             <th>Quem reservou</th>
@@ -425,6 +426,7 @@ function LabFeed() {
                                             <th></th>
                                             <th>Laboratório</th>
                                             <th>Data de reserva</th>
+                                            <th>Data do inicio reserva</th>
                                             <th>Data do fim da reserva</th>
                                             <th>Tempo restante</th>
                                             <th>Quem reservou</th>
@@ -534,7 +536,8 @@ function LabFeed() {
                                             </th>
                                             {/* <th>ID do laboratório</th> */}
                                             <th>Laboratório</th>
-                                            <th>Data da reserva</th>
+                                            <th>Data de reserva</th>
+                                            <th>Data do inicio reserva</th>
                                             <th>Data do fim da reserva</th>
                                             <th>Tempo restante</th>
                                             <th></th>
@@ -556,7 +559,8 @@ function LabFeed() {
                                             </th>
                                             {/* <th>ID do laboratório</th> */}
                                             <th>Laboratório</th>
-                                            <th>Data da reserva</th>
+                                            <th>Data de reserva</th>
+                                            <th>Data do inicio reserva</th>
                                             <th>Data do fim da reserva</th>
                                             <th>Tempo restante</th>
                                             <th></th>

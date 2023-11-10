@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react'
 import DelModalBooking from './deleteBookingModal'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 require('dayjs/locale/pt-br')
 let relativeTime = require('dayjs/plugin/relativeTime')
@@ -16,9 +17,9 @@ dayjs.extend(relativeTime)
 function Booking({book, HandleFetch}) {
 
     const {data:session} = useSession()
+    let mensagem = ''
 
-
-    // CRIANDO DATA DO FIM DA RESERV
+    // CRIANDO DATA DO FIM DA RESERVA
     let dateEnd = book?.booking_end.substring(0, 10) //27-10-2023 DATE
     let timeEnd = book?.booking_end.substring(11, 19) //11:21:22 TIME
     let yearEnd = dateEnd.substring(6, 10) //2023
@@ -28,10 +29,31 @@ function Booking({book, HandleFetch}) {
     let minutesEnd = timeEnd.substring(3, 5) //21
     let secondsEnd = timeEnd.substring(6, 8) //22
 
-
+    let hoje = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
-    const tempo_restante = dayjs(data_inicio).to(data_fim)
+    let tempo_restante = dayjs(data_inicio).to(data_fim)
+
+    if(book?.booking_start){
+        mensagem = `Reserva inicia dia ${book?.booking_start}`
+
+        // DATA DO INICIO DA RESERVA
+        let dateStart = book?.booking_start.substring(0, 10) //27-10-2023 DATE
+        let timeStart = book?.booking_start.substring(11, 19) //11:21:22 TIME
+        let yearStart = dateStart.substring(6, 10) //2023
+        let monthStart = dateStart.substring(3, 5) //10
+        let dayStart = dateStart.substring(0, 2) //27
+        let hoursStart = timeStart.substring(0, 2) //11
+        let minutesStart = timeStart.substring(3, 5) //21
+        let secondsStart = timeStart.substring(6, 8) //22
+    
+    
+        data_inicio = new Date(yearStart, monthStart, dayStart,hoursStart,minutesStart, secondsStart)
+        data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
+
+        tempo_restante = dayjs(data_inicio).to(data_fim)
+    }
+
 
   return (
         <tr>
@@ -70,6 +92,12 @@ function Booking({book, HandleFetch}) {
 
             <td>
                 {book?.booked_at?.replaceAll('-', '/')}
+                <br/> 
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
+            </td>
+
+            <td>
+                {book?.booking_start ? book?.booking_start?.replaceAll('-', '/') : book?.booked_at?.replaceAll('-', '/')}
                 <br/>
                 {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
             </td>
@@ -81,7 +109,20 @@ function Booking({book, HandleFetch}) {
             </td>
 
             <td>
-                <span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span>
+                <span className='text-info'>
+                    {book?.booking_start ? 
+                    <>
+                        {dayjs() >= dayjs(book?.booking_start) ? tempo_restante?.replaceAll('em', '') : mensagem}
+                    </>
+                    : 
+                    <>
+                        {tempo_restante?.replaceAll('em', '')}
+                    </>
+                    }
+
+                    
+                    <br/>
+                </span>
             </td>
             
             <td>

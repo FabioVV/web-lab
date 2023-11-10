@@ -109,6 +109,12 @@ function UserBooking({book, HandleFetch}) {
             </td>
 
             <td>
+                {book?.booking_start ? book?.booking_start?.replaceAll('-', '/') : book?.booked_at?.replaceAll('-', '/')}
+                <br/>
+                {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}
+            </td>
+
+            <td>
                 {book?.booking_end?.replaceAll('-', '/')}
                 <br/>
                 {/* <span className="badge badge-ghost badge-sm">Número do boleto: {book.bol_number}</span> */}

@@ -224,62 +224,102 @@ function BookingModal({lab_id, HandleFetch}) {
                                             </div>
                                         </div>
                                     </div> 
-                                 
-                                    <div className={dia.valor == 'hoje' ? "flex flex-wrap -mx-3 mb-6 hidden":"flex flex-wrap -mx-3 mb-6"}>
-                                        <div className="w-full px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                Para quando é sua reserva? 
-                                            </label>
-                                            <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
-                                                {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
-                                            />
-                                            <ErrorMessage
-                                                errors={errors}
-                                                name="booking_end"
-                                                render={({ message }) => 
-                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                                <strong className="font-bold">* {message}</strong>
-                                                </div>}
-                                            />
-                                            
-                                        </div>
-                                        
-                                    </div> 
 
 
-                                    <div className="flex flex-wrap -mx-3 mb-6">
-                                        <div className="w-full px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                Sua reserva irá até qual dia e horário? 
-                                            </label>
-                                            <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
-                                                {...register("booking_end", { 
-                                                    
-                                                        validate: { PastData: (value, formValues) => {
+                                    {dia.valor == 'hoje' ? 
+                                    ''
+                                    :
+                                        <div className='flex flex-wrap -mx-3 mb-6'>
+                                            <div className="w-full px-3 mb-6 md:mb-0">
+                                                <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                    Para quando é sua reserva? 
+                                                </label>
+                                                <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
+                                                    {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
+                                                />
+                                                <ErrorMessage
+                                                    errors={errors}
+                                                    name="booking_end"
+                                                    render={({ message }) => 
+                                                    <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                    <strong className="font-bold">* {message}</strong>
+                                                    </div>}
+                                                />
+                                                
+                                            </div>
+                                        </div> 
+                                    }
+
+
+                                    {dia.valor == 'hoje' ? 
+                                        <div className="flex flex-wrap -mx-3 mb-6">
+                                            <div className="w-full px-3 mb-6 md:mb-0">
+                                                <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                    Sua reserva irá até qual dia e horário? 
+                                                </label>
+                                                <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
+                                                    {...register("booking_end", { 
+                                                        
+                                                            validate: { PastData: (value, formValues) => {
+                                                                return(
+                                                                    value > Date.now() || 'Você não pode escolher uma data do passado.'
+                                                                )
+                                                        }, BigData: (value, formValues) => {
                                                             return(
-                                                                value > Date.now() || 'Você não pode escolher uma data do passado.'
+                                                                // PRECISO FAZER A LOGICA DE CASO A PESSOA RESERVE PARA COMECAR OUTRO DIA ALEM DE HOJE
+                                                                dayjs().add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
                                                             )
-                                                    }, BigData: (value, formValues) => {
-                                                        return(
-                                                            
-                                                            dayjs().add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
-                                                        )
+                                                        }
                                                     }
-                                                }
-                                                ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
-                                            />
-                                            <ErrorMessage
-                                                errors={errors}
-                                                name="booking_end"
-                                                render={({ message }) => 
-                                                <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                                                <strong className="font-bold">* {message}</strong>
-                                                </div>}
-                                            />
-                                            
-                                        </div>
+                                                    ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
+                                                />
+                                                <ErrorMessage
+                                                    errors={errors}
+                                                    name="booking_end"
+                                                    render={({ message }) => 
+                                                    <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                    <strong className="font-bold">* {message}</strong>
+                                                    </div>}
+                                                />
+                                                
+                                            </div>
                                         
-                                    </div>
+                                        </div>
+                                    :
+                                        <div className="flex flex-wrap -mx-3 mb-6">
+                                            <div className="w-full px-3 mb-6 md:mb-0">
+                                                <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
+                                                    Sua reserva irá até qual dia e horário? 
+                                                </label>
+                                                <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
+                                                    {...register("booking_end", { 
+                                                        
+                                                            validate: { PastData: (value, formValues) => {
+                                                                return(
+                                                                    value > Date.now() || 'Você não pode escolher uma data do passado.'
+                                                                )
+                                                        }, BigData: (value, formValues) => {
+                                                            return(
+                                                                // PRECISO FAZER A LOGICA DE CASO A PESSOA RESERVE PARA COMECAR OUTRO DIA ALEM DE HOJE
+                                                                dayjs(getValues('booking_start')).add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
+                                                            )
+                                                        }
+                                                    }
+                                                    ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_end:e.target.value})}, })}
+                                                />
+                                                <ErrorMessage
+                                                    errors={errors}
+                                                    name="booking_end"
+                                                    render={({ message }) => 
+                                                    <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                                                    <strong className="font-bold">* {message}</strong>
+                                                    </div>}
+                                                />
+                                                
+                                            </div>
+                                        </div>
+                                    }
+
 
                                 </fieldset>
                                 

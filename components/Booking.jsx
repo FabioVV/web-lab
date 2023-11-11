@@ -29,13 +29,14 @@ function Booking({book, HandleFetch}) {
     let minutesEnd = timeEnd.substring(3, 5) //21
     let secondsEnd = timeEnd.substring(6, 8) //22
 
-    let hoje = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
     let tempo_restante = dayjs(data_inicio).to(data_fim)
+    let tempo_restante_booking_start = ''
+
 
     if(book?.booking_start){
-        mensagem = `Reserva inicia dia ${book?.booking_start}`
+        mensagem = `Reserva inicia dia ${book?.booking_start.replaceAll('-', '/')}`
 
         // DATA DO INICIO DA RESERVA
         let dateStart = book?.booking_start.substring(0, 10) //27-10-2023 DATE
@@ -51,7 +52,7 @@ function Booking({book, HandleFetch}) {
         data_inicio = new Date(yearStart, monthStart, dayStart,hoursStart,minutesStart, secondsStart)
         data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
 
-        tempo_restante = dayjs(data_inicio).to(data_fim)
+        tempo_restante_booking_start = dayjs(data_inicio).to(data_fim)
     }
 
 
@@ -119,8 +120,6 @@ function Booking({book, HandleFetch}) {
                         {tempo_restante?.replaceAll('em', '')}
                     </>
                     }
-
-                    
                     <br/>
                 </span>
             </td>
@@ -135,7 +134,6 @@ function Booking({book, HandleFetch}) {
                     <Link className="btn btn-outline btn-info btn-xs mr-2 mb-2" href={`/booking/edit?id=${book?.id}`}>Editar</Link>
                     <button onClick={() => {document.getElementById(`my_modal_delete_booking_${book?.id}`)?.showModal()}} className="btn btn-outline btn-error btn-xs mr-2 mb-2">Remover</button>
                     <DelModalBooking HandleFetch={HandleFetch} book_id={book?.id}/>
-                    
                 </div>
                 :
                 ""

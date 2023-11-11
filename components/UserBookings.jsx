@@ -19,6 +19,7 @@ dayjs.extend(relativeTime)
 function UserBooking({book, HandleFetch}) {
 
     const {data:session} = useSession()
+    let mensagem = ''
 
 
     // CRIANDO DATA DO FIM DA RESERV
@@ -35,20 +36,27 @@ function UserBooking({book, HandleFetch}) {
     let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
     let tempo_restante = dayjs(data_inicio).to(data_fim)
-    let ref = useRef(tempo_restante)
 
-    useEffect(() => {
 
-        const timer = setInterval(() => {
-            let data_inicio_inner = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
+    if(book?.booking_start){
+        mensagem = `Reserva inicia dia ${book?.booking_start.replaceAll('-', '/')}`
 
-            ref.current = dayjs(data_inicio_inner).to(data_fim)
+        // DATA DO INICIO DA RESERVA
+        let dateStart = book?.booking_start.substring(0, 10) //27-10-2023 DATE
+        let timeStart = book?.booking_start.substring(11, 19) //11:21:22 TIME
+        let yearStart = dateStart.substring(6, 10) //2023
+        let monthStart = dateStart.substring(3, 5) //10
+        let dayStart = dateStart.substring(0, 2) //27
+        let hoursStart = timeStart.substring(0, 2) //11
+        let minutesStart = timeStart.substring(3, 5) //21
+        let secondsStart = timeStart.substring(6, 8) //22
+    
+    
+        data_inicio = new Date(yearStart, monthStart, dayStart,hoursStart,minutesStart, secondsStart)
+        data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
 
-        }, 1000);
-        timer
-        return () => clearInterval(timer);  
-
-    }, []);
+        tempo_restante = dayjs(data_inicio).to(data_fim)
+    }
 
   return (
         <tr>
@@ -123,12 +131,22 @@ function UserBooking({book, HandleFetch}) {
             <td>
                 {book.is_active ?
                     <>
-                        {data_inicio > data_fim ? <span className='text-error'>Finalizada</span>:<span className='text-info'>{ref.current?.replaceAll('em', '')}</span>}
+                        {book?.booking_start ? 
+                        <>
+                            {dayjs() >= dayjs(book?.booking_start) ?<span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span>: <span className='text-info'>{mensagem}</span>}
+                        </>
+                        : 
+                        <>
+                            {data_inicio > data_fim ? <span className='text-error'>Finalizada</span>:<span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span>}
+                        </>
+                        }
                     </>
                 :
                     <span className='text-error'>Finalizada</span>
                 }
             </td>
+
+            
             
             <th>
             {book?.is_active && (session?.user.id == book?.user_id || session?.user.is_superuser || session?.user.is_staff) ? 

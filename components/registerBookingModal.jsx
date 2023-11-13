@@ -199,12 +199,12 @@ function BookingModal({lab_id, HandleFetch}) {
                                         <div className="w-full px-3 mb-6 md:mb-0">
 
                                             <label className="block uppercase tracking-wide text-xs font-bold mb-3" htmlFor="booking_end">
-                                                Sua reserva é para hoje ou outro dia? 
+                                            Quando sua reserva devera iniciar? 
                                             </label>
 
                                             <div className="form-control">
                                                 <label className="label cursor-pointer">
-                                                    <span className="label-text">Outro dia</span> 
+                                                    <span className="label-text">Para outro momento</span> 
                                                     <input onClick={(e) => {setDia({...dia, valor:e.target.value});}} type="radio" value='outro' name="radioDia" className="radio checked:bg-red-500" checked={dia.valor == 'outro' ? 'checked':''}
 
                                                     />
@@ -214,7 +214,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                 </div>
                                                 <div className="form-control">
                                                 <label className="label cursor-pointer">
-                                                    <span className="label-text">Hoje</span> 
+                                                    <span className="label-text">Para agora</span> 
                                                     <input onClick={(e) => {setDia({...dia, valor:e.target.value});}}  type="radio" value='hoje' name="radioDia" className="radio checked:bg-blue-500" checked={dia.valor == 'hoje' ? 'checked':''} 
 
                                                     />

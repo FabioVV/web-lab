@@ -56,8 +56,8 @@ export default function LoginPage() {
 
   return (
     <div>
-        <div className="login-body relative flex flex-col items-center min-h-screen overflow-hidden">
-          <div className="w-full p-6 rounded-md shadow-lg lg:max-w-xl">
+        <div className="login-body relative flex flex-col items-center min-h-screen overflow-hidden ">
+          <div className="w-full p-10 rounded-xl shadow-lg lg:max-w-xl bg-base-200">
             <h1 className="text-3xl font-bold text-center ">  Digite suas credenciais </h1>
 
             <form method="POST" className="mt-6">

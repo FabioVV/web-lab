@@ -36,6 +36,7 @@ function UserBooking({book, HandleFetch}) {
     let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
     let tempo_restante = dayjs(data_inicio).to(data_fim)
+    let reserva_iniciou = ''
 
 
     if(book?.booking_start){
@@ -49,13 +50,10 @@ function UserBooking({book, HandleFetch}) {
         let dayStart = dateStart.substring(0, 2) //27
         let hoursStart = timeStart.substring(0, 2) //11
         let minutesStart = timeStart.substring(3, 5) //21
-        let secondsStart = timeStart.substring(6, 8) //22
+        let secondsStart = timeStart.substring(6, 8) //22   
     
-    
-        data_inicio = new Date(yearStart, monthStart, dayStart,hoursStart,minutesStart, secondsStart)
-        data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
 
-        tempo_restante = dayjs(data_inicio).to(data_fim)
+        reserva_iniciou = new Date (`${dayStart}/${monthStart}/${yearStart} ` + `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`) > new Date (`${dayStart}/${monthStart}/${yearStart} ` + `${hoursStart}:${minutesStart}:${secondsStart}`)
     }
 
   return (
@@ -133,7 +131,7 @@ function UserBooking({book, HandleFetch}) {
                     <>
                         {book?.booking_start ? 
                         <>
-                            {dayjs() >= dayjs(book?.booking_start) ?<span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span>: <span className='text-info'>{mensagem}</span>}
+                            {reserva_iniciou ? <span className='text-info'>{tempo_restante?.replaceAll('em', '')}</span> :  <span className='text-info'>{mensagem}</span>}
                         </>
                         : 
                         <>

@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import Image from 'next/image'
 
 
 const Nav = () => {
@@ -16,169 +17,68 @@ const Nav = () => {
         {/* {console.log(session)} */}
         {session?.user ? (
                 
-                <div data-theme='dracula' className='fixed top-0 w-full z-40 bg-base-200'>
-                <nav className="w-full">
-                  <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-                    <div>
-                      <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                          <Link href='/' className="text-2xl  font-bold">Olá, {session?.user.first_name}</Link>
-                        
-                        <div className="md:hidden">
-                          <button
-                            className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
-                            onClick={() => setNavbar(!navbar)}
-                          >
-                            {navbar ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-6 "
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-6 "
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M4 6h16M4 12h16M4 18h16"
-                                />
-                              </svg>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div
-                        className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                          navbar ? 'block' : 'hidden'
-                        }`}
-                      >
-                        <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                          <li className="">
-                            <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
-                              Início
-                            </Link>
-                          </li>
-                          {/* <li className="">
-                            <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
-                              Sobre
-                            </Link>
-                          </li> */}
-                          <li className="">
-                            <Link  className='hover:border-b-2 hover:border-white-900 ' href="/users/account">
-                              Conta
-                            </Link>
-                          </li>
-                          <li className="">
-                            <button className='hover:border-b-2 hover:border-white-900 '  onClick={()=>signOut({callbackUrl: `${window.location.origin}`})}>
-                                Sair
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </nav>
+          <div className="navbar bg-base-200">
+              <div className="flex-1">
+                <a onClick={()=>{window.location.href='/'; window.scrollTo({ top: 0, behavior: 'smooth' })}} className="btn btn-ghost text-xl">Lab booking</a>
               </div>
+              <div className="flex-none gap-2">
+                {/* <div className="form-control">
+                  <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                </div> */}
+                Olá, {session?.user.first_name}
+                <div className="dropdown dropdown-end">
+                  
+                  <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    
+                    <div className="w-10 rounded-full">
+                      
+                      <Image
+                        src="/images/user-placeholder.png"
+                         width={100} 
+                         height={100}
+                        alt="Imagem do usuario - Placeholder"
+                      />
+
+                    </div>
+                  </label>
+                  <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li>
+                      <Link href="/users/account" className="justify-between">
+                        Conta
+                        {/* <span className="badge">New</span> */}
+                      </Link>
+                    </li>
+                    {/* <li><a>Settings</a></li> */}
+                    <li onClick={()=>signOut({callbackUrl: `${window.location.origin}`})}><a>Sair</a></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
           
         ):(
         <>
-        <div data-theme='dracula' className='fixed top-0 w-full z-40 bg-base-200'>
-        <nav className="w-full">
-            <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-            <div>
-                <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href='/' className="text-2xl  font-bold">Lab-Management</a>
-                
-                <div className="md:hidden">
-                    <button
-                    className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
-                    onClick={() => setNavbar(!navbar)}
-                    >
-                    {navbar ? (
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 "
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        >
-                        <path
-                            fillRule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                        />
-                        </svg>
-                    ) : (
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 "
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4 6h16M4 12h16M4 18h16"
-                        />
-                        </svg>
-                    )}
-                    </button>
-                </div>
-                </div>
+          <div className="navbar bg-base-200">
+            <div className="flex-1">
+              <a onClick={()=>{window.location.href='/'; window.scrollTo({ top: 0, behavior: 'smooth' })}} className="btn btn-ghost text-xl">Lab booking</a>
             </div>
-            <div>
-                <div
-                className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                    navbar ? 'block' : 'hidden'
-                }`}
-                >
-                <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                    <li className="">
-                      <Link className='hover:border-b-2 hover:border-white-900 ' href="/">
-                          Início
-                      </Link>
-                    </li>
-                    {/* <li className="">
-                      <Link className='hover:border-b-2 hover:border-white-900 ' href="/about">
-                          Sobre
-                      </Link>
-                    </li> */}
-                    <li className="">
-                      <button className='hover:border-b-2 hover:border-white-900'  onClick={signIn}>
-                          Entrar
-                      </button>
-                      {/* <button className='hover:border-b-2 hover:border-white-900'  onClick={()=>{signIn('google')}}>
-                          Entrar com a google
-                      </button> */}
-                    </li>
-                    <li className="">
-                      <Link className='hover:border-b-2 hover:border-white-900' href="/users/register">
-                          Criar conta
-                      </Link>
-                    
-                    </li>
-                </ul>
-                </div>
+            <div className="flex-none">
+              <ul className="menu menu-horizontal px-1">
+                <li><button onClick={signIn} >Entrar</button></li>
+                <li><Link href="/users/register">Criar conta</Link></li>
+                {/* <li>
+                  <details>
+                    <summary>
+                      options?
+                    </summary>
+                    <ul className="p-2 bg-base-100">
+                      <li><a>Link 1</a></li>
+                      <li><a>Link 2</a></li>
+                    </ul>
+                  </details>
+                </li> */}
+              </ul>
             </div>
-            </div>
-        </nav>
-        </div>
+          </div>
         </>
         )}
     </nav>

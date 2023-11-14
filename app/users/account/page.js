@@ -1,17 +1,17 @@
 "use client"
 
-import { IMaskInput } from "react-imask";
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from 'next-auth/react';
 import DelModalAccount from '@components/deleteAccountModal';
 
+
 const UserAccount = () => {
   const {data:session, update} = useSession()
   const [isLoading, setIsLoading] = useState(false)
-  const { register, handleSubmit, setError, watch, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, setError, reset, formState: { errors } } = useForm();
   const [user, setUser] = useState({
     first_name: '',
     username: '',
@@ -254,11 +254,8 @@ const UserAccount = () => {
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="cpf_cnpj">
                       CPF/CNPJ *
                     </label>
-                    
-                    {/* <IMaskInput mask="000.000.000-00" className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
-                      {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
 
-                    /> */}
+
 
                     <input  className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
                       {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}

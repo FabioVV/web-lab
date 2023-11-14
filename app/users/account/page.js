@@ -137,9 +137,9 @@ const UserAccount = () => {
     
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
-        <div className="w-full p-6 rounded-lg shadow-2xl lg:max-w-xl transition-all">
+        <div className="w-full p-6 rounded-lg shadow-2xl transition-all">
             <div className=''>
-              <h1 className='text-3xl font-bold text-center ' >Seus dados.</h1>
+              <h1 className='text-3xl font-bold text-center'>Seus dados</h1>
               
               <form method='post' onSubmit={handleSubmit(onSubmit)} id='form' className="w-full p-6">
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -173,18 +173,36 @@ const UserAccount = () => {
                 </div>
 
                 <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="username">
-                      Nome de usuário *
-                    </label>
-                    <input className="input input-bordered w-full max-w" 
-                    id="username" type="text" placeholder="Jane123" name='username' 
-                      {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="username">
+                        Nome de usuário *
+                      </label>
+                      <input className="input input-bordered w-full max-w" 
+                      id="username" type="text" placeholder="Jane123" name='username' 
+                        {...register("username", { required: "Campo obrigatório.", maxLength:{value:25, message:'Máximo de 25 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setUser({...user, username:e.target.value})}, })}
+
+                      />
+                      <ErrorMessage
+                        errors={errors}
+                        name="username"
+                        render={({ message }) => 
+                        <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
+                          <strong className="font-bold">* {message}</strong>
+                        </div>}
+                      />
+      
+                  </div>
+                  <div className="w-full md:w-1/2 px-3">
+                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="email">
+                      Email *
+                    </label>
+                    <input  className="input input-bordered w-full max-w" id="email" type="email" placeholder="jane@email.com" name='email'
+                    {...register("email", { required: "Campo obrigatório.", pattern: { value: /.+@.+/, message: 'Email inválido' }, maxLength:{value:45, message:'Máximo de 45 caracteres'}, onChange: (e) => {setUser({...user, email:e.target.value})}, })}
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="username"
+                      name="email"
                       render={({ message }) => 
                       <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
                         <strong className="font-bold">* {message}</strong>
@@ -192,11 +210,11 @@ const UserAccount = () => {
                     />
                   </div>
                 </div>
-                
-                {/* <div className="flex flex-wrap -mx-3 mb-6">
+{/* 
+                <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password">
-                      Senha *
+                      Nova senha *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="password" type="password" placeholder="************" name='password'
                       {...register("password", { required: "Campo obrigatório." })}
@@ -212,7 +230,7 @@ const UserAccount = () => {
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="password_confirmation">
-                      Confirme sua senha *
+                      Confirme sua nova senha *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="password_confirmation" type="password" placeholder="************" name='password_confirmation'
                       {...register("password_confirmation", { required: "Campo obrigatório." })}
@@ -230,32 +248,11 @@ const UserAccount = () => {
                   </div>
                 </div> */}
 
-                <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="email">
-                      Email *
-                    </label>
-                    <input  className="input input-bordered w-full max-w" id="email" type="email" placeholder="jane@email.com" name='email'
-                     {...register("email", { required: "Campo obrigatório.", pattern: { value: /.+@.+/, message: 'Email inválido' }, maxLength:{value:45, message:'Máximo de 45 caracteres'}, onChange: (e) => {setUser({...user, email:e.target.value})}, })}
-                    />
-                    <ErrorMessage
-                      errors={errors}
-                      name="email"
-                      render={({ message }) => 
-                      <div className="text-red-400 px-2 py-1 rounded relative mt-2" role="alert" id='email-message'>
-                        <strong className="font-bold">* {message}</strong>
-                      </div>}
-                    />
-                  </div>
-                </div>
-
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="cpf_cnpj">
                       CPF/CNPJ *
                     </label>
-
-
 
                     <input  className="input input-bordered w-full max-w" id="cpf_cnpj" type="text" placeholder="041-412-123-41" name='cpf_cnpj'
                       {...register("cpf_cnpj", { required: "Campo obrigatório.", maxLength:{value:14, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, cpf_cnpj:e.target.value})}, })}
@@ -332,11 +329,11 @@ const UserAccount = () => {
                 </div>
 
 
-                <div className="flex flex-wrap -mx-3 mb-2"> 
+                <div className="flex justify-end flex-wrap -mx-3 mb-2"> 
 
                   <div className="px-3 mb-6 md:mb-0">
 
-                    <div className="mt-2">
+                    <div className="mt-2 ">
                       <button id='account-save-button' disabled={isLoading} type="submit" className="btn btn-outline btn-success mr-3">
                         {isLoading ? <span className="loading loading-spinner loading-lg"></span>: 'Salvar'}
 

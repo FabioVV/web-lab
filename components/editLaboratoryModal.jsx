@@ -118,7 +118,7 @@ function EdModal({lab_id, HandleFetch}) {
                                   Nome
                               </label>
                               <input  className="input input-bordered w-full max-w" type="text" placeholder="Laboratório 201" name='name' id='name' 
-                                  {...register("name", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 15 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, name:e.target.value})}, })}
+                                  {...register("name", { required: "Campo obrigatório.", maxLength:{value:20, message:'Máximo de 20 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, name:e.target.value})}, })}
                               />
                               <ErrorMessage
                                   errors={errors}
@@ -155,7 +155,7 @@ function EdModal({lab_id, HandleFetch}) {
                               </label>
 
                               <textarea className="textarea textarea-bordered textarea-xs w-full max-w" name="about" id="about"  rows="3" 
-                              {...register("about", { required: "Campo obrigatório.", maxLength:{value:50, message:'Máximo de 30 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, about:e.target.value})}, })}
+                              {...register("about", { required: "Campo obrigatório.", maxLength:{value:50, message:'Máximo de 50 caracteres'}, minLength:{value:5, message:'Necessita no minímo 5 caracteres '}, onChange: (e) => {setLab({...lab, about:e.target.value})}, })}
                               />
                               <ErrorMessage
                               errors={errors}

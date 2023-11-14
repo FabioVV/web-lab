@@ -66,3 +66,7 @@ tbody tr:nth-child(even){}
 .modal-box.booking{
     max-width: 40rem;
 }
+
+.tabs{
+    justify-content: center;
+}

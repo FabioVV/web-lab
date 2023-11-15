@@ -27,7 +27,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>-->
 
-<h3 align="center">API Lab</h3>
+<h3 align="center">WEB Lab</h3>
 
   <p align="center">
     Projeto para resolver um problema de reserva de laboratórios - IMPACTA 2023

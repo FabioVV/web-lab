@@ -57,8 +57,11 @@ const UserAccount = () => {
       let yearEnd = dateEnd.substring(0, 4) //2023
       let monthEnd = dateEnd.substring(4, 8).replaceAll('-', '') //10
       let dayEnd = dateEnd.substring(8, 11).replaceAll('-', '') //27
-      let data_birth = new Date(yearEnd, monthEnd, dayEnd)
+      let data_birth = new Date(`${yearEnd}-${monthEnd}-${dayEnd}`)
+      data_birth.setMinutes( data_birth.getMinutes() + data_birth.getTimezoneOffset() );
 
+
+      alert(data_birth)
 
       setUser({
         first_name: user_get.first_name,
@@ -331,8 +334,8 @@ const UserAccount = () => {
                               )
                             }, Today: (value, formValues) => { 
                                 return(
-                                  //PRECISO CONSERTAR ALGUM DIA - nao pode escolher a data de hoje
-                                  true ||  `${value} = ${new Date()} Você não pode escolher a data de hoje.`
+                                  // Que lógica bosta. Puta que pariu.
+                                  (dayjs(value).date() + 1 != new Date().getDate() && dayjs(value).get('year') != new Date().getFullYear()) ||  `Por favor, escolha uma data de nascimento válida.`
                                 ) 
                             }
                         }

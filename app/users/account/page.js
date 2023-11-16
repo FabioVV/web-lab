@@ -160,7 +160,7 @@ const UserAccount = () => {
     
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
-        <div className="w-full p-6 rounded-lg transition-all">
+        <div className="w-5/6 p-6 rounded-lg transition-all">
             <div className=''>
               <h1 className='text-3xl font-bold text-center'>Seus dados</h1>
               
@@ -380,7 +380,7 @@ const UserAccount = () => {
                         Excluir conta
                       </button>
 
-                      <button onClick={()=>{window.location.href='/'}} disabled={isLoading} className="btn btn-outline btn-info mr-3" type='button' >
+                      <button onClick={()=>{window.location.href='/'}} disabled={isLoading} className="btn btn-outline btn-info mr-3 mt-2" type='button' >
                         Retornar
                       </button>
                     </div>

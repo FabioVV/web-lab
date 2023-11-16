@@ -199,12 +199,12 @@ function BookingModal({lab_id, HandleFetch}) {
                                         <div className="w-full px-3 mb-6 md:mb-0">
 
                                             <label className="block uppercase tracking-wide text-xs font-bold mb-3" htmlFor="booking_end">
-                                            Quando sua reserva devera iniciar? 
+                                                Para quando é sua reserva? 
                                             </label>
 
                                             <div className="form-control">
                                                 <label className="label cursor-pointer">
-                                                    <span className="label-text">Para outro momento</span> 
+                                                    <span className="label-text">Reservar para outro dia</span> 
                                                     <input onClick={(e) => {setDia({...dia, valor:e.target.value});}} type="radio" value='outro' name="radioDia" className="radio checked:bg-red-500" checked={dia.valor == 'outro' ? 'checked':''}
 
                                                     />
@@ -214,7 +214,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                 </div>
                                                 <div className="form-control">
                                                 <label className="label cursor-pointer">
-                                                    <span className="label-text">Para agora</span> 
+                                                    <span className="label-text">Reserva para agora</span> 
                                                     <input onClick={(e) => {setDia({...dia, valor:e.target.value});}}  type="radio" value='hoje' name="radioDia" className="radio checked:bg-blue-500" checked={dia.valor == 'hoje' ? 'checked':''} 
 
                                                     />
@@ -232,7 +232,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                         <div className='flex flex-wrap -mx-3 mb-6'>
                                             <div className="w-full px-3 mb-6 md:mb-0">
                                                 <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                    Para quando é sua reserva? 
+                                                    Quando sua reserva inicia?
                                                 </label>
                                                 <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
                                                     {...register("booking_start", { validate: (value, formValues) => value > Date.now() || 'Você não pode escolher uma data do passado.' ,valueAsDate:true,  required: "Campo obrigatório.", onChange: (e) => {setLab({...lab, booking_start:e.target.value})}, })}
@@ -255,7 +255,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                         <div className="flex flex-wrap -mx-3 mb-6">
                                             <div className="w-full px-3 mb-6 md:mb-0">
                                                 <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                    Sua reserva irá até qual dia e horário? 
+                                                    Até quando deseja reservar este laboratório?
                                                 </label>
                                                 <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
                                                     {...register("booking_end", { 
@@ -288,7 +288,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                         <div className="flex flex-wrap -mx-3 mb-6">
                                             <div className="w-full px-3 mb-6 md:mb-0">
                                                 <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="booking_end">
-                                                    Sua reserva irá até qual dia e horário? 
+                                                    Quando sua reserva finaliza?
                                                 </label>
                                                 <input className="input input input-bordered w-full max-w" type="datetime-local" name='booking_end' id='booking_end' 
                                                     {...register("booking_end", { 

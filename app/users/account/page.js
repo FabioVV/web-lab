@@ -8,12 +8,24 @@ import { useSession } from 'next-auth/react';
 import DelModalAccount from '@components/deleteAccountModal';
 
 
+require('dayjs/locale/pt-br')
+let relativeTime = require('dayjs/plugin/relativeTime')
+const dayjs = require('dayjs')
+var utc = require('dayjs/plugin/utc')
+var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+dayjs.locale('pt-br')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(relativeTime)
+
+
 const UserAccount = () => {
   const {data:session, update} = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, setError, reset, formState: { errors } } = useForm();
   const [user, setUser] = useState({
     first_name: '',
+    last_name: '',
     username: '',
     phone: '',
     email: '',
@@ -21,9 +33,10 @@ const UserAccount = () => {
     user_type: '',
     birth_date: '',
     sex: '',
-    last_name: '',
   })
 
+
+    
   useEffect(()=>{
     let defaultValues = {};
 
@@ -38,6 +51,15 @@ const UserAccount = () => {
       });
       
       const user_get = await res.json()
+
+
+      let dateEnd = user_get?.birth_date.substring(0, 10) //2023-11-16 DATE
+      let yearEnd = dateEnd.substring(0, 4) //2023
+      let monthEnd = dateEnd.substring(4, 8).replaceAll('-', '') //10
+      let dayEnd = dateEnd.substring(8, 11).replaceAll('-', '') //27
+      let data_birth = new Date(yearEnd, monthEnd, dayEnd)
+
+
       setUser({
         first_name: user_get.first_name,
         last_name: user_get.last_name,
@@ -137,7 +159,7 @@ const UserAccount = () => {
     
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
-        <div className="w-full p-6 rounded-lg shadow-2xl transition-all">
+        <div className="w-full p-6 rounded-lg transition-all">
             <div className=''>
               <h1 className='text-3xl font-bold text-center'>Seus dados</h1>
               
@@ -287,7 +309,7 @@ const UserAccount = () => {
                       Telefone
                     </label>
                     <input  className="input input-bordered w-full max-w" id="phone" type='tel' placeholder="11975461285" name='phone'
-                     {...register("phone", {  maxLength:{value:20, message:'Máximo de 14 caracteres'}, onChange: (e) => {setUser({...user, phone:e.target.value})}, })}
+                     {...register("phone", {  maxLength:{value:20, message:'Máximo de 20 caracteres'}, onChange: (e) => {setUser({...user, phone:e.target.value})}, })}
 
                     />
                     <p className="text-accent text-xs italic">Digite apenas números</p>
@@ -301,8 +323,22 @@ const UserAccount = () => {
                       Data de nascimento *
                     </label>
                     <input  className="input input-bordered w-full max-w" id="birth_date" type="date"  name='birth_date'
-                      {...register("birth_date", {  onChange: (e) => {setUser({...user, birth_date:e.target.value})}, })}
+                      {...register("birth_date", { 
+                        validate: { 
+                            PastData: (value, formValues) => {
+                              return(
+                                  (value < Date.now() && value != new Date())  || 'Você não pode escolher uma data no futuro.'
+                              )
+                            }, Today: (value, formValues) => { 
+                                return(
+                                  //PRECISO CONSERTAR ALGUM DIA - nao pode escolher a data de hoje
+                                  true ||  `${value} = ${new Date()} Você não pode escolher a data de hoje.`
+                                ) 
+                            }
+                        }
+                        ,valueAsDate:true, onChange: (e) => {setUser({...user, birth_date:e.target.value})}, })}
                     />
+
                     <ErrorMessage
                       errors={errors}
                       name="birth_date"

@@ -266,8 +266,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                                 )
                                                         }, BigData: (value, formValues) => {
                                                             return(
-                                                                // PRECISO FAZER A LOGICA DE CASO A PESSOA RESERVE PARA COMECAR OUTRO DIA ALEM DE HOJE
-                                                                dayjs().add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
+                                                                dayjs().add(7, 'day') > dayjs(value) || 'Sua reserva não pode durar mais que uma semana.'
                                                             )
                                                         }
                                                     }
@@ -300,8 +299,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                                 )
                                                         }, BigData: (value, formValues) => {
                                                             return(
-                                                                // PRECISO FAZER A LOGICA DE CASO A PESSOA RESERVE PARA COMECAR OUTRO DIA ALEM DE HOJE
-                                                                dayjs(getValues('booking_start')).add(7, 'day') > dayjs(value)  /*dayjs().add(7, 'day')*/ || 'Sua reserva não pode durar mais que uma semana.'
+                                                                dayjs(getValues('booking_start')).add(7, 'day') > dayjs(value) || 'Sua reserva não pode durar mais que uma semana.'
                                                             )
                                                         }
                                                     }

@@ -32,7 +32,7 @@ function Booking({book, HandleFetch}) {
     let data_inicio = new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())
     let data_fim = new Date(yearEnd, monthEnd, dayEnd, hoursEnd, minutesEnd, secondsEnd)
     let tempo_restante = dayjs(data_inicio).to(data_fim)
-    let reserva_iniciou = ''
+    let reserva_iniciou = false
 
 
     if(book?.booking_start){
@@ -48,7 +48,8 @@ function Booking({book, HandleFetch}) {
         let minutesStart = timeStart.substring(3, 5) //21
         let secondsStart = timeStart.substring(6, 8) //22   
     
-        let start_date_to_js = new Date (`${dayStart}/${monthStart}/${yearStart} ` + `${hoursStart}:${minutesStart}:${secondsStart}`)
+        let start_date_to_js = new Date(`${yearStart}/${monthStart}/${dayStart} ` + `${hoursStart}:${minutesStart}:${secondsStart}`)
+
         reserva_iniciou = new Date() > start_date_to_js
     }
 

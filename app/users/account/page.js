@@ -61,8 +61,6 @@ const UserAccount = () => {
       data_birth.setMinutes( data_birth.getMinutes() + data_birth.getTimezoneOffset() );
 
 
-      alert(data_birth)
-
       setUser({
         first_name: user_get.first_name,
         last_name: user_get.last_name,

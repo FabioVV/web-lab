@@ -214,7 +214,7 @@ function BookingModal({lab_id, HandleFetch}) {
                                                 </div>
                                                 <div className="form-control">
                                                 <label className="label cursor-pointer">
-                                                    <span className="label-text">Reserva para agora</span> 
+                                                    <span className="label-text">Reservar para agora</span> 
                                                     <input onClick={(e) => {setDia({...dia, valor:e.target.value});}}  type="radio" value='hoje' name="radioDia" className="radio checked:bg-blue-500" checked={dia.valor == 'hoje' ? 'checked':''} 
 
                                                     />
